@@ -29,13 +29,8 @@
             view.displayMessage('Oops, Enter only Letters!');
             clearForm();
             return;
-        } else {
-            
+        } else {            
             concatArrayStr(input.toLowerCase());
-            // var colorList = concatArrayStr(input);
-            // if (colorList !== null) {
-            //     controller.processInput(colorList);
-            // }
         }
     }
 
@@ -45,21 +40,21 @@
         var splitArray = input.split(/\s+/);
             var periodicSym = model.jsonElems;
         splitArray.forEach(function(val, idx) {
-            var retVar = matchElem(periodicSym, val);
+        var twoLetterArray = produceTwoChArray(val);
+            var retVar = idx%2 !== 0 ? matchElem(periodicSym, val) : matchElem(periodicSym, twoLetterArray);
             periodicSym.splice(periodicSym.indexOf(retVar),1);            
-            view.updateColor(retVar, val);
-            // tempArray.push(retVar);
-            
+            view.updateColor(retVar, val, idx);            
         })
         clearForm();
     }
 
     function matchElem(arr, parseInp) {
         var retVar;
-        var regex = /^[a-zA-Z]+/gi;
         //randomize array here
+
         // for (var i = 0; i < arr.length; i++) {
-        //     if (parseInp.match(/arr[i]/) !== null) {
+        //     var reg = new RegExp(arr[i], 'gi');
+        //     if (parseInp.match(reg) !== null) {
         //         retVar = arr[i]
         //         return retVar;
         //     }
@@ -73,10 +68,9 @@
             }
             console.log("parseInp",parseInp[i]);            
         }
-        // return null;
     }
 
-    function twoch(word) {
+    function produceTwoChArray(word) {
         var temp = "";
         var tempArr = [];
         // var retVar = generateWordSequence(n);
@@ -93,8 +87,6 @@
         }
         return tempArr;
     }
-    var word = "breaking"
-    twoch("breaking");
 
     function generateWordSequence(n) {
         var n = n - 2;
@@ -184,7 +176,7 @@
                 message.show().text("");
             });
         },
-        updateColor: function(colorEle, splitWord) {
+        updateColor: function(colorEle, splitWord, idx) {
             var hTag = $('#h1');
             // var prevIdx = 0;
             // colorArr.forEach(function(color) {
@@ -200,17 +192,36 @@
             //         }
             //     });
             // });
-            this.buildDom(splitWord);
-            if (colorEle === undefined) return;
-            for (var i = 0; i < splitWord.length; i++) {
-                
-                    if (splitWord[i] === colorEle) {
-                        hTag.children().eq(i).addClass('highlight');
+            var wordId = "word_"+idx
+            var genWordId = '#'+wordId;
+            if (idx > 0) {
+                hTag.append('<div id='+wordId+'></div>');
+                for (var i = 0; i < splitWord.length; i++) {
+                    $(genWordId).append("<span>" + splitWord[i].toLowerCase() + "</span>");
+                }
+            }else{
+                this.buildDom(splitWord);                
+            }
+            if (colorEle === undefined) {
+                return;
+            }else if (colorEle.length === 2) {
+                colorEle = colorEle.match(/.{1,1}/g);
+            }
+            
+            for (var i = 0; i < colorEle.length; i++) {
+                for (var k = 0; k < splitWord.length; k++) {
+                    if (splitWord[k] === colorEle[i]) {
+                        
+                        if (idx>0) {
+                            $(genWordId).children().eq(i).addClass('highlight');
+                        }else{
+                            hTag.children().eq(i).addClass('highlight');
+                        }
                         break;
-                    }
+                    }                    
+                }
                
             }
-            // clearForm();
         }
     };
 
@@ -221,10 +232,7 @@
             url: controller.jsonUrl,
             data: "data",
             success: function(response) {
-
                 model.jsonElems = forFn(response.elements);
-
-
             },
             complete: ajaxCompleted
         });
