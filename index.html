@@ -222,7 +222,6 @@
                 }
                
             }
-            // clearForm();
         }
     };
 
@@ -233,10 +232,7 @@
             url: controller.jsonUrl,
             data: "data",
             success: function(response) {
-
                 model.jsonElems = forFn(response.elements);
-
-
             },
             complete: ajaxCompleted
         });
