@@ -195,27 +195,13 @@
             data: "data",
             success: function(response) {
                 model.jsonElems = forFn(response.elements);
-            },
-            complete: ajaxCompleted
+            }
         });
     }
 
     var controller = {
         jsonUrl: 'PeriodicTableJSON.json',
         processInput: function(colorList) {
-            // var charList = forFn(input);
-            // var charList = matchElem(model.jsonElems, input);
-
-
-
-            // var selList = model.findSelected(charList, model.jsonElems);
-
-            // var colorElem = model.filterDups(selList);
-
             view.updateColor(colorList, model.origInput);
         }
     };
-
-    function ajaxCompleted() {
-
-    }
