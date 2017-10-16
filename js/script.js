@@ -15,7 +15,9 @@
         var retStr = "";
         var tempArray = [];
         var splitArray = input.split(/\s+/);
-        var periodicSym = model.jsonElems;
+        var periodicSym = model.jsonElems.map(function(object){
+            return object.symbol;
+        });
         splitArray.forEach(function(val, idx) {
             var twoLetterArray = produceTwoChArray(val);
             var retVar = idx % 2 !== 0 ? matchElem(periodicSym, val) : matchElem(periodicSym, twoLetterArray);
@@ -95,7 +97,13 @@
         var retArray = [];
         for (var i = 0; i < arr.length; i++) {
             if (arr[i].symbol) {
-                retArray.push(arr[i].symbol.toLowerCase());
+                var elObj = {
+                    atomic_mass: arr[i].atomic_mass,
+                    number: arr[i].number,
+                    shells: arr[i].shells,
+                    symbol: arr[i].symbol.toLowerCase()
+                }
+                retArray.push(elObj);
             } else {
                 retArray.push(arr[i].toLowerCase());
             }
@@ -166,9 +174,11 @@
             }
             if (colorEle === undefined) {
                 return;
-            } else if (colorEle.length === 2) {
-                colorEle = colorEle.match(/.{1,1}/g);
-            }
+            } 
+            // else if (colorEle.length === 2) {
+            //     colorEle = colorEle.match(/.{1,1}/g);
+            //     debugger;
+            // }
 
             for (var i = 0; i < colorEle.length; i++) {
                 for (var k = 0; k < splitWord.length; k++) {
@@ -194,7 +204,16 @@
             url: controller.jsonUrl,
             data: "data",
             success: function(response) {
-                model.jsonElems = forFn(response.elements);
+                // model.jsonElems = forFn(response.elements);
+                // model.jsonElems = forFn(response.elements);
+                model.jsonElems = response.elements.map(function(obj) {
+                    return {
+                        atomic_mass: obj.atomic_mass,
+                        number: obj.number,
+                        shells: obj.shells,
+                        symbol: obj.symbol.toLowerCase()
+                    }
+                })
             }
         });
     }
