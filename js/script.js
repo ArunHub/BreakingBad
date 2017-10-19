@@ -15,14 +15,20 @@
         var retStr = "";
         var tempArray = [];
         var splitArray = input.split(/\s+/);
-        var periodicSym = model.jsonElems.map(function(object){
-            return object.symbol;
-        });
+        var periodicSym = model.jsonElems;
+        // var periodicSym = model.jsonElems.map(function(object){
+        //     return object.symbol;
+        // });
         splitArray.forEach(function(val, idx) {
             var twoLetterArray = produceTwoChArray(val);
             var retVar = idx % 2 !== 0 ? matchElem(periodicSym, val) : matchElem(periodicSym, twoLetterArray);
+            var regex = '[^' + retVar.symbol + ']';
+            regex = new RegExp(regex, 'gi')
+            var remLetters = val.match(regex);
+            remLetters.splice(retVar.pos, 0, retVar);
             periodicSym.splice(periodicSym.indexOf(retVar), 1);
-            view.updateColor(retVar, val, idx);
+            view.buildObjDom(remLetters, idx);
+            // view.updateColor(retVar, val, idx);
         })
         clearForm();
     }
@@ -41,9 +47,12 @@
         for (var i = 0; i < parseInp.length; i++) {
             for (var j = 0; j < arr.length; j++) {
                 console.log("text", parseInp[i], arr[j]);
-                if (parseInp[i] === arr[j]) {
+                if (parseInp[i] === arr[j].symbol) {
+                    // if (parseInp[i] === arr[j]) {
                     console.log('match', parseInp[i]);
-                    return parseInp[i];
+                    // return parseInp[i];
+                    arr[j]['pos'] = i;
+                    return arr[j];
                 } else if ((parseInp[parseInp.length - 1].length === 2) && (arr.length - 1) === j && (parseInp.length - 1) === i) {
                     // var single = forFn(arr);
                     // matchElem(single, parseInp);
@@ -115,22 +124,7 @@
 
     var model = {
         jsonElems: [],
-        origInput: "",
-        findSelected: function(chars, symbols) {
-            var retArray = [];
-            for (var i = 0; i < chars.length; i++) {
-                symbols.forEach(function(symbol) {
-                    if (chars[i] === symbol) retArray.push(chars[i]);
-                });
-            }
-            return retArray;
-        },
-        filterDups: function(selList) {
-            var retArray = selList.filter(function(elem, pos) {
-                return selList.indexOf(elem) == pos;
-            });
-            return retArray;
-        }
+        origInput: ""
     };
 
     var view = {
@@ -138,6 +132,23 @@
             var hTag = $('#h1');
             for (var i = 0; i < dom.length; i++) {
                 hTag.append("<span>" + dom[i].toLowerCase() + "</span>");
+            }
+        },
+        buildObjDom: function(dom, index) {
+            var inputgroup = $('.input-group');
+            var inputword = "input-word-" + index;
+            var genWordId = '#' + inputword;
+            inputgroup.append('<div id=' + inputword + '></div>');
+            for (var i = 0; i < dom.length; i++) {
+                if (dom[i].symbol) {
+                    console.log("text",genWordId);
+                    $(genWordId).append('<div class="periodic-element"><div class="atomic-mass">' + dom[i].atomic_mass + '</div><div class="shells">2</div><div class="symbol">' + dom[i].symbol.toLowerCase() + '</div><div class="number">' + dom[i].number + '</div></div>');
+                    dom[i].shells.forEach(function(val, idx) {
+                        $('.shells').append("<span>" + val + "</span>");
+                    });
+                } else {
+                    $(genWordId).append("<span>" + dom[i].toLowerCase() + "</span>");
+                }
             }
         },
         displayMessage: function(str) {
@@ -148,20 +159,6 @@
         },
         updateColor: function(colorEle, splitWord, idx) {
             var hTag = $('#h1');
-            // var prevIdx = 0;
-            // colorArr.forEach(function(color) {
-            //     charList.forEach(function(char, idx) {
-            //         if (color === char) {
-            //             if (prevIdx !== idx - 1) {
-            //                 console.log("ajc", prevIdx);
-            //                 hTag.children().eq(idx).addClass('highlight');
-            //             } else {
-            //                 // charList.splice(idx,1);
-            //             }
-            //             prevIdx = idx;
-            //         }
-            //     });
-            // });
             var wordId = "word_" + idx
             var genWordId = '#' + wordId;
             if (idx > 0) {
@@ -174,11 +171,9 @@
             }
             if (colorEle === undefined) {
                 return;
-            } 
-            // else if (colorEle.length === 2) {
-            //     colorEle = colorEle.match(/.{1,1}/g);
-            //     debugger;
-            // }
+            } else if (colorEle.length === 2) {
+                colorEle = colorEle.match(/.{1,1}/g);
+            }
 
             for (var i = 0; i < colorEle.length; i++) {
                 for (var k = 0; k < splitWord.length; k++) {
@@ -212,7 +207,7 @@
                         number: obj.number,
                         shells: obj.shells,
                         symbol: obj.symbol.toLowerCase()
-                    }
+                    };
                 })
             }
         });
