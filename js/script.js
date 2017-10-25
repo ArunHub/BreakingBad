@@ -16,10 +16,7 @@
         var tempArray = [];
         var splitArray = input.split(/\s+/);
         var periodicSym = model.jsonElems;
-        // var periodicSym = model.jsonElems.map(function(object){
-        //     return object.symbol;
-        // });
-        $('.input-group').css('padding','5px');
+
         splitArray.forEach(function(val, idx) {
             var twoLetterArray = produceTwoChArray(val);
             var retVar = idx % 2 !== 0 ? matchElem(periodicSym, val) : matchElem(periodicSym, twoLetterArray);
@@ -31,6 +28,7 @@
             view.buildObjDom(remLetters, idx);
             // view.updateColor(retVar, val, idx);
         })
+        $('.input-group').css('padding', '5px');
         clearForm();
     }
 
@@ -82,6 +80,10 @@
         }
         temp1 = temp1.join('+').toString();
         return temp1;
+    }
+
+    function part(string, count) {
+        return [...string.slice(count - 1)].map((_, i) => string.slice(i, i + count));
     }
 
     function clearSubmit() {
