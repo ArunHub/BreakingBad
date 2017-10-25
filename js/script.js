@@ -19,6 +19,7 @@
         // var periodicSym = model.jsonElems.map(function(object){
         //     return object.symbol;
         // });
+        $('.input-group').css('padding','5px');
         splitArray.forEach(function(val, idx) {
             var twoLetterArray = produceTwoChArray(val);
             var retVar = idx % 2 !== 0 ? matchElem(periodicSym, val) : matchElem(periodicSym, twoLetterArray);
@@ -46,10 +47,8 @@
         // }
         for (var i = 0; i < parseInp.length; i++) {
             for (var j = 0; j < arr.length; j++) {
-                console.log("text", parseInp[i], arr[j]);
                 if (parseInp[i] === arr[j].symbol) {
                     // if (parseInp[i] === arr[j]) {
-                    console.log('match', parseInp[i]);
                     // return parseInp[i];
                     arr[j]['pos'] = i;
                     return arr[j];
@@ -64,7 +63,6 @@
     function produceTwoChArray(word) {
         var temp = "";
         var tempArr = [];
-        // var retVar = generateWordSequence(n);
 
         for (var i = 0; i < word.length; i++) {
             temp += word[i];
@@ -141,10 +139,12 @@
             inputgroup.append('<div id=' + inputword + '></div>');
             for (var i = 0; i < dom.length; i++) {
                 if (dom[i].symbol) {
-                    console.log("text",genWordId);
-                    $(genWordId).append('<div class="periodic-element"><div class="atomic-mass">' + dom[i].atomic_mass + '</div><div class="shells">2</div><div class="symbol">' + dom[i].symbol.toLowerCase() + '</div><div class="number">' + dom[i].number + '</div></div>');
+                    $(genWordId).append('<div class="periodic-element"><div class="atomic-mass">' + dom[i].atomic_mass + '</div><div class="oxidation"></div><div class="symbol">' + dom[i].symbol.toLowerCase() + '</div><div class="number">' + dom[i].number + '</div><div class="shells">2</div></div>');
                     dom[i].shells.forEach(function(val, idx) {
-                        $('.shells').append("<span>" + val + "</span>");
+                        $(genWordId + ' ' + '.shells').append("<span>" + '-' + val + "</span>");
+                    });
+                    dom[i].oxidationStates.forEach(function(val, idx) {
+                        $(genWordId + ' ' + '.oxidation').append("<span>" + val + "</span>");
                     });
                 } else {
                     $(genWordId).append("<span>" + dom[i].toLowerCase() + "</span>");
@@ -192,30 +192,29 @@
         }
     };
 
-    function ajaxCall() {
-
-        $.ajax({
-            dataType: "json",
-            url: controller.jsonUrl,
-            data: "data",
-            success: function(response) {
-                // model.jsonElems = forFn(response.elements);
-                // model.jsonElems = forFn(response.elements);
-                model.jsonElems = response.elements.map(function(obj) {
-                    return {
-                        atomic_mass: obj.atomic_mass,
-                        number: obj.number,
-                        shells: obj.shells,
-                        symbol: obj.symbol.toLowerCase()
-                    };
-                })
-            }
-        });
-    }
-
     var controller = {
         jsonUrl: 'PeriodicTableJSON.json',
         processInput: function(colorList) {
             view.updateColor(colorList, model.origInput);
         }
     };
+
+    function ajaxCall() {
+        $.ajax({
+            dataType: "json",
+            url: controller.jsonUrl,
+            data: "data",
+            success: function(response) {
+                // model.jsonElems = forFn(response.elements);
+                model.jsonElems = response.elements.map(function(obj) {
+                    return {
+                        atomic_mass: obj.atomic_mass,
+                        number: obj.number,
+                        shells: obj.shells,
+                        symbol: obj.symbol.toLowerCase(),
+                        oxidationStates: obj.oxidationStates
+                    };
+                });
+            }
+        });
+    }

@@ -1,13 +1,82 @@
-    .highlight {
-        color: red;
-        text-transform: uppercase;
-    }
-    .symbol {
-        color: red;
-        text-transform: uppercase;
-    }
+* {
+    border-sizing: border-box;
+}
 
-    .periodic-element {
-    	position: relative;
-    	display: inline-block;
-    }
+.highlight {
+    color: red;
+    text-transform: uppercase;
+}
+
+.input-group {
+    background: green;
+}
+
+div[id*='input-word-'] {
+    margin: auto;
+    position: relative;
+    widows: 100%;
+}
+
+div[id*='input-word-1'] {
+    margin-left: 204px;
+}
+
+div[id*='input-word-']>span {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 200px;
+    font-size: 120px;
+}
+
+.periodic-element {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 200px;
+    height: 200px;
+    font-size: 3rem;
+    border: 2px solid white;
+    background: linear-gradient(to bottom right, #4ea76d 20%, #1f4c21 75%);
+    color: white;
+    font-family: arial;
+}
+
+.periodic-element>div {
+    position: absolute;
+    font-size: 0.3em;
+    font-weight: bold;
+}
+
+.oxidation span {
+    display: block;
+    text-align: right;
+}
+
+.oxidation {
+    right: 3px;
+    top: 3px;
+}
+
+.periodic-element .symbol {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5em;
+    text-transform: capitalize;
+}
+
+.atomic-mass {
+    left: 3px;
+    top: 3px;
+}
+
+.periodic-element .number {
+    left: 3px;
+    bottom: 23px;
+    font-size: 0.5em;
+}
+
+.shells {
+    bottom: 3px;
+    left: 3px;
+}
