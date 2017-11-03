@@ -1,88 +1,72 @@
+
+
+    // console.log("jsonFunction",jsonFunction);
+
     function fireSubmit() {
         clearSubmit();
-        var getInput = document.getElementById('getInput');
-        var input = model.origInput = getInput.value.trim();
+        var sayUrName = document.getElementById('say-ur-name');
+        var input = model.origInput = sayUrName.value.trim();
         if (input === null || input.length === 0 || input.match(/(^[0-9])|([0-9]$)|([^a-zA-Z\s+])/)) {
-            view.displayMessage('Oops, Enter only Letters!');
+            view.displayMessage('Oops, Special characters, numbers are not allowed. Enter only Letters!');
+            clearForm();
+            return;
+        } else if (input.length === model.chunkNumber - 1) {
+            view.displayMessage('Enter atleast two letters');
             clearForm();
             return;
         } else {
-            concatArrayStr(input.toLowerCase());
+            processInput(input.toLowerCase());
         }
     }
 
-    function concatArrayStr(input) {
-        var retStr = "";
-        var tempArray = [];
-        var splitArray = input.split(/\s+/);
-        var periodicSym = model.jsonElems;
+    function processInput(input) {
+        var splitInput = input.split(/\s+/);
+        var periodicArr = model.jsonElems;
 
-        splitArray.forEach(function(val, idx) {
-            var twoLetterArray = produceTwoChArray(val);
-            var retVar = idx % 2 !== 0 ? matchElem(periodicSym, val) : matchElem(periodicSym, twoLetterArray);
-            var regex = '[^' + retVar.symbol + ']';
-            regex = new RegExp(regex, 'gi')
-            var remLetters = val.match(regex);
-            remLetters.splice(retVar.pos, 0, retVar);
-            periodicSym.splice(periodicSym.indexOf(retVar), 1);
-            view.buildObjDom(remLetters, idx);
-            // view.updateColor(retVar, val, idx);
+        splitInput.forEach(function(val, idx) {
+            var twoLetterArr = breakStr(val, model.chunkNumber);
+            // var retVar = idx % 2 !== 0 ? matchElem(periodicArr, val) : matchElem(periodicArr, twoLetterArr);
+            var retVal = matchElem(periodicArr, twoLetterArr);
+            if (retVal === 'one') {
+                retVal = matchElem(periodicArr, val);
+            }
+            if( retVal !== null || retVal !== undefined) {
+                var regex = '[^' + retVal.symbol + ']';
+                regex = new RegExp(regex, 'gi')
+                var reduceArr = val.match(regex);
+                reduceArr.splice(retVal.pos, 0, retVal);
+                periodicArr.splice(periodicArr.indexOf(retVal), 1);
+                view.buildObjDom(reduceArr, idx);
+                // view.updateColor(retVal, val, idx);
+            }else {
+                view.displayMessage('No match found');
+                clearForm();
+                return;
+            }
         })
         $('.input-group').css('padding', '5px');
         clearForm();
     }
 
-    function matchElem(arr, parseInp) {
-        var retVar;
+    function matchElem(periodicArr, letterArr) {
         //randomize array here
-
-        // for (var i = 0; i < arr.length; i++) {
-        //     var reg = new RegExp(arr[i], 'gi');
-        //     if (parseInp.match(reg) !== null) {
-        //         retVar = arr[i]
-        //         return retVar;
-        //     }
-        // }
-        for (var i = 0; i < parseInp.length; i++) {
-            for (var j = 0; j < arr.length; j++) {
-                if (parseInp[i] === arr[j].symbol) {
-                    // if (parseInp[i] === arr[j]) {
-                    // return parseInp[i];
-                    arr[j]['pos'] = i;
-                    return arr[j];
-                } else if ((parseInp[parseInp.length - 1].length === 2) && (arr.length - 1) === j && (parseInp.length - 1) === i) {
-                    // var single = forFn(arr);
-                    // matchElem(single, parseInp);
+        for (var i = 0; i < letterArr.length; i++) {
+            for (var j = 0; j < periodicArr.length; j++) {
+                if (letterArr[i] === periodicArr[j].symbol) {
+                    // if (letterArr[i] === periodicArr[j]) {
+                    // return letterArr[i];
+                    periodicArr[j]['pos'] = i;
+                    return periodicArr[j];
+                } else if ((letterArr[letterArr.length - 1].length === model.chunkNumber) && (periodicArr.length - 1) === j && (letterArr.length - 1) === i) {
+                    return 'one';
+                } else if ((letterArr[letterArr.length - 1].length === model.chunkNumber - 1) && (periodicArr.length - 1) === j && (letterArr.length - 1) === i) {
+                    return null;
                 }
             }
         }
     }
 
-    function produceTwoChArray(word) {
-        var temp = "";
-        var tempArr = [];
-
-        for (var i = 0; i < word.length; i++) {
-            temp += word[i];
-            if (temp.length === 2) {
-                tempArr.push(temp);
-            }
-            temp = word[i];
-        }
-        return tempArr;
-    }
-
-    function generateWordSequence(n) {
-        var n = n - 2;
-        var temp1 = [];
-        for (var j = n; j >= 0; j--) {
-            temp1.push("word[i - " + j + "]");
-        }
-        temp1 = temp1.join('+').toString();
-        return temp1;
-    }
-
-    function part(string, count) {
+    function breakStr(string, count) {
         return [...string.slice(count - 1)].map((_, i) => string.slice(i, i + count));
     }
 
@@ -92,37 +76,44 @@
     }
 
     function clearForm() {
-        var form = document.getElementsByName('guessForm')[0];
+        var form = document.getElementsByName('periodicForm')[0];
         form.reset();
+    }
+
+    function refreshPage() {
+        window.location.reload();
     }
 
     function init() {
         var submitBtn = document.getElementById('submitBtn');
+        var refresh = document.getElementById('refresh');
         submitBtn.onclick = fireSubmit;
+        refresh.onclick = refreshPage;
         ajaxCall();
     }
 
-    function forFn(arr) {
-        var retArray = [];
-        for (var i = 0; i < arr.length; i++) {
-            if (arr[i].symbol) {
-                var elObj = {
-                    atomic_mass: arr[i].atomic_mass,
-                    number: arr[i].number,
-                    shells: arr[i].shells,
-                    symbol: arr[i].symbol.toLowerCase()
-                }
-                retArray.push(elObj);
-            } else {
-                retArray.push(arr[i].toLowerCase());
-            }
-        }
-        return retArray;
-    }
+    // function forFn(arr) {
+    //     var retArray = [];
+    //     for (var i = 0; i < arr.length; i++) {
+    //         if (arr[i].symbol) {
+    //             var elObj = {
+    //                 atomic_mass: arr[i].atomic_mass,
+    //                 number: arr[i].number,
+    //                 shells: arr[i].shells,
+    //                 symbol: arr[i].symbol.toLowerCase()
+    //             }
+    //             retArray.push(elObj);
+    //         } else {
+    //             retArray.push(arr[i].toLowerCase());
+    //         }
+    //     }
+    //     return retArray;
+    // }
 
     window.onload = init;
 
     var model = {
+        chunkNumber: 2,
         jsonElems: [],
         origInput: ""
     };
@@ -136,6 +127,7 @@
         },
         buildObjDom: function(dom, index) {
             var inputgroup = $('.input-group');
+            var details = $('.details');
             var inputword = "input-word-" + index;
             var genWordId = '#' + inputword;
             inputgroup.append('<div id=' + inputword + '></div>');
@@ -148,6 +140,8 @@
                     dom[i].oxidationStates.forEach(function(val, idx) {
                         $(genWordId + ' ' + '.oxidation').append("<span>" + val + "</span>");
                     });
+                    console.log("text",dom[i]);
+                    details.append('<div>'+dom[i].name+'----------'+dom[i].source+'----------'+dom[i].summary+'</div>');
                 } else {
                     $(genWordId).append("<span>" + dom[i].toLowerCase() + "</span>");
                 }
@@ -196,9 +190,9 @@
 
     var controller = {
         jsonUrl: 'PeriodicTableJSON.json',
-        processInput: function(colorList) {
-            view.updateColor(colorList, model.origInput);
-        }
+        // processInput: function(colorList) {
+        //     view.updateColor(colorList, model.origInput);
+        // }
     };
 
     function ajaxCall() {
@@ -210,6 +204,9 @@
                 // model.jsonElems = forFn(response.elements);
                 model.jsonElems = response.elements.map(function(obj) {
                     return {
+                        name: obj.name,
+                        source: obj.source,
+                        summary: obj.summary,
                         atomic_mass: obj.atomic_mass,
                         number: obj.number,
                         shells: obj.shells,
