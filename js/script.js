@@ -44,7 +44,6 @@
                 return;
             }
         })
-        $('.input-group').css('padding', '5px');
         clearForm();
     }
 
@@ -140,25 +139,26 @@
                     dom[i].oxidationStates.forEach(function(val, idx) {
                         $(genWordId + ' ' + '.oxidation').append("<span>" + val + "</span>");
                     });
-                    console.log("text",dom[i]);
                     details.append('<div>'+dom[i].name+'----------'+dom[i].source+'----------'+dom[i].summary+'</div>');
+                    console.log("width per",$(genWordId));
                 } else {
                     $(genWordId).append("<span>" + dom[i].toLowerCase() + "</span>");
                 }
+                console.log("text",$('.periodic-element').outerWidth());
             }
         },
         displayMessage: function(str) {
-            var message = $('blockquote');
+            var message = $('.message');
             message.text(str).fadeOut(4000, function() {
                 message.show().text("");
             });
         },
         updateColor: function(colorEle, splitWord, idx) {
-            var hTag = $('#h1');
+            var name = $('#name');
             var wordId = "word_" + idx
             var genWordId = '#' + wordId;
             if (idx > 0) {
-                hTag.append('<div id=' + wordId + '></div>');
+                name.append('<div id=' + wordId + '></div>');
                 for (var i = 0; i < splitWord.length; i++) {
                     $(genWordId).append("<span>" + splitWord[i].toLowerCase() + "</span>");
                 }
@@ -178,7 +178,7 @@
                         if (idx > 0) {
                             $(genWordId).children().eq(i).addClass('highlight');
                         } else {
-                            hTag.children().eq(i).addClass('highlight');
+                            name.children().eq(i).addClass('highlight');
                         }
                         break;
                     }
