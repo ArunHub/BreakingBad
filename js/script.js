@@ -27,7 +27,7 @@
             var twoLetterArr = breakStr(val, model.chunkNumber);
             // var retVar = idx % 2 !== 0 ? matchElem(periodicArr, val) : matchElem(periodicArr, twoLetterArr);
             var retVal = matchElem(periodicArr, twoLetterArr);
-            if (retVal === 'one') {
+            if (retVal === 'single letter') {
                 retVal = matchElem(periodicArr, val);
             }
             if( retVal !== null || retVal !== undefined) {
@@ -35,7 +35,7 @@
                 regex = new RegExp(regex, 'gi')
                 var reduceArr = val.match(regex);
                 reduceArr.splice(retVal.pos, 0, retVal);
-                periodicArr.splice(periodicArr.indexOf(retVal), 1);
+                // periodicArr.splice(periodicArr.indexOf(retVal), 1);
                 view.buildObjDom(reduceArr, idx);
                 // view.updateColor(retVal, val, idx);
             }else {
@@ -57,7 +57,7 @@
                     periodicArr[j]['pos'] = i;
                     return periodicArr[j];
                 } else if ((letterArr[letterArr.length - 1].length === model.chunkNumber) && (periodicArr.length - 1) === j && (letterArr.length - 1) === i) {
-                    return 'one';
+                    return 'single letter';
                 } else if ((letterArr[letterArr.length - 1].length === model.chunkNumber - 1) && (periodicArr.length - 1) === j && (letterArr.length - 1) === i) {
                     return null;
                 }
@@ -130,6 +130,7 @@
             var inputword = "input-word-" + index;
             var genWordId = '#' + inputword;
             inputgroup.append('<div id=' + inputword + '></div>');
+            var count = 0;
             for (var i = 0; i < dom.length; i++) {
                 if (dom[i].symbol) {
                     $(genWordId).append('<div class="periodic-element"><div class="atomic-mass">' + dom[i].atomic_mass + '</div><div class="oxidation"></div><div class="symbol">' + dom[i].symbol.toLowerCase() + '</div><div class="number">' + dom[i].number + '</div><div class="shells">2</div></div>');
@@ -140,11 +141,16 @@
                         $(genWordId + ' ' + '.oxidation').append("<span>" + val + "</span>");
                     });
                     details.append('<div>'+dom[i].name+'----------'+dom[i].source+'----------'+dom[i].summary+'</div>');
-                    console.log("width per",$(genWordId));
+                    console.log("big",$('.periodic-element').outerWidth());
+                    var perEl = $('.periodic-element').outerWidth();
+                    count += perEl;
                 } else {
                     $(genWordId).append("<span>" + dom[i].toLowerCase() + "</span>");
+                    console.log("span",$(genWordId + ' > span').outerWidth());
+                    var spanEl = $(genWordId + ' > span').outerWidth();
+                    count += spanEl;
                 }
-                console.log("text",$('.periodic-element').outerWidth());
+                console.log("ount",count);
             }
         },
         displayMessage: function(str) {
