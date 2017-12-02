@@ -15,34 +15,79 @@ function fireSubmit() {
     }
 }
 
+// function processInput(input) {
+//     var splitInput = input.split(/\s+/);
+//     var periodicArr = model.jsonElems;
+
+//     splitInput.forEach(function(val, idx) {
+//         var twoLetterArr = breakStr(val, model.chunkNumber);
+//         // var retVar = idx % 2 !== 0 ? matchElem(periodicArr, val) : matchElem(periodicArr, twoLetterArr);
+//         var retVal = matchElem(periodicArr, twoLetterArr);
+//         if (retVal === 'single letter') {
+//             retVal = matchElem(periodicArr, val);
+//         }
+//         if (retVal == null || retVal == undefined) {
+//             view.displayMessage('No match found for this word: ' + val);
+//             clearForm();
+//             return;
+//         } else {
+//             view.buildPeriodEl(retVal, idx);
+//             var reduceArr = getParts(retVal.symbol, val);
+//             reduceArr.splice(retVal.pos, 0, retVal);
+//             view.buildObjDom(reduceArr, retVal.pos, idx);
+//         }
+//     })
+//     clearForm();
+// }
+
 function processInput(input) {
     var splitInput = input.split(/\s+/);
     var periodicArr = model.jsonElems;
 
     splitInput.forEach(function(val, idx) {
-        var twoLetterArr = breakStr(val, model.chunkNumber);
         // var retVar = idx % 2 !== 0 ? matchElem(periodicArr, val) : matchElem(periodicArr, twoLetterArr);
-        var retVal = matchElem(periodicArr, twoLetterArr);
-        if (retVal === 'single letter') {
-            retVal = matchElem(periodicArr, val);
-        }
-        if (retVal == null || retVal == undefined) {
-            view.displayMessage('No match found for this word: ' + val);
-            clearForm();
-            return;
+        var retVal = regexMatch(periodicArr, val, 2);
+        if (retVal == null) {
+            retVal = regexMatch(periodicArr, val, 1)
+            if (retVal == null || retVal == undefined) {
+                view.displayMessage('No match found for this word: ' + val);
+                clearForm();
+                return;
+            }
         } else {
             view.buildPeriodEl(retVal, idx);
-            var reduceArr = getParts(retVal.symbol, val);
-            reduceArr.splice(retVal.pos, 0, retVal);
-            view.buildObjDom(reduceArr, retVal.pos, idx);
+            var joinedArr = joinArray(val, retVal);
+            view.buildObjDom(joinedArr, retVal.pos, idx);
         }
     })
     clearForm();
 }
 
+function joinArray(str, retVal) {
+    var first = getParts(retVal.symbol, str);
+    var removed = first.splice(retVal.pos).join('');
+    first = first.join('');
+    var retArr = Array.of(first, retVal, removed);
+    return retArr;
+}
+
 function getParts(input, string) {
     var regex = new RegExp(input, 'i')
     return string.replace(regex, '').split('');
+}
+
+function regexMatch(periodicArr, str, n) {
+    for (var i = 0; i < periodicArr.length; i++) {
+        if (periodicArr[i].symbol.length === n) {
+            var regex = new RegExp(periodicArr[i].symbol, 'i');
+            var temp = str.match(regex);
+        }
+        if (temp) {
+            periodicArr[i]['pos'] = temp.index;
+            break;
+        }
+    }
+    return periodicArr[i];
 }
 
 function matchElem(periodicArr, letterArr) {
@@ -53,8 +98,10 @@ function matchElem(periodicArr, letterArr) {
                 periodicArr[j]['pos'] = i;
                 return periodicArr[j];
             } else if ((letterArr[letterArr.length - 1].length === model.chunkNumber) && (periodicArr.length - 1) === j && (letterArr.length - 1) === i) {
+                // condition when no two letter el not found
                 return 'single letter';
             } else if ((letterArr[letterArr.length - 1].length === model.chunkNumber - 1) && (periodicArr.length - 1) === j && (letterArr.length - 1) === i) {
+                // when nothing found
                 return null;
             }
         }
@@ -97,12 +144,6 @@ var model = {
 
 var view = {
     marginLeft: 0,
-    buildDom: function(dom) {
-        var hTag = $('#h1');
-        for (var i = 0; i < dom.length; i++) {
-            hTag.append("<span>" + dom[i].toLowerCase() + "</span>");
-        }
-    },
     buildPeriodEl: function(obj, index) {
         var inputgroup = $('.input-group');
         var inputword = "input-word-" + index;
