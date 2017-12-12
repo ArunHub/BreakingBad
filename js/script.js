@@ -47,17 +47,18 @@ function processInput(input) {
     splitInput.forEach(function(val, idx) {
         // var retVar = idx % 2 !== 0 ? matchElem(periodicArr, val) : matchElem(periodicArr, twoLetterArr);
         var retVal = regexMatch(periodicArr, val, 2);
-        if (retVal == null) {
-            retVal = regexMatch(periodicArr, val, 1)
-            if (retVal == null || retVal == undefined) {
-                view.displayMessage('No match found for this word: ' + val);
-                clearForm();
-                return;
-            }
+        if (retVal == null || retVal == undefined) {
+            retVal = regexMatch(periodicArr, val, 1);
+        }
+        if (retVal == null || retVal == undefined) {
+            view.displayMessage('No match found for this word: ' + val);
+            clearForm();
+            return;
         } else {
-            view.buildPeriodEl(retVal, idx);
+            // view.buildPeriodEl(retVal, idx);
             var joinedArr = joinArray(val, retVal);
-            view.buildObjDom(joinedArr, retVal.pos, idx);
+            // view.buildObjDom(joinedArr, retVal.pos, idx);
+            view.buildFullDom(joinedArr, idx);
         }
     })
     clearForm();
@@ -65,8 +66,8 @@ function processInput(input) {
 
 function joinArray(str, retVal) {
     var first = getParts(retVal.symbol, str);
-    var removed = first.splice(retVal.pos).join('');
-    first = first.join('');
+    var removed = { string: first.splice(retVal.pos).join(''), after: true };
+    first = { string: first.join(''), before: true };
     var retArr = Array.of(first, retVal, removed);
     return retArr;
 }
@@ -144,6 +145,7 @@ var model = {
 
 var view = {
     marginLeft: 0,
+    left: 0,
     buildPeriodEl: function(obj, index) {
         var inputgroup = $('.input-group');
         var inputword = "input-word-" + index;
@@ -151,7 +153,7 @@ var view = {
         inputgroup.append('<div id=' + inputword + ' style="margin-left:' + view.marginLeft + 'px"></div>');
         var details = $('.details');
         view.marginLeft = 0;
-        $(genWordId).append('<div class="periodic-element"><div class="atomic-mass">' + obj.atomic_mass + '</div><div class="oxidation"></div><div class="symbol">' + obj.symbol.toLowerCase() + '</div><div class="number">' + obj.number + '</div><div class="shells">2</div></div>');
+        $(genWordId).append('<div class="periodic-element" data-before="A" data-after="B"><div class="atomic-mass">' + obj.atomic_mass + '</div><div class="oxidation"></div><div class="symbol">' + obj.symbol.toLowerCase() + '</div><div class="number">' + obj.number + '</div><div class="shells">2</div></div>');
         obj.shells.forEach(function(val, idx) {
             $(genWordId + ' ' + '.shells').append("<span>" + '-' + val + "</span>");
         });
@@ -187,6 +189,45 @@ var view = {
             }
 
         }
+    },
+    buildFullDom: function(dom, index) {
+        var inputgroup = $('.parent');
+        var inputword = "child-" + index;
+        var genWordId = '.' + inputword;
+        var details = $('.details');
+        var length = dom.length - 1;
+        console.log("text", dom);
+        inputgroup.append('<div class=' + inputword + '><div class="periodic-element" style="left:' + view.left + 'px"></div></div>');
+
+        for (var i = 0; i < dom.length; i++) {
+
+            if (dom[i].symbol) {
+                $(genWordId + ' ' + '.periodic-element').append('<div class="atomic-mass">' + dom[i].atomic_mass + '</div><div class="oxidation"></div><div class="symbol">' + dom[i].symbol.toLowerCase() + '</div><div class="number">' + dom[i].number + '</div><div class="shells">2</div>');
+                dom[i].shells.forEach(function(val, idx) {
+                    $(genWordId + ' ' + '.shells').append("<span>" + '-' + val + "</span>");
+                });
+                dom[i].oxidationStates.forEach(function(val, idx) {
+                    $(genWordId + ' ' + '.oxidation').append("<span>" + val + "</span>");
+                });
+                details.append('<div>' + dom[i].name + '----------' + dom[i].source + '----------' + dom[i].summary + '</div>');
+            }
+
+
+            if (!dom[i].symbol) {
+                if (dom[i].before) {
+                    console.log("before", dom[i]);
+                    $(genWordId + ' ' + '.periodic-element').attr("data-before", dom[i].string);
+                    var spanEl = $(genWordId + ' .periodic-element').outerWidth();
+                } else if (dom[i].after) {
+                    console.log("after", dom[i]);
+                    $(genWordId + ' ' + '.periodic-element').attr("data-after", dom[i].string);
+                }
+
+            }
+
+        }
+        var el = $(genWordId + ' .periodic-element').outerWidth();
+        view.left += el;
     },
     displayMessage: function(str) {
         var message = $('.message');
