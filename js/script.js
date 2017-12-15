@@ -52,7 +52,6 @@ function processInput(input) {
         }
         if (retVal == null || retVal == undefined) {
             view.displayMessage('No match found for this word: ' + val);
-            clearForm();
             return;
         } else {
             // view.buildPeriodEl(retVal, idx);
@@ -60,7 +59,7 @@ function processInput(input) {
             // view.buildObjDom(joinedArr, retVal.pos, idx);
             view.buildFullDom(joinedArr, idx);
         }
-    })
+    });
     clearForm();
 }
 
