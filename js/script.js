@@ -15,37 +15,11 @@ function fireSubmit() {
     }
 }
 
-// function processInput(input) {
-//     var splitInput = input.split(/\s+/);
-//     var periodicArr = model.jsonElems;
-
-//     splitInput.forEach(function(val, idx) {
-//         var twoLetterArr = breakStr(val, model.chunkNumber);
-//         // var retVar = idx % 2 !== 0 ? matchElem(periodicArr, val) : matchElem(periodicArr, twoLetterArr);
-//         var retVal = matchElem(periodicArr, twoLetterArr);
-//         if (retVal === 'single letter') {
-//             retVal = matchElem(periodicArr, val);
-//         }
-//         if (retVal == null || retVal == undefined) {
-//             view.displayMessage('No match found for this word: ' + val);
-//             clearForm();
-//             return;
-//         } else {
-//             view.buildPeriodEl(retVal, idx);
-//             var reduceArr = getParts(retVal.symbol, val);
-//             reduceArr.splice(retVal.pos, 0, retVal);
-//             view.buildObjDom(reduceArr, retVal.pos, idx);
-//         }
-//     })
-//     clearForm();
-// }
-
 function processInput(input) {
     var splitInput = input.split(/\s+/);
     var periodicArr = model.jsonElems;
 
     splitInput.forEach(function(val, idx) {
-        // var retVar = idx % 2 !== 0 ? matchElem(periodicArr, val) : matchElem(periodicArr, twoLetterArr);
         var retVal = regexMatch(periodicArr, val, 2);
         if (retVal == null || retVal == undefined) {
             retVal = regexMatch(periodicArr, val, 1);
@@ -54,9 +28,7 @@ function processInput(input) {
             view.displayMessage('No match found for this word: ' + val);
             return;
         } else {
-            // view.buildPeriodEl(retVal, idx);
             var joinedArr = joinArray(val, retVal);
-            // view.buildObjDom(joinedArr, retVal.pos, idx);
             view.buildFullDom(joinedArr, idx);
         }
     });
@@ -88,24 +60,6 @@ function regexMatch(periodicArr, str, n) {
         }
     }
     return periodicArr[i];
-}
-
-function matchElem(periodicArr, letterArr) {
-    //randomize array here
-    for (var i = 0; i < letterArr.length; i++) {
-        for (var j = 0; j < periodicArr.length; j++) {
-            if (letterArr[i] === periodicArr[j].symbol) {
-                periodicArr[j]['pos'] = i;
-                return periodicArr[j];
-            } else if ((letterArr[letterArr.length - 1].length === model.chunkNumber) && (periodicArr.length - 1) === j && (letterArr.length - 1) === i) {
-                // condition when no two letter el not found
-                return 'single letter';
-            } else if ((letterArr[letterArr.length - 1].length === model.chunkNumber - 1) && (periodicArr.length - 1) === j && (letterArr.length - 1) === i) {
-                // when nothing found
-                return null;
-            }
-        }
-    }
 }
 
 function breakStr(string, count) {
@@ -143,55 +97,10 @@ var model = {
 };
 
 var view = {
-    marginLeft: 0,
     left: 0,
-    buildPeriodEl: function(obj, index) {
-        var inputgroup = $('.input-group');
-        var inputword = "input-word-" + index;
-        var genWordId = '#' + inputword;
-        inputgroup.append('<div id=' + inputword + ' style="margin-left:' + view.marginLeft + 'px"></div>');
-        var details = $('.details');
-        view.marginLeft = 0;
-        $(genWordId).append('<div class="periodic-element" data-before="A" data-after="B"><div class="atomic-mass">' + obj.atomic_mass + '</div><div class="oxidation"></div><div class="symbol">' + obj.symbol.toLowerCase() + '</div><div class="number">' + obj.number + '</div><div class="shells">2</div></div>');
-        obj.shells.forEach(function(val, idx) {
-            $(genWordId + ' ' + '.shells').append("<span>" + '-' + val + "</span>");
-        });
-        obj.oxidationStates.forEach(function(val, idx) {
-            $(genWordId + ' ' + '.oxidation').append("<span>" + val + "</span>");
-        });
-        details.append('<div>' + obj.name + '----------' + obj.source + '----------' + obj.summary + '</div>');
-        var perEl = $('.periodic-element').outerWidth();
-        view.marginLeft += perEl;
-    },
-    buildObjDom: function(dom, pos, index) {
-        var inputgroup = $('.input-group');
-        var inputword = "input-word-" + index;
-        var genWordId = '#' + inputword;
-        var length = dom.length - 1;
-        for (var i = length; i >= 0; i--) {
-            if (!dom[i].symbol) {
-                if (i < pos) {
-                    $(genWordId).prepend("<span>" + dom[i].toLowerCase() + "</span>");
-                    var spanEl = $(genWordId + ' > span').outerWidth();
-                    view.marginLeft += spanEl;
-                }
-            }
-        }
-
-
-        for (var i = 0; i < dom.length; i++) {
-            if (!dom[i].symbol) {
-                if (i > pos) {
-                    $(genWordId).append("<span>" + dom[i].toLowerCase() + "</span>");
-                    var spanEl = $(genWordId + ' > span').outerWidth();
-                }
-            }
-
-        }
-    },
     buildFullDom: function(dom, index) {
-        var inputgroup = $('.parent');
-        var inputword = "child-" + index;
+        var inputgroup = $('.input-group');
+        var inputword = "input-word-" + index;
         var genWordId = '.' + inputword;
         var details = $('.details');
         var length = dom.length - 1;
