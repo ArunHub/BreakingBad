@@ -59,6 +59,19 @@ h1 {
     margin: 25px 0 5px;
 }
 
+form {
+    margin-bottom: 30px;
+}
+
+input[type='text'] {
+    width: 300px;
+    border: 3px solid white;
+    color: white;
+    background: black;
+    padding: 10px 5px;
+    font-size: 1.5em;
+}
+
 .input-group {
     position: relative;
     margin: auto;
@@ -69,26 +82,6 @@ h1 {
 div[class*=input-word-] {
     text-align: left;
 }
-
-.periodic-element:before,
-.periodic-element:after {
-    font-family: 'Bundy';
-    position: absolute;
-    font-size: 2.5em;
-    line-height: 204px;
-    left: 103%;
-}
-
-.periodic-element:before {
-    content: attr(data-before);
-    left: auto;
-    right: 101%
-}
-
-.periodic-element:after {
-    content: attr(data-after);
-}
-
 .periodic-element {
     font-family: 'Arial';
     position: relative;
@@ -97,8 +90,39 @@ div[class*=input-word-] {
     font-size: 3rem;
     border: 2px solid white;
     background: linear-gradient(to bottom right, #4ea76d 20%, #1f4c21 75%);
+    transition: all 2s ease-in;
+    transform-style: preserve-3d;
+    transform: perspective(200px) scaleZ(.5) translate3d(-50px, 0, 100px);
+    opacity: 0;
+}
+.periodic-element:before,
+.periodic-element:after {
+    content: "";
+    font-family: 'Bundy';
+    position: absolute;
+    font-size: 2.5em;
+    line-height: 204px;
+    left: 103%;
+    transition: inherit;
+    opacity: 0;
 }
 
+.periodic-element:before {
+    left: auto;
+    right: 101%
+}
+.periodic-element.animate {
+    opacity: 1;
+    transform: perspective(0) scaleZ(.5) translate3d(0,0,100px);
+}
+.pseudo.periodic-element:before {
+    content: attr(data-before);
+    opacity: 1;
+}
+.pseudo.periodic-element:after {
+    content: attr(data-after);
+    opacity: 1;
+}
 .periodic-element>div {
     position: absolute;
     font-size: 0.3em;

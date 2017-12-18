@@ -32,6 +32,7 @@ function processInput(input) {
             view.buildFullDom(joinedArr, idx);
         }
     });
+        $('.periodic-element').addClass('pseudo').css("transition-delay",view.delay+"s");
     clearForm();
 }
 
@@ -98,14 +99,14 @@ var model = {
 
 var view = {
     left: 0,
+    delay: 1,
     buildFullDom: function(dom, index) {
         var inputgroup = $('.input-group');
         var inputword = "input-word-" + index;
         var genWordId = '.' + inputword;
         var details = $('.details');
         var length = dom.length - 1;
-        console.log("text", dom);
-        inputgroup.append('<div class=' + inputword + '><div class="periodic-element" style="left:' + view.left + 'px"></div></div>');
+        inputgroup.append('<div class=' + inputword + '><div class="periodic-element" style="left:' + view.left + 'px;transition-delay:'+view.delay+'s"></div></div>');
 
         for (var i = 0; i < dom.length; i++) {
 
@@ -123,19 +124,20 @@ var view = {
 
             if (!dom[i].symbol) {
                 if (dom[i].before) {
-                    console.log("before", dom[i]);
                     $(genWordId + ' ' + '.periodic-element').attr("data-before", dom[i].string);
                     var spanEl = $(genWordId + ' .periodic-element').outerWidth();
                 } else if (dom[i].after) {
-                    console.log("after", dom[i]);
                     $(genWordId + ' ' + '.periodic-element').attr("data-after", dom[i].string);
                 }
 
             }
 
+            $(genWordId + ' ' + '.periodic-element').addClass('animate');
         }
-        var el = $(genWordId + ' .periodic-element').outerWidth();
+        var el = $(genWordId + ' .periodic-element').outerWidth()
+        // var dl = $(genWordId + ' .periodic-element').css('transition-delay',delay);
         view.left += el;
+        view.delay += 2.5;
     },
     displayMessage: function(str) {
         var message = $('.message');
