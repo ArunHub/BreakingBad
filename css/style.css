@@ -33,6 +33,7 @@
 
 html {
     height: 100%;
+    --50per: 50%;
 }
 
 body {
@@ -140,9 +141,9 @@ div[class*=input-word-] {
 }
 
 .periodic-element .symbol {
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    left: var(--50per);
+    top: var(--50per);
+    transform: translate(-50%,-50%);
     font-size: 2.5em;
     text-transform: capitalize;
 }

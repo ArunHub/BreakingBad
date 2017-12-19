@@ -18,21 +18,36 @@ function fireSubmit() {
 function processInput(input) {
     var splitInput = input.split(/\s+/);
     var periodicArr = model.jsonElems;
-
-    splitInput.forEach(function(val, idx) {
-        var retVal = regexMatch(periodicArr, val, 2);
+    $('#submitBtn').attr("disabled", "disabled");
+    // splitInput.forEach(function(val, idx) {
+    //     var retVal = regexMatch(periodicArr, val, 2);
+    //     if (retVal == null || retVal == undefined) {
+    //         retVal = regexMatch(periodicArr, val, 1);
+    //     }
+    //     if (retVal == null || retVal == undefined) {
+    //         view.displayMessage('No match found for this word: ' + val);
+    //         return;
+    //     } else {
+    //         var joinedArr = joinArray(val, retVal);
+    //         view.buildFullDom(joinedArr, idx);
+    //     }
+    // });
+    for (var i = 0; i < splitInput.length; i++) {
+        var retVal = regexMatch(periodicArr, splitInput[i], 2);
         if (retVal == null || retVal == undefined) {
-            retVal = regexMatch(periodicArr, val, 1);
+            retVal = regexMatch(periodicArr, splitInput[i], 1);
         }
         if (retVal == null || retVal == undefined) {
-            view.displayMessage('No match found for this word: ' + val);
+            view.displayMessage('No match found for this word: ' + splitInput[i]);
+            $('#submitBtn').attr("disabled", "");
+            clearForm();
             return;
         } else {
-            var joinedArr = joinArray(val, retVal);
-            view.buildFullDom(joinedArr, idx);
+            var joinedArr = joinArray(splitInput[i], retVal);
+            view.buildFullDom(joinedArr, i);
         }
-    });
-        $('.periodic-element').addClass('pseudo').css("transition-delay",view.delay+"s");
+    }
+    $('.periodic-element').addClass('pseudo').css("transition-delay", view.delay + "s");
     clearForm();
 }
 
@@ -51,16 +66,14 @@ function getParts(input, string) {
 
 function regexMatch(periodicArr, str, n) {
     for (var i = 0; i < periodicArr.length; i++) {
-        if (periodicArr[i].symbol.length === n) {
-            var regex = new RegExp(periodicArr[i].symbol, 'i');
-            var temp = str.match(regex);
-        }
-        if (temp) {
+        var regex = new RegExp(periodicArr[i].symbol, 'i');
+        var temp;
+        if (periodicArr[i].symbol.length === n && (temp = str.match(regex)) !== null) {
             periodicArr[i]['pos'] = temp.index;
-            break;
+            return periodicArr[i];
         }
     }
-    return periodicArr[i];
+    return null;
 }
 
 function breakStr(string, count) {
@@ -106,7 +119,7 @@ var view = {
         var genWordId = '.' + inputword;
         var details = $('.details');
         var length = dom.length - 1;
-        inputgroup.append('<div class=' + inputword + '><div class="periodic-element" style="left:' + view.left + 'px;transition-delay:'+view.delay+'s"></div></div>');
+        inputgroup.append('<div class=' + inputword + '><div class="periodic-element" style="left:' + view.left + 'px;transition-delay:' + view.delay + 's"></div></div>');
 
         for (var i = 0; i < dom.length; i++) {
 
