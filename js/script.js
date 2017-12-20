@@ -21,8 +21,7 @@ function processInput(input) {
     btnState("disabled");
     for (var i = 0; i < splitInput.length; i++) {
         var retVal = regexMatch(periodicArr, splitInput[i]);
-        if ((retVal == null || retVal == undefined) && model.oneLen.length !== 0) retVal = model.oneLen[0];
-        if ((retVal == null || retVal == undefined) && model.oneLen.length === 0) {
+        if ((retVal == null || retVal == undefined)) {
             view.displayMessage('No match found for this word: ' + splitInput[i]);
             btnState("");
             clearForm();
@@ -54,19 +53,18 @@ function btnState(state) {
 }
 
 function regexMatch(periodicArr, str) {
+    var oneLen = [];
+    var twoLen = [];
     for (var i = 0; i < periodicArr.length; i++) {
         var regex = new RegExp(periodicArr[i].symbol, 'i');
         var temp;
         if (periodicArr[i].symbol && (temp = str.match(regex)) !== null) {
             periodicArr[i]['pos'] = temp.index;
-            if (temp[0].length === 2) {
-                return periodicArr[i];
-            } else {
-                model.oneLen.push(periodicArr[i]);
-            }
+            (temp[0].length === 2) ? twoLen.push(periodicArr[i]): oneLen.push(periodicArr[i])
+
         }
     }
-    return null;
+    return twoLen[0] ? twoLen[0] : oneLen[0] ? oneLen[0] : null;
 }
 
 function breakStr(string, count) {
@@ -100,8 +98,7 @@ window.onload = init;
 var model = {
     chunkNumber: 2,
     jsonElems: [],
-    origInput: "",
-    oneLen: []
+    origInput: ""
 };
 
 var view = {
@@ -142,7 +139,6 @@ var view = {
             $(genWordId + ' ' + '.periodic-element').addClass('animate');
         }
         var el = $(genWordId + ' .periodic-element').outerWidth()
-        // var dl = $(genWordId + ' .periodic-element').css('transition-delay',delay);
         view.left += el;
         view.delay += 2.5;
     },
