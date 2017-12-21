@@ -1,12 +1,11 @@
 function fireSubmit() {
-    clearSubmit();
     var sayUrName = document.getElementById('say-ur-name');
-    var input = model.origInput = sayUrName.value.trim();
-    if (input === null || input.length === 0 || input.match(/(^[0-9])|([0-9]$)|([^a-zA-Z\s+])/)) {
+    var input = sayUrName.value.trim();
+    if (input === null || input.length === 0 || input.match(/[^a-zA-Z\s+]/gi)) {
         view.displayMessage('Oops, Special characters, numbers are not allowed. Enter only Letters!');
         clearForm();
         return;
-    } else if (input.length === model.chunkNumber - 1) {
+    } else if (input.length === 1) {
         view.displayMessage('Enter atleast two letters');
         clearForm();
         return;
@@ -31,8 +30,9 @@ function processInput(input) {
             view.buildFullDom(joinedArr, i);
         }
     }
-    $('.periodic-element').addClass('pseudo').css("transition-delay", view.delay + "s");
+    $('.periodic-element').addClass('pseudo').css("transition-delay", view.get('delay') + "s");
     clearForm();
+    return;
 }
 
 function joinArray(str, retVal) {
@@ -71,11 +71,6 @@ function breakStr(string, count) {
     return [...string.slice(count - 1)].map((_, i) => string.slice(i, i + count));
 }
 
-function clearSubmit() {
-    var hTag = $('#h1');
-    hTag.children().remove();
-}
-
 function clearForm() {
     var form = document.getElementsByName('periodicForm')[0];
     form.reset();
@@ -96,51 +91,49 @@ function init() {
 window.onload = init;
 
 var model = {
-    chunkNumber: 2,
-    jsonElems: [],
-    origInput: ""
+    jsonElems: []
 };
 
 var view = {
     left: 0,
     delay: 1,
+    get: function(prop) {
+        return prop === 'left' ? this.left : this.delay;
+    },
+    set: function(prop, value) {
+        return prop === 'left' ? this.left += value : this.delay += value;
+    },
     buildFullDom: function(dom, index) {
         var inputgroup = $('.input-group');
         var inputword = "input-word-" + index;
         var genWordId = '.' + inputword;
         var details = $('.details');
         var length = dom.length - 1;
-        inputgroup.append('<div class=' + inputword + '><div class="periodic-element" style="left:' + view.left + 'px;transition-delay:' + view.delay + 's"></div></div>');
+        inputgroup.append('<div class=' + inputword + '><div class="periodic-element" style="left:' + view.get('left') + 'px;transition-delay:' + view.get('delay') + 's"></div></div>');
 
         for (var i = 0; i < dom.length; i++) {
 
             if (dom[i].symbol) {
-                $(genWordId + ' ' + '.periodic-element').append('<div class="atomic-mass">' + dom[i].atomic_mass + '</div><div class="oxidation"></div><div class="symbol">' + dom[i].symbol.toLowerCase() + '</div><div class="number">' + dom[i].number + '</div><div class="shells">2</div>');
-                dom[i].shells.forEach(function(val, idx) {
+                $(genWordId + ' ' + '.periodic-element').append('<div class="atomic-mass">' + dom[i].atomic_mass + '</div><div class="oxidation"></div><div class="symbol">' + dom[i].symbol + '</div><div class="number">' + dom[i].number + '</div><div class="shells">2</div>');
+                dom[i].shells.forEach(function(val) {
                     $(genWordId + ' ' + '.shells').append("<span>" + '-' + val + "</span>");
                 });
-                dom[i].oxidationStates.forEach(function(val, idx) {
+                dom[i].oxidationStates.forEach(function(val) {
                     $(genWordId + ' ' + '.oxidation').append("<span>" + val + "</span>");
                 });
                 details.append('<div>' + dom[i].name + '----------' + dom[i].source + '----------' + dom[i].summary + '</div>');
-            }
-
-
-            if (!dom[i].symbol) {
-                if (dom[i].before) {
-                    $(genWordId + ' ' + '.periodic-element').attr("data-before", dom[i].string);
-                    var spanEl = $(genWordId + ' .periodic-element').outerWidth();
-                } else if (dom[i].after) {
-                    $(genWordId + ' ' + '.periodic-element').attr("data-after", dom[i].string);
-                }
-
+            }else if (dom[i].before) {
+                $(genWordId + ' ' + '.periodic-element').attr("data-before", dom[i].string);
+                var spanEl = $(genWordId + ' .periodic-element').outerWidth();
+            } else if (dom[i].after) {
+                $(genWordId + ' ' + '.periodic-element').attr("data-after", dom[i].string);
             }
 
             $(genWordId + ' ' + '.periodic-element').addClass('animate');
         }
         var el = $(genWordId + ' .periodic-element').outerWidth()
-        view.left += el;
-        view.delay += 2.5;
+        view.set('left', el);
+        view.set('delay', 2.5);
     },
     displayMessage: function(str) {
         var message = $('.message');
@@ -148,10 +141,6 @@ var view = {
             message.show().text("");
         });
     }
-};
-
-var controller = {
-    jsonUrl: 'PeriodicTableJSON.json'
 };
 
 function ajaxCall() {
