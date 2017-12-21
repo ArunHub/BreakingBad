@@ -23,7 +23,8 @@
             "ypos": 1, 
             "shells": [
                 1
-            ]
+            ],
+            "oxidationStates": [-1, 1]
         }, 
         {
             "name": "Helium", 
@@ -48,7 +49,8 @@
             "ypos": 1, 
             "shells": [
                 2
-            ]
+            ],
+            "oxidationStates": []
         }, 
         {
             "name": "Lithium", 
@@ -73,7 +75,8 @@
             "ypos": 2, 
             "shells": [
                 1
-            ]
+            ],
+            "oxidationStates": [1]
         }, 
         {
             "name": "Beryllium", 
@@ -98,7 +101,8 @@
             "ypos": 2, 
             "shells": [
                 2
-            ]
+            ],
+            "oxidationStates": [2]
         }, 
         {
             "name": "Boron", 
@@ -123,7 +127,8 @@
             "ypos": 2, 
             "shells": [
                 3
-            ]
+            ],
+            "oxidationStates": [1, 2, 3]
         }, 
         {
             "name": "Carbon", 
@@ -148,7 +153,8 @@
             "ypos": 2, 
             "shells": [
                 4
-            ]
+            ],
+            "oxidationStates": [-4, -3, -2, -1, 1, 2, 3, 4]
         }, 
         {
             "name": "Nitrogen", 
@@ -173,7 +179,8 @@
             "ypos": 2, 
             "shells": [
                 5
-            ]
+            ],
+            "oxidationStates": [-3, -2, -1, 1, 2, 3, 4, 5]
         }, 
         {
             "name": "Oxygen", 
@@ -198,7 +205,8 @@
             "ypos": 2, 
             "shells": [
                 6
-            ]
+            ],
+            "oxidationStates": [-2, -1, 1, 2]
         }, 
         {
             "name": "Fluorine", 
@@ -223,7 +231,8 @@
             "ypos": 2, 
             "shells": [
                 7
-            ]
+            ],
+            "oxidationStates": [-1]
         }, 
         {
             "name": "Neon", 
@@ -248,7 +257,8 @@
             "ypos": 2, 
             "shells": [
                 8
-            ]
+            ],
+            "oxidationStates": []
         }, 
         {
             "name": "Sodium", 
@@ -274,7 +284,8 @@
             "shells": [
                 8, 
                 1
-            ]
+            ],
+            "oxidationStates": [-1, 1]
         }, 
         {
             "name": "Magnesium", 
@@ -300,7 +311,8 @@
             "shells": [
                 8, 
                 2
-            ]
+            ],
+            "oxidationStates": [1, 2]
         }, 
         {
             "name": "Aluminium", 
@@ -326,7 +338,8 @@
             "shells": [
                 8, 
                 3
-            ]
+            ],
+            "oxidationStates": [1, 3]
         }, 
         {
             "name": "Silicon", 
@@ -352,7 +365,8 @@
             "shells": [
                 8, 
                 4
-            ]
+            ],
+            "oxidationStates": [-4, -3, -2, -1, 1, 2, 3, 4]
         }, 
         {
             "name": "Phosphorus", 
@@ -378,7 +392,8 @@
             "shells": [
                 8, 
                 5
-            ]
+            ],
+            "oxidationStates": [-3, -2, -1, 1, 2, 3, 4, 5]
         }, 
         {
             "name": "Sulfur", 
@@ -404,7 +419,8 @@
             "shells": [
                 8, 
                 6
-            ]
+            ],
+            "oxidationStates": [-2, -1, 1, 2, 3, 4, 5, 6]
         }, 
         {
             "name": "Chlorine", 
@@ -430,7 +446,8 @@
             "shells": [
                 8, 
                 7
-            ]
+            ],
+            "oxidationStates": [-1, 1, 2, 3, 4, 5, 6, 7]
         }, 
         {
             "name": "Argon", 
@@ -456,7 +473,8 @@
             "shells": [
                 8, 
                 8
-            ]
+            ],
+            "oxidationStates": []
         }, 
         {
             "name": "Potassium", 
@@ -483,7 +501,8 @@
                 8, 
                 8, 
                 1
-            ]
+            ],
+            "oxidationStates": [1]
         }, 
         {
             "name": "Calcium", 
@@ -510,7 +529,8 @@
                 8, 
                 8, 
                 2
-            ]
+            ],
+            "oxidationStates": [2]
         }, 
         {
             "name": "Scandium", 
@@ -537,7 +557,8 @@
                 8, 
                 9, 
                 2
-            ]
+            ],
+            "oxidationStates": [1, 2, 3]
         }, 
         {
             "name": "Titanium", 
@@ -564,7 +585,8 @@
                 8, 
                 10, 
                 2
-            ]
+            ],
+            "oxidationStates": [-1, 2, 3, 4]
         }, 
         {
             "name": "Vanadium", 
@@ -591,7 +613,8 @@
                 8, 
                 11, 
                 2
-            ]
+            ],
+            "oxidationStates": [-1, 2, 3, 4]
         }, 
         {
             "name": "Chromium", 
@@ -618,7 +641,8 @@
                 8, 
                 13, 
                 1
-            ]
+            ],
+            "oxidationStates": [-2, -1, 1, 2, 3, 4, 5, 6]
         }, 
         {
             "name": "Manganese", 
@@ -645,7 +669,8 @@
                 8, 
                 13, 
                 2
-            ]
+            ],
+            "oxidationStates": [-3, -2, -1, 1, 2, 3, 4, 5, 6, 7]
         }, 
         {
             "name": "Iron", 
@@ -672,7 +697,8 @@
                 8, 
                 14, 
                 2
-            ]
+            ],
+            "oxidationStates": [-2, -1, 1, 2, 3, 4, 5, 6]
         }, 
         {
             "name": "Cobalt", 
@@ -699,7 +725,8 @@
                 8, 
                 15, 
                 2
-            ]
+            ],
+            "oxidationStates": [-1, 1, 2, 3, 4, 5]
         }, 
         {
             "name": "Nickel", 
@@ -726,7 +753,8 @@
                 8, 
                 16, 
                 2
-            ]
+            ],
+            "oxidationStates": [-1, 1, 2, 3, 4]
         }, 
         {
             "name": "Copper", 
@@ -753,7 +781,8 @@
                 8, 
                 18, 
                 1
-            ]
+            ],
+            "oxidationStates": [1, 2, 3, 4]
         }, 
         {
             "name": "Zinc", 
@@ -780,7 +809,8 @@
                 8, 
                 18, 
                 2
-            ]
+            ],
+            "oxidationStates": [2]
         }, 
         {
             "name": "Gallium", 
@@ -807,7 +837,8 @@
                 8, 
                 18, 
                 3
-            ]
+            ],
+            "oxidationStates": [1, 2, 3]
         }, 
         {
             "name": "Germanium", 
@@ -834,7 +865,8 @@
                 8, 
                 18, 
                 4
-            ]
+            ],
+            "oxidationStates": [-4, 1, 2, 3, 4]
         }, 
         {
             "name": "Arsenic", 
@@ -861,7 +893,8 @@
                 8, 
                 18, 
                 5
-            ]
+            ],
+            "oxidationStates": [-3, 2, 3, 5]
         }, 
         {
             "name": "Selenium", 
@@ -888,7 +921,8 @@
                 8, 
                 18, 
                 6
-            ]
+            ],
+            "oxidationStates": [-2, 2, 4, 6]
         }, 
         {
             "name": "Bromine", 
@@ -915,7 +949,8 @@
                 8, 
                 18, 
                 7
-            ]
+            ],
+            "oxidationStates": [-1, 1, 3, 4, 5, 7]
         }, 
         {
             "name": "Krypton", 
@@ -942,7 +977,8 @@
                 8, 
                 18, 
                 8
-            ]
+            ],
+            "oxidationStates": [2]
         }, 
         {
             "name": "Rubidium", 
@@ -970,7 +1006,8 @@
                 18, 
                 8, 
                 1
-            ]
+            ],
+            "oxidationStates": [1]
         }, 
         {
             "name": "Strontium", 
@@ -998,7 +1035,8 @@
                 18, 
                 8, 
                 2
-            ]
+            ],
+            "oxidationStates": [2]
         }, 
         {
             "name": "Yttrium", 
@@ -1026,7 +1064,8 @@
                 18, 
                 9, 
                 2
-            ]
+            ],
+            "oxidationStates": [1, 2, 3]
         }, 
         {
             "name": "Zirconium", 
@@ -1054,7 +1093,8 @@
                 18, 
                 10, 
                 2
-            ]
+            ],
+            "oxidationStates": [1, 2, 3, 4]
         }, 
         {
             "name": "Niobium", 
@@ -1082,7 +1122,8 @@
                 18, 
                 12, 
                 1
-            ]
+            ],
+            "oxidationStates": [-1, 2, 3, 4, 5]
         }, 
         {
             "name": "Molybdenum", 
@@ -1110,7 +1151,8 @@
                 18, 
                 13, 
                 1
-            ]
+            ],
+            "oxidationStates": [-2, -1, 1, 2, 3, 4, 5, 6]
         }, 
         {
             "name": "Technetium", 
@@ -1138,7 +1180,8 @@
                 18, 
                 13, 
                 2
-            ]
+            ],
+            "oxidationStates": [-3, -1, 1, 2, 3, 4, 5, 6, 7]
         }, 
         {
             "name": "Ruthenium", 
@@ -1166,7 +1209,8 @@
                 18, 
                 15, 
                 1
-            ]
+            ],
+            "oxidationStates": [-2, 1, 2, 3, 4, 5, 6, 7, 8]
         }, 
         {
             "name": "Rhodium", 
@@ -1194,7 +1238,8 @@
                 18, 
                 16, 
                 1
-            ]
+            ],
+            "oxidationStates": [-1, 1, 2, 3, 4, 5, 6]
         }, 
         {
             "name": "Palladium", 
@@ -1221,7 +1266,8 @@
                 8, 
                 18, 
                 18
-            ]
+            ],
+            "oxidationStates": [2, 4]
         }, 
         {
             "name": "Silver", 
@@ -1249,7 +1295,8 @@
                 18, 
                 18, 
                 1
-            ]
+            ],
+            "oxidationStates": [1, 2, 3]
         }, 
         {
             "name": "Cadmium", 
@@ -1277,7 +1324,8 @@
                 18, 
                 18, 
                 2
-            ]
+            ],
+            "oxidationStates": [2]
         }, 
         {
             "name": "Indium", 
@@ -1305,7 +1353,8 @@
                 18, 
                 18, 
                 3
-            ]
+            ],
+            "oxidationStates": [1, 2, 3]
         }, 
         {
             "name": "Tin", 
@@ -1333,7 +1382,8 @@
                 18, 
                 18, 
                 4
-            ]
+            ],
+            "oxidationStates": [-4, 2, 4]
         }, 
         {
             "name": "Antimony", 
@@ -1361,7 +1411,8 @@
                 18, 
                 18, 
                 5
-            ]
+            ],
+            "oxidationStates": [-3, 3, 5]
         }, 
         {
             "name": "Tellurium", 
@@ -1389,7 +1440,8 @@
                 18, 
                 18, 
                 6
-            ]
+            ],
+            "oxidationStates": [-2, 2, 4, 5, 6]
         }, 
         {
             "name": "Iodine", 
@@ -1417,7 +1469,8 @@
                 18, 
                 18, 
                 7
-            ]
+            ],
+            "oxidationStates": [-1, 1, 3, 5, 7]
         }, 
         {
             "name": "Xenon", 
@@ -1445,7 +1498,8 @@
                 18, 
                 18, 
                 8
-            ]
+            ],
+            "oxidationStates": [2, 4, 6, 8]
         }, 
         {
             "name": "Cesium", 
@@ -1474,7 +1528,8 @@
                 18, 
                 8, 
                 1
-            ]
+            ],
+            "oxidationStates": [1]
         }, 
         {
             "name": "Barium", 
@@ -1503,7 +1558,8 @@
                 18, 
                 8, 
                 2
-            ]
+            ],
+            "oxidationStates": [2]
         }, 
         {
             "name": "Lanthanum", 
@@ -1532,7 +1588,8 @@
                 18, 
                 9, 
                 2
-            ]
+            ],
+            "oxidationStates": [2, 3]
         }, 
         {
             "name": "Cerium", 
@@ -1561,7 +1618,8 @@
                 19, 
                 9, 
                 2
-            ]
+            ],
+            "oxidationStates": [2, 3, 4]
         }, 
         {
             "name": "Praseodymium", 
@@ -1590,7 +1648,8 @@
                 21, 
                 8, 
                 2
-            ]
+            ],
+            "oxidationStates": [2, 3, 4]
         }, 
         {
             "name": "Neodymium", 
@@ -1619,7 +1678,8 @@
                 22, 
                 8, 
                 2
-            ]
+            ],
+            "oxidationStates": [2, 3]
         }, 
         {
             "name": "Promethium", 
@@ -1648,7 +1708,8 @@
                 23, 
                 8, 
                 2
-            ]
+            ],
+            "oxidationStates": [3]
         }, 
         {
             "name": "Samarium", 
@@ -1677,7 +1738,8 @@
                 24, 
                 8, 
                 2
-            ]
+            ],
+            "oxidationStates": [2, 3]
         }, 
         {
             "name": "Europium", 
@@ -1706,7 +1768,8 @@
                 25, 
                 8, 
                 2
-            ]
+            ],
+            "oxidationStates": [2, 3]
         }, 
         {
             "name": "Gadolinium", 
@@ -1735,7 +1798,8 @@
                 25, 
                 9, 
                 2
-            ]
+            ],
+            "oxidationStates": [1, 2, 3]
         }, 
         {
             "name": "Terbium", 
@@ -1764,7 +1828,8 @@
                 27, 
                 8, 
                 2
-            ]
+            ],
+            "oxidationStates": [1, 3, 4]
         }, 
         {
             "name": "Dysprosium", 
@@ -1793,7 +1858,8 @@
                 28, 
                 8, 
                 2
-            ]
+            ],
+            "oxidationStates": [2, 3]
         }, 
         {
             "name": "Holmium", 
@@ -1822,7 +1888,8 @@
                 29, 
                 8, 
                 2
-            ]
+            ],
+            "oxidationStates": [3]
         }, 
         {
             "name": "Erbium", 
@@ -1851,7 +1918,8 @@
                 30, 
                 8, 
                 2
-            ]
+            ],
+            "oxidationStates": [3]
         }, 
         {
             "name": "Thulium", 
@@ -1880,7 +1948,8 @@
                 31, 
                 8, 
                 2
-            ]
+            ],
+            "oxidationStates": [2, 3]
         }, 
         {
             "name": "Ytterbium", 
@@ -1909,7 +1978,8 @@
                 32, 
                 8, 
                 2
-            ]
+            ],
+            "oxidationStates": [2, 3]
         }, 
         {
             "name": "Lutetium", 
@@ -1938,7 +2008,8 @@
                 32, 
                 9, 
                 2
-            ]
+            ],
+            "oxidationStates": [3]
         }, 
         {
             "name": "Hafnium", 
@@ -1967,7 +2038,8 @@
                 32, 
                 10, 
                 2
-            ]
+            ],
+            "oxidationStates": [2, 3, 4]
         }, 
         {
             "name": "Tantalum", 
@@ -1996,7 +2068,8 @@
                 32, 
                 11, 
                 2
-            ]
+            ],
+            "oxidationStates": [-1, 2, 3, 4, 5]
         }, 
         {
             "name": "Tungsten", 
@@ -2025,7 +2098,8 @@
                 32, 
                 12, 
                 2
-            ]
+            ],
+            "oxidationStates": [-2, -1, 1, 2, 3, 4, 5, 6]
         }, 
         {
             "name": "Rhenium", 
@@ -2054,7 +2128,8 @@
                 32, 
                 13, 
                 2
-            ]
+            ],
+            "oxidationStates": [-3, -1, 1, 2, 3, 4, 5, 6, 7]
         }, 
         {
             "name": "Osmium", 
@@ -2083,7 +2158,8 @@
                 32, 
                 14, 
                 2
-            ]
+            ],
+            "oxidationStates": [-3, -1, 1, 2, 3, 4, 5, 6, 7, 8]
         }, 
         {
             "name": "Iridium", 
@@ -2112,7 +2188,8 @@
                 32, 
                 15, 
                 2
-            ]
+            ],
+            "oxidationStates": [-3, -1, 1, 2, 3, 4, 5, 6]
         }, 
         {
             "name": "Platinum", 
@@ -2141,7 +2218,8 @@
                 32, 
                 17, 
                 1
-            ]
+            ],
+            "oxidationStates": [2, 4, 5, 6]
         }, 
         {
             "name": "Gold", 
@@ -2170,7 +2248,8 @@
                 32, 
                 18, 
                 1
-            ]
+            ],
+            "oxidationStates": [-1, 1, 2, 3, 5]
         }, 
         {
             "name": "Mercury", 
@@ -2199,7 +2278,8 @@
                 32, 
                 18, 
                 2
-            ]
+            ],
+            "oxidationStates": [1, 2, 4]
         }, 
         {
             "name": "Thallium", 
@@ -2228,7 +2308,8 @@
                 32, 
                 18, 
                 3
-            ]
+            ],
+            "oxidationStates": [1, 3]
         }, 
         {
             "name": "Lead", 
@@ -2257,7 +2338,8 @@
                 32, 
                 18, 
                 4
-            ]
+            ],
+            "oxidationStates": [-4, 2, 4]
         }, 
         {
             "name": "Bismuth", 
@@ -2286,7 +2368,8 @@
                 32, 
                 18, 
                 5
-            ]
+            ],
+            "oxidationStates": [-3, 3, 5]
         }, 
         {
             "name": "Polonium", 
@@ -2315,7 +2398,8 @@
                 32, 
                 18, 
                 6
-            ]
+            ],
+            "oxidationStates": [-2, 2, 4, 6]
         }, 
         {
             "name": "Astatine", 
@@ -2344,7 +2428,8 @@
                 32, 
                 18, 
                 7
-            ]
+            ],
+            "oxidationStates": [-1, 1, 3, 5]
         }, 
         {
             "name": "Radon", 
@@ -2373,7 +2458,8 @@
                 32, 
                 18, 
                 8
-            ]
+            ],
+            "oxidationStates": [2]
         }, 
         {
             "name": "Francium", 
@@ -2403,7 +2489,8 @@
                 18, 
                 8, 
                 1
-            ]
+            ],
+            "oxidationStates": [1]
         }, 
         {
             "name": "Radium", 
@@ -2433,7 +2520,8 @@
                 18, 
                 8, 
                 2
-            ]
+            ],
+            "oxidationStates": [2]
         }, 
         {
             "name": "Actinium", 
@@ -2463,7 +2551,8 @@
                 18, 
                 9, 
                 2
-            ]
+            ],
+            "oxidationStates": [3]
         }, 
         {
             "name": "Thorium", 
@@ -2493,7 +2582,8 @@
                 18, 
                 10, 
                 2
-            ]
+            ],
+            "oxidationStates": [2, 3, 4]
         }, 
         {
             "name": "Protactinium", 
@@ -2523,7 +2613,8 @@
                 20, 
                 9, 
                 2
-            ]
+            ],
+            "oxidationStates": [3, 4, 5]
         }, 
         {
             "name": "Uranium", 
@@ -2553,7 +2644,8 @@
                 21, 
                 9, 
                 2
-            ]
+            ],
+            "oxidationStates": [3, 4, 5, 6]
         }, 
         {
             "name": "Neptunium", 
@@ -2583,7 +2675,8 @@
                 22, 
                 9, 
                 2
-            ]
+            ],
+            "oxidationStates": [3, 4, 5, 6, 7]
         }, 
         {
             "name": "Plutonium", 
@@ -2613,7 +2706,8 @@
                 24, 
                 8, 
                 2
-            ]
+            ],
+            "oxidationStates": [3, 4, 5, 6, 7]
         }, 
         {
             "name": "Americium", 
@@ -2643,7 +2737,8 @@
                 25, 
                 8, 
                 2
-            ]
+            ],
+            "oxidationStates": [2, 3, 4, 5, 6]
         }, 
         {
             "name": "Curium", 
@@ -2673,7 +2768,8 @@
                 25, 
                 9, 
                 2
-            ]
+            ],
+            "oxidationStates": [3, 4]
         }, 
         {
             "name": "Berkelium", 
@@ -2703,7 +2799,8 @@
                 27, 
                 8, 
                 2
-            ]
+            ],
+            "oxidationStates": [3, 4]
         }, 
         {
             "name": "Californium", 
@@ -2733,7 +2830,8 @@
                 28, 
                 8, 
                 2
-            ]
+            ],
+            "oxidationStates": [2, 3, 4]
         }, 
         {
             "name": "Einsteinium", 
@@ -2763,7 +2861,8 @@
                 29, 
                 8, 
                 2
-            ]
+            ],
+            "oxidationStates": [2, 3]
         }, 
         {
             "name": "Fermium", 
@@ -2793,7 +2892,8 @@
                 30, 
                 8, 
                 2
-            ]
+            ],
+            "oxidationStates": [2, 3]
         }, 
         {
             "name": "Mendelevium", 
@@ -2823,7 +2923,8 @@
                 31, 
                 8, 
                 2
-            ]
+            ],
+            "oxidationStates": [2, 3]
         }, 
         {
             "name": "Nobelium", 
@@ -2853,7 +2954,8 @@
                 32, 
                 8, 
                 2
-            ]
+            ],
+            "oxidationStates": [2, 3]
         }, 
         {
             "name": "Lawrencium", 
@@ -2883,7 +2985,8 @@
                 32, 
                 8, 
                 3
-            ]
+            ],
+            "oxidationStates": [3]
         }, 
         {
             "name": "Rutherfordium", 
@@ -2913,7 +3016,8 @@
                 32, 
                 10, 
                 2
-            ]
+            ],
+            "oxidationStates": [4]
         }, 
         {
             "name": "Dubnium", 
@@ -2943,7 +3047,8 @@
                 32, 
                 11, 
                 2
-            ]
+            ],
+            "oxidationStates": []
         }, 
         {
             "name": "Seaborgium", 
@@ -2973,7 +3078,8 @@
                 32, 
                 12, 
                 2
-            ]
+            ],
+            "oxidationStates": []
         }, 
         {
             "name": "Bohrium", 
@@ -3003,7 +3109,8 @@
                 32, 
                 13, 
                 2
-            ]
+            ],
+            "oxidationStates": []
         }, 
         {
             "name": "Hassium", 
@@ -3033,7 +3140,8 @@
                 32, 
                 14, 
                 2
-            ]
+            ],
+            "oxidationStates": []
         }, 
         {
             "name": "Meitnerium", 
@@ -3063,7 +3171,8 @@
                 32, 
                 15, 
                 2
-            ]
+            ],
+            "oxidationStates": []
         }, 
         {
             "name": "Darmstadtium", 
@@ -3093,7 +3202,8 @@
                 32, 
                 16, 
                 2
-            ]
+            ],
+            "oxidationStates": []
         }, 
         {
             "name": "Roentgenium", 
@@ -3123,7 +3233,8 @@
                 32, 
                 17, 
                 2
-            ]
+            ],
+            "oxidationStates": []
         }, 
         {
             "name": "Copernicium", 
@@ -3153,7 +3264,8 @@
                 32, 
                 18, 
                 2
-            ]
+            ],
+            "oxidationStates": []
         }, 
         {
             "name": "Nihonium", 
@@ -3183,7 +3295,8 @@
                 32, 
                 18, 
                 3
-            ]
+            ],
+            "oxidationStates": []
         }, 
         {
             "name": "Flerovium", 
@@ -3213,7 +3326,8 @@
                 32, 
                 18, 
                 4
-            ]
+            ],
+            "oxidationStates": []
         }, 
         {
             "name": "Moscovium", 
@@ -3243,7 +3357,8 @@
                 32, 
                 18, 
                 5
-            ]
+            ],
+            "oxidationStates": []
         }, 
         {
             "name": "Livermorium", 
@@ -3273,7 +3388,8 @@
                 32, 
                 18, 
                 6
-            ]
+            ],
+            "oxidationStates": []
         }, 
         {
             "name": "Tennessine", 
@@ -3303,7 +3419,8 @@
                 32, 
                 18, 
                 7
-            ]
+            ],
+            "oxidationStates": []
         }, 
         {
             "name": "Oganesson", 
@@ -3333,7 +3450,8 @@
                 32, 
                 18, 
                 8
-            ]
+            ],
+            "oxidationStates": []
         }
     ]
 }

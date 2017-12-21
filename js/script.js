@@ -1,207 +1,170 @@
-    function fireSubmit() {
-        clearSubmit();
-        var getInput = document.getElementById('getInput');
-        var input = model.origInput = getInput.value.trim();
-        if (input === null || input.length === 0 || input.match(/(^[0-9])|([0-9]$)|([^a-zA-Z\s+])/)) {
-            view.displayMessage('Oops, Enter only Letters!');
+function fireSubmit() {
+    clearSubmit();
+    var sayUrName = document.getElementById('say-ur-name');
+    var input = model.origInput = sayUrName.value.trim();
+    if (input === null || input.length === 0 || input.match(/(^[0-9])|([0-9]$)|([^a-zA-Z\s+])/)) {
+        view.displayMessage('Oops, Special characters, numbers are not allowed. Enter only Letters!');
+        clearForm();
+        return;
+    } else if (input.length === model.chunkNumber - 1) {
+        view.displayMessage('Enter atleast two letters');
+        clearForm();
+        return;
+    } else {
+        processInput(input.toLowerCase());
+    }
+}
+
+function processInput(input) {
+    var splitInput = input.split(/\s+/);
+    var periodicArr = model.jsonElems;
+    btnState("disabled");
+    for (var i = 0; i < splitInput.length; i++) {
+        var retVal = regexMatch(periodicArr, splitInput[i]);
+        if ((retVal == null || retVal == undefined)) {
+            view.displayMessage('No match found for this word: ' + splitInput[i]);
+            btnState("");
             clearForm();
             return;
         } else {
-            concatArrayStr(input.toLowerCase());
+            var joinedArr = joinArray(splitInput[i], retVal);
+            view.buildFullDom(joinedArr, i);
         }
     }
+    $('.periodic-element').addClass('pseudo').css("transition-delay", view.delay + "s");
+    clearForm();
+}
 
-    function concatArrayStr(input) {
-        var retStr = "";
-        var tempArray = [];
-        var splitArray = input.split(/\s+/);
-        var periodicSym = model.jsonElems;
-        splitArray.forEach(function(val, idx) {
-            var twoLetterArray = produceTwoChArray(val);
-            var retVar = idx % 2 !== 0 ? matchElem(periodicSym, val) : matchElem(periodicSym, twoLetterArray);
-            periodicSym.splice(periodicSym.indexOf(retVar), 1);
-            view.updateColor(retVar, val, idx);
-        })
-        clearForm();
-    }
+function joinArray(str, retVal) {
+    var first = getParts(retVal.symbol, str);
+    var removed = { string: first.splice(retVal.pos).join(''), after: true };
+    first = { string: first.join(''), before: true };
+    var retArr = Array.of(first, retVal, removed);
+    return retArr;
+}
 
-    function matchElem(arr, parseInp) {
-        var retVar;
-        //randomize array here
+function getParts(input, string) {
+    var regex = new RegExp(input, 'i')
+    return string.replace(regex, '').split('');
+}
 
-        // for (var i = 0; i < arr.length; i++) {
-        //     var reg = new RegExp(arr[i], 'gi');
-        //     if (parseInp.match(reg) !== null) {
-        //         retVar = arr[i]
-        //         return retVar;
-        //     }
-        // }
-        for (var i = 0; i < parseInp.length; i++) {
-            for (var j = 0; j < arr.length; j++) {
-                console.log("text", parseInp[i], arr[j]);
-                if (parseInp[i] === arr[j]) {
-                    console.log('match', parseInp[i]);
-                    return parseInp[i];
-                } else if ((parseInp[parseInp.length - 1].length === 2) && (arr.length - 1) === j && (parseInp.length - 1) === i) {
-                    // var single = forFn(arr);
-                    // matchElem(single, parseInp);
-                }
-            }
+function btnState(state) {
+    $('#submitBtn').attr("disabled", state);
+}
+
+function regexMatch(periodicArr, str) {
+    var oneLen = [];
+    var twoLen = [];
+    for (var i = 0; i < periodicArr.length; i++) {
+        var regex = new RegExp(periodicArr[i].symbol, 'i');
+        var temp;
+        if (periodicArr[i].symbol && (temp = str.match(regex)) !== null) {
+            periodicArr[i]['pos'] = temp.index;
+            (temp[0].length === 2) ? twoLen.push(periodicArr[i]): oneLen.push(periodicArr[i])
+
         }
     }
+    return twoLen[0] ? twoLen[0] : oneLen[0] ? oneLen[0] : null;
+}
 
-    function produceTwoChArray(word) {
-        var temp = "";
-        var tempArr = [];
-        // var retVar = generateWordSequence(n);
+function breakStr(string, count) {
+    return [...string.slice(count - 1)].map((_, i) => string.slice(i, i + count));
+}
 
-        for (var i = 0; i < word.length; i++) {
-            temp += word[i];
-            if (temp.length === 2) {
-                tempArr.push(temp);
-            }
-            temp = word[i];
-        }
-        return tempArr;
-    }
+function clearSubmit() {
+    var hTag = $('#h1');
+    hTag.children().remove();
+}
 
-    function generateWordSequence(n) {
-        var n = n - 2;
-        var temp1 = [];
-        for (var j = n; j >= 0; j--) {
-            temp1.push("word[i - " + j + "]");
-        }
-        temp1 = temp1.join('+').toString();
-        return temp1;
-    }
+function clearForm() {
+    var form = document.getElementsByName('periodicForm')[0];
+    form.reset();
+}
 
-    function clearSubmit() {
-        var hTag = $('#h1');
-        hTag.children().remove();
-    }
+function refreshPage() {
+    window.location.reload();
+}
 
-    function clearForm() {
-        var form = document.getElementsByName('guessForm')[0];
-        form.reset();
-    }
+function init() {
+    var submitBtn = document.getElementById('submitBtn');
+    var refresh = document.getElementById('refresh');
+    submitBtn.onclick = fireSubmit;
+    refresh.onclick = refreshPage;
+    ajaxCall();
+}
 
-    function init() {
-        var submitBtn = document.getElementById('submitBtn');
-        submitBtn.onclick = fireSubmit;
-        ajaxCall();
-    }
+window.onload = init;
 
-    function forFn(arr) {
-        var retArray = [];
-        for (var i = 0; i < arr.length; i++) {
-            if (arr[i].symbol) {
-                retArray.push(arr[i].symbol.toLowerCase());
-            } else {
-                retArray.push(arr[i].toLowerCase());
-            }
-        }
-        return retArray;
-    }
+var model = {
+    chunkNumber: 2,
+    jsonElems: [],
+    origInput: ""
+};
 
-    window.onload = init;
+var view = {
+    left: 0,
+    delay: 1,
+    buildFullDom: function(dom, index) {
+        var inputgroup = $('.input-group');
+        var inputword = "input-word-" + index;
+        var genWordId = '.' + inputword;
+        var details = $('.details');
+        var length = dom.length - 1;
+        inputgroup.append('<div class=' + inputword + '><div class="periodic-element" style="left:' + view.left + 'px;transition-delay:' + view.delay + 's"></div></div>');
 
-    var model = {
-        jsonElems: [],
-        origInput: "",
-        findSelected: function(chars, symbols) {
-            var retArray = [];
-            for (var i = 0; i < chars.length; i++) {
-                symbols.forEach(function(symbol) {
-                    if (chars[i] === symbol) retArray.push(chars[i]);
+        for (var i = 0; i < dom.length; i++) {
+
+            if (dom[i].symbol) {
+                $(genWordId + ' ' + '.periodic-element').append('<div class="atomic-mass">' + dom[i].atomic_mass + '</div><div class="oxidation"></div><div class="symbol">' + dom[i].symbol.toLowerCase() + '</div><div class="number">' + dom[i].number + '</div><div class="shells">2</div>');
+                dom[i].shells.forEach(function(val, idx) {
+                    $(genWordId + ' ' + '.shells').append("<span>" + '-' + val + "</span>");
                 });
-            }
-            return retArray;
-        },
-        filterDups: function(selList) {
-            var retArray = selList.filter(function(elem, pos) {
-                return selList.indexOf(elem) == pos;
-            });
-            return retArray;
-        }
-    };
-
-    var view = {
-        buildDom: function(dom) {
-            var hTag = $('#h1');
-            for (var i = 0; i < dom.length; i++) {
-                hTag.append("<span>" + dom[i].toLowerCase() + "</span>");
-            }
-        },
-        displayMessage: function(str) {
-            var message = $('blockquote');
-            message.text(str).fadeOut(4000, function() {
-                message.show().text("");
-            });
-        },
-        updateColor: function(colorEle, splitWord, idx) {
-            var hTag = $('#h1');
-            // var prevIdx = 0;
-            // colorArr.forEach(function(color) {
-            //     charList.forEach(function(char, idx) {
-            //         if (color === char) {
-            //             if (prevIdx !== idx - 1) {
-            //                 console.log("ajc", prevIdx);
-            //                 hTag.children().eq(idx).addClass('highlight');
-            //             } else {
-            //                 // charList.splice(idx,1);
-            //             }
-            //             prevIdx = idx;
-            //         }
-            //     });
-            // });
-            var wordId = "word_" + idx
-            var genWordId = '#' + wordId;
-            if (idx > 0) {
-                hTag.append('<div id=' + wordId + '></div>');
-                for (var i = 0; i < splitWord.length; i++) {
-                    $(genWordId).append("<span>" + splitWord[i].toLowerCase() + "</span>");
-                }
-            } else {
-                this.buildDom(splitWord);
-            }
-            if (colorEle === undefined) {
-                return;
-            } else if (colorEle.length === 2) {
-                colorEle = colorEle.match(/.{1,1}/g);
+                dom[i].oxidationStates.forEach(function(val, idx) {
+                    $(genWordId + ' ' + '.oxidation').append("<span>" + val + "</span>");
+                });
+                details.append('<div>' + dom[i].name + '----------' + dom[i].source + '----------' + dom[i].summary + '</div>');
             }
 
-            for (var i = 0; i < colorEle.length; i++) {
-                for (var k = 0; k < splitWord.length; k++) {
-                    if (splitWord[k] === colorEle[i]) {
 
-                        if (idx > 0) {
-                            $(genWordId).children().eq(i).addClass('highlight');
-                        } else {
-                            hTag.children().eq(i).addClass('highlight');
-                        }
-                        break;
-                    }
+            if (!dom[i].symbol) {
+                if (dom[i].before) {
+                    $(genWordId + ' ' + '.periodic-element').attr("data-before", dom[i].string);
+                    var spanEl = $(genWordId + ' .periodic-element').outerWidth();
+                } else if (dom[i].after) {
+                    $(genWordId + ' ' + '.periodic-element').attr("data-after", dom[i].string);
                 }
 
             }
+
+            $(genWordId + ' ' + '.periodic-element').addClass('animate');
         }
-    };
-
-    function ajaxCall() {
-
-        $.ajax({
-            dataType: "json",
-            url: controller.jsonUrl,
-            data: "data",
-            success: function(response) {
-                model.jsonElems = forFn(response.elements);
-            }
+        var el = $(genWordId + ' .periodic-element').outerWidth()
+        view.left += el;
+        view.delay += 2.5;
+    },
+    displayMessage: function(str) {
+        var message = $('.message');
+        message.text(str).fadeOut(4000, function() {
+            message.show().text("");
         });
     }
+};
 
-    var controller = {
-        jsonUrl: 'PeriodicTableJSON.json',
-        processInput: function(colorList) {
-            view.updateColor(colorList, model.origInput);
-        }
-    };
+var controller = {
+    jsonUrl: 'PeriodicTableJSON.json'
+};
+
+function ajaxCall() {
+    model.jsonElems = jsonData.elements.map(function(obj) {
+        return {
+            name: obj.name,
+            source: obj.source,
+            summary: obj.summary,
+            atomic_mass: obj.atomic_mass,
+            number: obj.number,
+            shells: obj.shells,
+            symbol: obj.symbol.toLowerCase(),
+            oxidationStates: obj.oxidationStates
+        };
+    });
+}

@@ -1,4 +1,171 @@
-    .highlight {
-        color: red;
-        text-transform: uppercase;
-    }
+@font-face {
+    font-family: 'Bimasakti';
+    src: url('Bimasakti_1.eot');
+    src: local('Bimasakti'), url('Bimasakti_1.eot?#iefix') format('embedded-opentype'), url('Bimasakti_1.woff2') format('woff2'), url('Bimasakti_1.woff') format('woff'), url('Bimasakti_1.ttf') format('truetype'), url('Bimasakti_1.svg#Bimasakti') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Bundy';
+    src: url('Bundy-Regular.eot');
+    src: local('Bundy-Regular'),
+    url('Bundy-Regular.eot?#iefix') format('embedded-opentype'),
+    url('Bundy-Regular.woff2') format('woff2'),
+    url('Bundy-Regular.woff') format('woff'),
+    url('Bundy-Regular.ttf') format('truetype'),
+    url('Bundy-Regular.svg#Bundy-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Autodestruct BB';
+    src: url('AutodestructBB.eot');
+    src: local('Autodestruct BB'), local('AutodestructBB'), url('AutodestructBB.eot?#iefix') format('embedded-opentype'), url('AutodestructBB.woff2') format('woff2'), url('AutodestructBB.woff') format('woff'), url('AutodestructBB.ttf') format('truetype'), url('AutodestructBB.svg#AutodestructBB') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    --50per: 50%;
+}
+
+body {
+    font-family: 'Bimasakti';
+    margin: 0;
+    padding: 0;
+    background: -webkit-linear-gradient(to top right, #060606 0%, #50a750 100%);
+    background: -o-linear-gradient(to top right, #060606 0%, #50a750 100%);
+    background: linear-gradient(to top right, #060606 0%, #50a750 100%);
+}
+
+.breakingbad {
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+}
+
+img {
+    max-width: 150px;
+}
+
+h1 {
+    font-size: 60px;
+    margin: 25px 0 5px;
+}
+
+form {
+    margin-bottom: 30px;
+}
+
+input[type='text'] {
+    width: 300px;
+    border: 3px solid white;
+    color: white;
+    background: black;
+    padding: 10px 5px;
+    font-size: 1.5em;
+}
+
+.input-group {
+    position: relative;
+    margin: auto;
+    width: 408px;
+    color: white;
+}
+
+div[class*=input-word-] {
+    text-align: left;
+}
+.periodic-element {
+    font-family: 'Arial';
+    position: relative;
+    width: 200px;
+    height: 200px;
+    font-size: 3rem;
+    border: 2px solid white;
+    background: linear-gradient(to bottom right, #4ea76d 20%, #1f4c21 75%);
+    transition: all 2s ease-in;
+    transform-style: preserve-3d;
+    transform: perspective(200px) scaleZ(.5) translate3d(-50px, 0, 100px);
+    opacity: 0;
+}
+.periodic-element:before,
+.periodic-element:after {
+    content: "";
+    font-family: 'Bundy';
+    position: absolute;
+    font-size: 2.5em;
+    line-height: 204px;
+    left: 103%;
+    transition: inherit;
+    opacity: 0;
+}
+
+.periodic-element:before {
+    left: auto;
+    right: 101%
+}
+.periodic-element.animate {
+    opacity: 1;
+    transform: perspective(0) scaleZ(.5) translate3d(0,0,100px);
+}
+.pseudo.periodic-element:before {
+    content: attr(data-before);
+    opacity: 1;
+}
+.pseudo.periodic-element:after {
+    content: attr(data-after);
+    opacity: 1;
+}
+.periodic-element>div {
+    position: absolute;
+    font-size: 0.3em;
+    font-weight: bold;
+}
+
+.oxidation span {
+    display: block;
+    text-align: right;
+}
+
+.oxidation {
+    right: 3px;
+    top: 3px;
+}
+
+.periodic-element .symbol {
+    left: var(--50per);
+    top: var(--50per);
+    transform: translate(-50%,-50%);
+    font-size: 2.5em;
+    text-transform: capitalize;
+}
+
+.atomic-mass {
+    left: 3px;
+    top: 3px;
+}
+
+.periodic-element .number {
+    left: 3px;
+    bottom: 23px;
+    font-size: 0.5em;
+}
+
+.shells {
+    bottom: 3px;
+    left: 3px;
+}
+
+.details {
+    font-family: 'Autodestruct BB';
+    color: white;
+    font-size: 1.5em;
+}
