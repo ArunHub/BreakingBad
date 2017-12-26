@@ -168,4 +168,6 @@ div[class*=input-word-] {
     font-family: 'Autodestruct BB';
     color: white;
     font-size: 1.5em;
+    display: none;
+    transition: all 0.5s ease-in;
 }
