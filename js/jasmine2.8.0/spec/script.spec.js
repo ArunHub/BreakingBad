@@ -1,47 +1,49 @@
-describe('jasmine-node', function(){
+describe('jasmine-node', function() {
+    var periodicArr;
+    beforeAll(function() {
+        periodicArr = ajaxCall();
+    })
 
-  
+    var str = "breaking";
+    var symbol = "br";
+    describe('break string', function() {
+        var breakSt = breakStr(str, 3);
+        var expected = ["bre", "rea", "eak", "aki", "kin", "ing"];
+        it('should break string into array items with given count', function() {
+            expect(breakSt).toEqual(expected);
+        });
+        it('string length equals array items length', function() {
+            expect(str.length).toEqual(expected.length + 2);
+        });
+    });
 
-  it('should break string into array items with given count', function(){
-    var breakSt = breakStr("breaking",3);
-    expect(breakSt).toEqual(["bre", "rea", "eak", "aki", "kin", "ing"]);
-  });
+    it('should replace symbol with empty', function() {
+        var replace = replaceSymbol(symbol, str);
+        var expected = ["e", "a", "k", "i", "n", "g"];
+        expect(symbol.length).toBe(2);
+        expect(replace).toEqual(expected);
+        expected.forEach(function (val) {
+          expect(val.length).toEqual(1);
+        });        
+        expect(replace).toContain(expected[0]);
+        expect(replace).toEqual(jasmine.arrayContaining(expected));
+        expect(replace).not.toEqual(jasmine.arrayContaining([symbol]));
+    });
 
-  it('should replace symbol with empty', function(){
-    var replace = replaceSymbol("br","breaking");
-    expect(replace).toEqual(["e", "a", "k", "i", "n", "g"]);
-  });
-  it('should find regex match of element', function(){
-    var periodicArr = ajaxCall();
-    var regex_match = regexMatch(periodicArr, "br");
-    expect(regex_match).not.toBe(null);
-    expect(regex_match).toEqual(jasmine.objectContaining({
-      symbol: "br"
-    }));
-  });  
-  it('should join array of three', function(){
-    var periodicArr = ajaxCall();
-    var join_array = joinArray("breaking", {symbol: "br",pos: 0});
-    expect(join_array).not.toBe(null);
-    expect(join_array).toContain("eaking");
-  });
+    it('should find regex match of element', function() {
+        var regex_match1 = regexMatch(periodicArr, symbol);
+        var regex_match2 = regexMatch(periodicArr, "zz");
+        expect(regex_match1).not.toBe(null);
+        expect(regex_match2).toBe(null);
+        expect(regex_match1).toEqual(jasmine.objectContaining({
+            symbol: symbol
+        }));
+        expect(regex_match1).toEqual(jasmine.objectContaining({ symbol: jasmine.stringMatching(/br/) }));
+    });
 
-  xit('shows asynchronous test', function(){
-    setTimeout(function(){
-      expect('second').toEqual('second');
-      asyncSpecDone();
-    }, 1);
-    expect('first').toEqual('first');
-    asyncSpecWait();
-  });
-
-  xit('shows asynchronous test node-style', function(done){
-    setTimeout(function(){
-      expect('second').toEqual('second');
-      // If you call done() with an argument, it will fail the spec 
-      // so you can use it as a handler for many async node calls
-      done();
-    }, 1);
-    expect('first').toEqual('first');
-  });
+    it('should join array of three', function() {
+        var join_array = joinArray("breaking", { symbol: symbol, pos: 0 });
+        expect(join_array).not.toBe(null);
+        expect(join_array).toContain("eaking");
+    });
 });
