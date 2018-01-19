@@ -14,13 +14,27 @@ function fireSubmit() {
     }
 }
 
+function clearForm() {
+    var form = document.getElementsByName('periodicForm');
+    console.log("text",form);
+    form[0].reset();
+}
+
+function breakStr(string, count) {
+    return [...string.slice(count - 1)].map((_, i) => string.slice(i, i + count));
+}
+
+function refreshPage() {
+    window.location.reload();
+}
+
 function processInput(input) {
     var splitInput = input.split(/\s+/);
     var periodicArr = ajaxCall();
     btnState("disabled");
     for (var i = 0; i < splitInput.length; i++) {
         var retVal = regexMatch(periodicArr, splitInput[i]);
-        if ((retVal == null || retVal == undefined)) {
+        if ((retVal === null || retVal === undefined)) {
             view.displayMessage('No match found for this word: ' + splitInput[i]);
             btnState("");
             clearForm();
@@ -36,17 +50,19 @@ function processInput(input) {
     return;
 }
 
-function joinArray(str, retVal) {
-    var first = replaceSymbol(retVal.symbol, str);
-    var removed = first.splice(retVal.pos).join('');
-    first = first.join('');
-    var retArr = Array.of(first, retVal, removed);
-    return retArr;
-}
-
-function replaceSymbol(input, string) {
-    var regex = new RegExp(input, 'i')
-    return string.replace(regex, '').split('');
+function ajaxCall() {
+    return tempObj = jsonData.elements.map(function(obj) {
+        return {
+            name: obj.name,
+            source: obj.source,
+            summary: obj.summary,
+            atomic_mass: obj.atomic_mass,
+            number: obj.number,
+            shells: obj.shells,
+            symbol: obj.symbol.toLowerCase(),
+            oxidationStates: obj.oxidationStates
+        };
+    });
 }
 
 function btnState(state) {
@@ -68,27 +84,18 @@ function regexMatch(periodicArr, str) {
     return twoLen[0] ? twoLen[0] : oneLen[0] ? oneLen[0] : null;
 }
 
-function breakStr(string, count) {
-    return [...string.slice(count - 1)].map((_, i) => string.slice(i, i + count));
+function joinArray(str, retVal) {
+    var first = replaceSymbol(retVal.symbol, str);
+    var removed = first.splice(retVal.pos).join('');
+    first = first.join('');
+    var retArr = Array.of(first, retVal, removed);
+    return retArr;
 }
 
-function clearForm() {
-    var form = document.getElementsByName('periodicForm')[0];
-    form.reset();
+function replaceSymbol(input, string) {
+    var regex = new RegExp(input, 'i')
+    return string.replace(regex, '').split('');
 }
-
-function refreshPage() {
-    window.location.reload();
-}
-
-// function init() {
-//     var submitBtn = document.getElementById('submitBtn');
-//     var refresh = document.getElementById('refresh');
-//     submitBtn.onclick = fireSubmit;
-//     refresh.onclick = refreshPage;
-// }
-
-// window.onload = init;
 
 var model = {
     jsonElems: []
@@ -106,48 +113,27 @@ var view = {
     buildFullDom: function(dom, index) {
         var inputgroup = $('.input-group');
         var inputword = "input-word-" + index;
-        var genWordId = '.' + inputword;
+        var genWord = '.' + inputword;
         var details = $('.details');
         inputgroup.append('<div class=' + inputword + '><div class="periodic-element" style="left:' + view.get('left') + 'px;transition-delay:' + view.get('delay') + 's"></div></div>');
-        var _this = $(genWordId + ' .periodic-element');
+        var _thisEl = $(genWord + ' .periodic-element');
 
-        // for (var i = 0; i < dom.length; i++) {
-
-        //     if (dom[i].symbol) {
-        //         $(genWordId + ' .periodic-element').append('<div class="atomic-mass">' + dom[i].atomic_mass + '</div><div class="oxidation"></div><div class="symbol">' + dom[i].symbol + '</div><div class="number">' + dom[i].number + '</div><div class="shells">2</div>');
-        //         dom[i].shells.forEach(function(val) {
-        //             $(genWordId + ' ' + '.shells').append("<span>" + '-' + val + "</span>");
-        //         });
-        //         dom[i].oxidationStates.forEach(function(val) {
-        //             $(genWordId + ' ' + '.oxidation').append("<span>" + val + "</span>");
-        //         });
-        //         details.append('<div>' + dom[i].name + '----------' + dom[i].source + '----------' + dom[i].summary + '</div>');
-        //     }else if (dom[i].before) {
-        //         $(genWordId + ' .periodic-element').attr("data-before", dom[i].string);
-        //         var spanEl = $(genWordId + ' .periodic-element').outerWidth();
-        //     } else if (dom[i].after) {
-        //         $(genWordId + ' .periodic-element').attr("data-after", dom[i].string);
-        //     }
-
-        //     $(genWordId + ' .periodic-element').addClass('animate');
-        // }
-
-        _this.append('<div class="atomic-mass">' + dom[1].atomic_mass + '</div><div class="oxidation"></div><div class="symbol">' + dom[1].symbol + '</div><div class="number">' + dom[1].number + '</div><div class="shells">2</div>');
+        _thisEl.append('<div class="atomic-mass">' + dom[1].atomic_mass + '</div><div class="oxidation"></div><div class="symbol">' + dom[1].symbol + '</div><div class="number">' + dom[1].number + '</div><div class="shells">2</div>');
         dom[1].shells.forEach(function(val) {
-            $(genWordId + ' ' + '.shells').append("<span>" + '-' + val + "</span>");
+            $(genWord + ' ' + '.shells').append("<span>" + '-' + val + "</span>");
         });
         dom[1].oxidationStates.forEach(function(val) {
-            $(genWordId + ' ' + '.oxidation').append("<span>" + val + "</span>");
+            $(genWord + ' ' + '.oxidation').append("<span>" + val + "</span>");
         });
         details.append('<div>' + dom[1].name + '----------' + dom[1].source + '----------' + dom[1].summary + '</div>');
 
-        _this.attr("data-before", dom[0]);
-        _this.attr("data-after", dom[2]);
-        // var spanEl = _this.outerWidth();
+        _thisEl.attr("data-before", dom[0]);
+        _thisEl.attr("data-after", dom[2]);
+        var spanEl = _thisEl.outerWidth();
 
-        _this.addClass('animate');
+        _thisEl.addClass('animate');
 
-        var el = _this.outerWidth();
+        var el = _thisEl.outerWidth();
         view.set('left', el);
         view.set('delay', 2.5);
     },
@@ -158,18 +144,3 @@ var view = {
         });
     }
 };
-
-function ajaxCall() {
-    return tempObj = jsonData.elements.map(function(obj) {
-        return {
-            name: obj.name,
-            source: obj.source,
-            summary: obj.summary,
-            atomic_mass: obj.atomic_mass,
-            number: obj.number,
-            shells: obj.shells,
-            symbol: obj.symbol.toLowerCase(),
-            oxidationStates: obj.oxidationStates
-        };
-    });
-}

@@ -1,6 +1,6 @@
 describe('jasmine-node', function() {
     var periodicArr;
-    beforeAll(function() {
+    beforeEach(function() {
         periodicArr = ajaxCall();
     })
 
@@ -22,9 +22,9 @@ describe('jasmine-node', function() {
         var expected = ["e", "a", "k", "i", "n", "g"];
         expect(symbol.length).toBe(2);
         expect(replace).toEqual(expected);
-        expected.forEach(function (val) {
-          expect(val.length).toEqual(1);
-        });        
+        expected.forEach(function(val) {
+            expect(val.length).toEqual(1);
+        });
         expect(replace).toContain(expected[0]);
         expect(replace).toEqual(jasmine.arrayContaining(expected));
         expect(replace).not.toEqual(jasmine.arrayContaining([symbol]));
@@ -45,5 +45,27 @@ describe('jasmine-node', function() {
         var join_array = joinArray("breaking", { symbol: symbol, pos: 0 });
         expect(join_array).not.toBe(null);
         expect(join_array).toContain("eaking");
+    });
+
+    it('should call the process input function', function() {
+      // spyOn(window, 'btnState');
+      window.btnState = jasmine.createSpy('btnState');
+      spyOn(window, 'regexMatch');
+      spyOn(view, 'buildFullDom');
+      spyOn(view, 'displayMessage');
+      spyOn(window, 'clearForm');
+      spyOn(window, 'ajaxCall');
+      // spyOn(document, 'getElementsByName');
+      var processInp = processInput("breaking bad");
+      expect(window.regexMatch).toHaveBeenCalled();
+      expect(window.regexMatch).toHaveBeenCalledWith(periodicArr, "breaking");
+      expect(window.regexMatch).not.toBeNull();
+      expect(processInp).toBeUndefined();
+      expect(window.ajaxCall).toHaveBeenCalled();
+      expect(view.displayMessage).toHaveBeenCalledTimes(1);
+      expect(window.btnState).toHaveBeenCalledTimes(2);
+      expect(view.buildFullDom).toHaveBeenCalled();
+      // expect(window.clearForm).toHaveBeenCalled();
+      // expect(document.getElementsByName).toHaveBeenCalled();
     });
 });
