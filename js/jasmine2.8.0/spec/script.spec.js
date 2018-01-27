@@ -17,6 +17,21 @@ describe('jasmine-node', function() {
         });
     });
 
+    it('should call the processInput function', function() {
+      window.btnState = jasmine.createSpy('btnState');
+      spyOn(window, 'regexMatch');
+      spyOn(view, 'buildFullDom');
+      spyOn(view, 'displayMessage');
+      spyOn(window, 'clearForm');
+
+      var processInp = processInput("arun kumar");
+      expect(processInp).toBeUndefined();
+      expect(window.btnState).toHaveBeenCalledTimes(2);
+      expect(window.ajaxCall).toBeDefined();
+      expect(window.regexMatch).toHaveBeenCalledWith(window.ajaxCall(), "arun");
+      expect(view.displayMessage).toHaveBeenCalledTimes(1);
+    });
+
     it('should replace symbol with empty', function() {
         var replace = replaceSymbol(symbol, str);
         var expected = ["e", "a", "k", "i", "n", "g"];
@@ -47,25 +62,4 @@ describe('jasmine-node', function() {
         expect(join_array).toContain("eaking");
     });
 
-    it('should call the process input function', function() {
-      // spyOn(window, 'btnState');
-      window.btnState = jasmine.createSpy('btnState');
-      spyOn(window, 'regexMatch');
-      spyOn(view, 'buildFullDom');
-      spyOn(view, 'displayMessage');
-      spyOn(window, 'clearForm');
-      spyOn(window, 'ajaxCall');
-      // spyOn(document, 'getElementsByName');
-      var processInp = processInput("breaking bad");
-      expect(window.regexMatch).toHaveBeenCalled();
-      expect(window.regexMatch).toHaveBeenCalledWith(periodicArr, "breaking");
-      expect(window.regexMatch).not.toBeNull();
-      expect(processInp).toBeUndefined();
-      expect(window.ajaxCall).toHaveBeenCalled();
-      expect(view.displayMessage).toHaveBeenCalledTimes(1);
-      expect(window.btnState).toHaveBeenCalledTimes(2);
-      expect(view.buildFullDom).toHaveBeenCalled();
-      // expect(window.clearForm).toHaveBeenCalled();
-      // expect(document.getElementsByName).toHaveBeenCalled();
-    });
 });

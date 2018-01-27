@@ -1,5 +1,6 @@
 function fireSubmit() {
     var sayUrName = document.getElementById('say-ur-name');
+    console.log("sayUrName",sayUrName);
     var input = sayUrName.value.trim();
     if (input === null || input.length === 0 || input.match(/[^a-zA-Z\s+]/gi)) {
         view.displayMessage('Oops, Special characters, numbers are not allowed. Enter only Letters!');
@@ -16,7 +17,6 @@ function fireSubmit() {
 
 function clearForm() {
     var form = document.getElementsByName('periodicForm');
-    console.log("text",form);
     form[0].reset();
 }
 
