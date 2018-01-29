@@ -51,7 +51,7 @@ body {
     margin-top: 15px;
 }
 
-img {
+.one-who-knocks {
     max-width: 150px;
 }
 
@@ -83,6 +83,7 @@ input[type='text'] {
 div[class*=input-word-] {
     text-align: left;
 }
+
 .periodic-element {
     font-family: 'Arial';
     position: relative;
@@ -91,11 +92,14 @@ div[class*=input-word-] {
     font-size: 3rem;
     border: 2px solid white;
     background: linear-gradient(to bottom right, #4ea76d 20%, #1f4c21 75%);
-    transition: all 2s ease-in;
-    transform-style: preserve-3d;
+    transition-duration: 2s;
+    transition-property: all;
+    transition-timing-function: ease-in;
     transform: perspective(200px) scaleZ(.5) translate3d(-50px, 0, 100px);
+    transform-style: preserve-3d;
     opacity: 0;
 }
+
 .periodic-element:before,
 .periodic-element:after {
     content: "";
@@ -112,18 +116,22 @@ div[class*=input-word-] {
     left: auto;
     right: 101%
 }
-.periodic-element.animate {
+
+.periodic-element.transit {
     opacity: 1;
-    transform: perspective(0) scaleZ(.5) translate3d(0,0,100px);
+    transform: perspective(0) scaleZ(.5) translate3d(0, 0, 100px);
 }
+
 .pseudo.periodic-element:before {
     content: attr(data-before);
     opacity: 1;
 }
+
 .pseudo.periodic-element:after {
     content: attr(data-after);
     opacity: 1;
 }
+
 .periodic-element>div {
     position: absolute;
     font-size: 0.3em;
@@ -143,7 +151,7 @@ div[class*=input-word-] {
 .periodic-element .symbol {
     left: var(--50per);
     top: var(--50per);
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     font-size: 2.5em;
     text-transform: capitalize;
 }
@@ -170,4 +178,53 @@ div[class*=input-word-] {
     font-size: 1.5em;
     display: none;
     transition: all 0.5s ease-in;
+}
+
+.truck {
+    position: relative;
+    display: inline-block;
+}
+
+.gas-wrap {
+    position: absolute;
+    left: 100px;
+    top: -55px;
+    width: 140px;
+    height: 100px;
+}
+
+.move-element {
+    position: absolute;
+    width: 25px;
+    height: 5px;
+    background: black;
+    bottom: 0;
+    right: 0;
+    animation-duration: 8s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+
+.animate.move-element {
+    animation-name: cloud;
+}
+
+@keyframes cloud {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: rotate(180deg) translate(70px, 70px);
+    }
 }

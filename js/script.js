@@ -1,6 +1,5 @@
 function fireSubmit() {
     var sayUrName = document.getElementById('say-ur-name');
-    console.log("sayUrName",sayUrName);
     var input = sayUrName.value.trim();
     if (input === null || input.length === 0 || input.match(/[^a-zA-Z\s+]/gi)) {
         view.displayMessage('Oops, Special characters, numbers are not allowed. Enter only Letters!');
@@ -46,12 +45,13 @@ function processInput(input) {
     }
     $('.periodic-element').addClass('pseudo').css("transition-delay", view.get('delay') + "s");
     $('.details').css("transition-delay", view.get('delay') +1+ "s").fadeIn();
+    $('.move-element').addClass('animate').css("animation-delay", view.get('delay') + "s");
     clearForm();
     return;
 }
 
 function ajaxCall() {
-    return tempObj = jsonData.elements.map(function(obj) {
+    var tempObj = jsonData.elements.map(function(obj) {
         return {
             name: obj.name,
             source: obj.source,
@@ -63,6 +63,7 @@ function ajaxCall() {
             oxidationStates: obj.oxidationStates
         };
     });
+    return tempObj;
 }
 
 function btnState(state) {
@@ -77,7 +78,7 @@ function regexMatch(periodicArr, str) {
         var temp;
         if (periodicArr[i].symbol && (temp = str.match(regex)) !== null) {
             periodicArr[i]['pos'] = temp.index;
-            (temp[0].length === 2) ? twoLen.push(periodicArr[i]): oneLen.push(periodicArr[i])
+            (temp[0].length === 2) ? twoLen.push(periodicArr[i]): oneLen.push(periodicArr[i]);
 
         }
     }
@@ -93,7 +94,7 @@ function joinArray(str, retVal) {
 }
 
 function replaceSymbol(input, string) {
-    var regex = new RegExp(input, 'i')
+    var regex = new RegExp(input, 'i');
     return string.replace(regex, '').split('');
 }
 
@@ -129,9 +130,8 @@ var view = {
 
         _thisEl.attr("data-before", dom[0]);
         _thisEl.attr("data-after", dom[2]);
-        var spanEl = _thisEl.outerWidth();
 
-        _thisEl.addClass('animate');
+        _thisEl.addClass('transit');
 
         var el = _thisEl.outerWidth();
         view.set('left', el);
