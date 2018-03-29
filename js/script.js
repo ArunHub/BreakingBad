@@ -60,6 +60,11 @@ function replaceSymbol(input, string) {
     return string.replace(regex, '').split('');
 }
 
+function play() {
+    var audio = document.getElementById("audio");
+    audio.play();
+}
+
 var model = {
     jsonElems: []
 };
@@ -77,6 +82,7 @@ function fireSubmit() {
         return;
     } else {
         processInput(input.toLowerCase());
+        // play();
             // document.getElementsByClassName('cook-element')[0].addEventListener("transitionend", function(event) {console.log('eeend');}, false);
             // document.getElementById('smoke0').addEventListener("transitionend", function(event) {console.log('eeend');}, false);
     }
@@ -123,7 +129,7 @@ var view = {
     set: function(prop, value) {
         return prop === 'left' ? this.left += value : this.delay += value;
     },
-    setColor: function(category){
+    setCateColor: function(category){
       switch(category) {
         case 'non metal': return '#ffcc00';
         case 'noble gas': return '#33cccc';
@@ -143,17 +149,18 @@ var view = {
         var inputword = "input-word-" + index;
         var genWord = '.' + inputword;
         var details = $('.details');
+        var categoryColor = view.setCateColor(dom[1].category);
         inputgroup.append('<div class=' + inputword + '><div class="periodic-element" id="pe-'+index+'" style="left:' + view.get('left') + 'px;transition-delay:' + view.get('delay') + 's"></div></div>');
         var _thisEl = $('#'+'pe-'+index);
 
-        _thisEl.append('<div class="atomic-mass">' + dom[1].atomic_mass + '</div><div class="oxidation"></div><div class="symbol">' + dom[1].symbol + '</div><div class="number">' + dom[1].number + '</div><div class="shells">2</div>');
+        _thisEl.append('<div class="atomic-mass" title="atomic mass">' + dom[1].atomic_mass + '</div><div class="oxidation" title="oxidation states"></div><div class="symbol" title="periodic element">' + dom[1].symbol + '</div><div class="number" title="atomic number">' + dom[1].number + '</div><div class="shells" title="shells">2</div>');
         dom[1].shells.forEach(function(val) {
             $(genWord + ' ' + '.shells').append("<span>" + '-' + val + "</span>");
         });
         dom[1].oxidationStates.forEach(function(val) {
             $(genWord + ' ' + '.oxidation').append("<span>" + val + "</span>");
         });
-        details.append('<div>' + dom[1].name + '----------' + dom[1].source + '----------' + dom[1].summary + '</div>');
+        details.append('<div><strong style="color:'+categoryColor+'">' +dom[1].name + ' - <span class="details-symbol">' + dom[1].symbol + '</span></strong><br>' + dom[1].summary + '<br>' + dom[1].source + '</div>');
 
         _thisEl.attr("data-before", dom[0]);
         _thisEl.attr("data-after", dom[2]);
@@ -168,7 +175,7 @@ var view = {
         view.set('delay', 2.5);
 
         bikeSmokeFunction('smoke'+index);
-        window['smoke'+index].opts.color = view.setColor(dom[1].category);
+        window['smoke'+index].opts.color = categoryColor;
 
     },
     displayMessage: function(str) {

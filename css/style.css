@@ -27,6 +27,33 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Cardenio Modern';
+    src: url('hinted-CardenioModern-Bold.eot');
+    src: local('Cardenio Modern Bold'), local('CardenioModern-Bold'),
+        url('hinted-CardenioModern-Bold.eot?#iefix') format('embedded-opentype'),
+        url('hinted-CardenioModern-Bold.woff2') format('woff2'),
+        url('hinted-CardenioModern-Bold.woff') format('woff'),
+        url('hinted-CardenioModern-Bold.ttf') format('truetype'),
+        url('hinted-CardenioModern-Bold.svg#CardenioModern-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Cardenio Modern';
+    src: url('hinted-CardenioModern-Reg.eot');
+    src: local('Cardenio Modern'), local('CardenioModern-Reg'),
+        url('hinted-CardenioModern-Reg.eot?#iefix') format('embedded-opentype'),
+        url('hinted-CardenioModern-Reg.woff2') format('woff2'),
+        url('hinted-CardenioModern-Reg.woff') format('woff'),
+        url('hinted-CardenioModern-Reg.ttf') format('truetype'),
+        url('hinted-CardenioModern-Reg.svg#CardenioModern-Reg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 * {
     box-sizing: border-box;
 }
@@ -43,15 +70,17 @@ body {
     background: -webkit-linear-gradient(to top right, #060606 0%, #50a750 100%);
     background: -o-linear-gradient(to top right, #060606 0%, #50a750 100%);
     background: linear-gradient(to top right, #060606 0%, #50a750 100%);
+    background-attachment: fixed; 
 }
 
 .breakingbad {
     width: 100%;
     text-align: center;
-    margin-top: 15px;
+    position: relative;
 }
 
 .one-who-knocks {
+    margin-top: 15px;
     max-width: 150px;
 }
 
@@ -173,11 +202,29 @@ div[class*=input-word-] {
 }
 
 .details {
-    font-family: 'Autodestruct BB';
+    xfont-family: 'Autodestruct BB';
+    font-family: 'Cardenio Modern';
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 400px;
     color: white;
-    font-size: 1.5em;
+    font-size: 1.6em;
+      padding: 5px;
     display: none;
     transition: all 0.5s ease-in;
+    background-color: #417d41;
+    background-image: url("data:image/svg+xml,%3Csvg width='42' height='44' viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Page-1' fill='none' fill-rule='evenodd'%3E%3Cg id='brick-wall' fill='%23244824' fill-opacity='0.3'%3E%3Cpath d='M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-position-x: -2px;
+    box-shadow: inset 5px 5px #33683354;
+}
+
+.details-symbol {
+    display: inline-block;
+    padding: 2px;
+    border: 2px solid;
+    background: #367946;
+    margin-left: 2px;
 }
 
 .truck {
@@ -205,7 +252,7 @@ div[class*=input-word-] {
     opacity: 0;
 }
 
-#smoke0.animate, #smoke1.animate {
+.cook-element > div.animate{
     animation-name: cloud;
 }
 
