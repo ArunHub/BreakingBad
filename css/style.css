@@ -99,7 +99,20 @@ input[type='text'] {
     color: white;
     background: black;
     padding: 10px 5px;
-    font-size: 1.5em;
+    font-size: 1em;
+}
+
+input[type='submit']{
+    border: 3px solid black;
+    padding: 10px;
+    font-size: 0.9em;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+input[type='submit'][disabled]{
+    border-color: transparent;
+    cursor: not-allowed;
 }
 
 .input-group {
@@ -202,7 +215,6 @@ div[class*=input-word-] {
 }
 
 .details {
-    xfont-family: 'Autodestruct BB';
     font-family: 'Cardenio Modern';
     position: absolute;
     right: 0px;
@@ -228,16 +240,23 @@ div[class*=input-word-] {
 }
 
 .truck {
-    position: relative;
-    display: inline-block;
+    position: absolute;
+    left: 50px;
+    top: 50px;
+    width: 350px;
+}
+
+.truck img{
+    max-width: 100%;
+    height: auto;
 }
 
 .cook-element {
     position: absolute;
-    left: 100px;
-    top: -65px;
+    left: 40px;
+    top: -55px;
     width: 140px;
-    height: 100px;
+    height: 80px;
 }
 
 .cook-element > div{
@@ -274,4 +293,21 @@ div[class*=input-word-] {
         opacity: 0;
         transform: rotate(180deg) translate(90px, 70px);
     }
+}
+
+footer {
+    position: absolute;
+    font-family: 'Cardenio Modern';
+    font-weight: bold;
+    font-size: 1.2em;
+    color: whitesmoke;
+    padding: 2px;
+    border-top: 2px solid #175617;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+}
+
+footer span a {
+    color: grey;
 }

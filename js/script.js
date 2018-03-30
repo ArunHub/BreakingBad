@@ -167,7 +167,7 @@ var view = {
         var spanEl = _thisEl.outerWidth();
         _thisEl.addClass('transit');
 
-        $(".cook-element").append('<div id="smoke'+index+'"></div>');
+        $(".cook-element").append('<div id="smoke'+index+'" title="category: '+ dom[1].category +'"></div>');
         $("#smoke"+index).addClass('animate').css("animation-delay", view.get('delay') + "s");
 
         var el = _thisEl.outerWidth();
