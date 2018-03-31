@@ -98,7 +98,7 @@ function processInput(input) {
             view.displayMessage('No match found for this word: ' + splitInput[i]);
             btnState("");
             clearForm();
-            return;
+            // return;
         } else {
             var joinedArr = joinArray(splitInput[i], retVal);
             view.buildFullDom(joinedArr, i);
@@ -161,7 +161,7 @@ var view = {
             $(genWord + ' ' + '.oxidation').append("<span>" + val + "</span>");
         });
         details.append('<div><strong style="color:'+categoryColor+'">' +dom[1].name + ' - <span class="details-symbol">' + dom[1].symbol + '</span></strong><br>' + dom[1].summary + '<br>' + dom[1].source + '</div>');
-
+console.log("text",dom);
         _thisEl.attr("data-before", dom[0]);
         _thisEl.attr("data-after", dom[2]);
         var spanEl = _thisEl.outerWidth();
