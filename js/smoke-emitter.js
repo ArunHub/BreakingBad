@@ -10,6 +10,7 @@ function getsupportedprop(proparray) {
 var csstransform = getsupportedprop(['transform', 'MozTransform', 'webkitTransform', 'msTransform', 'OTransform'])
 var csstransition = getsupportedprop(['transition', 'MozTransition', 'webkitTransition', 'msTransition', 'oTransition'])
 
+
 var Emitter = function(opts, parent) {
     this.particles = [];
     this.opts = opts;
@@ -141,7 +142,7 @@ Particle.prototype.draw = function(i, p) {
     this.ele.style.borderRadius = this.rNow + 'px';
 }
 
-function bikeSmokeFunction(attachTo) {
+function smokeEmitter(attachTo) {
   window[attachTo] = new Emitter({
     particles:70,      
     attachTo: attachTo,

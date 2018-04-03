@@ -83,8 +83,6 @@ function fireSubmit() {
     } else {
         processInput(input.toLowerCase());
         // play();
-            // document.getElementsByClassName('cook-element')[0].addEventListener("transitionend", function(event) {console.log('eeend');}, false);
-            // document.getElementById('smoke0').addEventListener("transitionend", function(event) {console.log('eeend');}, false);
     }
 }
 
@@ -104,17 +102,8 @@ function processInput(input) {
             view.buildFullDom(joinedArr, i);
         }
     }
-    // $("#smoke0").one("webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend ", function(event) {
-    // // Do something when the transition ends
-    // console.log('end');
-    // });
-    // var smokeell = document.getElementByClassNames('smoke0');
-
     $('.periodic-element').addClass('pseudo').css("transition-delay", view.get('delay') + "s");
     $('.details').css("transition-delay", view.get('delay') +1+ "s").fadeIn();
-    // console.log("bikeSmoke",bikeSmoke);
-// bikeSmoke.destroy();
-    // smokeEmit();
     clearForm();
     return;
 }
@@ -161,21 +150,30 @@ var view = {
             $(genWord + ' ' + '.oxidation').append("<span>" + val + "</span>");
         });
         details.append('<div><strong style="color:'+categoryColor+'">' +dom[1].name + ' - <span class="details-symbol">' + dom[1].symbol + '</span></strong><br>' + dom[1].summary + '<br>' + dom[1].source + '</div>');
-console.log("text",dom);
-        _thisEl.attr("data-before", dom[0]);
         _thisEl.attr("data-after", dom[2]);
         var spanEl = _thisEl.outerWidth();
         _thisEl.addClass('transit');
 
+        var smokeElement = 'smoke'+index;
+
         $(".cook-element").append('<div id="smoke'+index+'" title="category: '+ dom[1].category +'"></div>');
-        $("#smoke"+index).addClass('animate').css("animation-delay", view.get('delay') + "s");
+        $("#"+smokeElement).addClass('animate').css("animation-delay", view.get('delay') + "s");
+
+        var smokeJs = document.getElementById(smokeElement);
+        smokeJs.addEventListener("webkitAnimationEnd", deleteSmoke, false);
+        smokeJs.addEventListener("animationend", deleteSmoke, false);
+        smokeJs.addEventListener("oanimationend", deleteSmoke, false);
+
+        function deleteSmoke() {
+          window[smokeElement].destroy();
+        }
 
         var el = _thisEl.outerWidth();
         view.set('left', el);
         view.set('delay', 2.5);
 
-        bikeSmokeFunction('smoke'+index);
-        window['smoke'+index].opts.color = categoryColor;
+        smokeEmitter(smokeElement);
+        window[smokeElement].opts.color = categoryColor;
 
     },
     displayMessage: function(str) {
