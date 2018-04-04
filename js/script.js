@@ -65,10 +65,6 @@ function play() {
     audio.play();
 }
 
-var model = {
-    jsonElems: []
-};
-
 function fireSubmit() {
     var sayUrName = document.getElementById('say-ur-name');
     var input = sayUrName.value.trim();
@@ -133,14 +129,20 @@ var view = {
         default: return 'whitesmoke';
       }
     },
+    createElement: function () {
+      var ss = document.createElement('div');
+      ss.innerText = "hello";
+      return ss;
+    },
     buildFullDom: function(dom, index) {
-        var inputgroup = $('.input-group');
+      console.log("text",dom);
         var inputword = "input-word-" + index;
         var genWord = '.' + inputword;
-        var details = $('.details');
         var categoryColor = view.setCateColor(dom[1].category);
-        inputgroup.append('<div class=' + inputword + '><div class="periodic-element" id="pe-'+index+'" style="left:' + view.get('left') + 'px;transition-delay:' + view.get('delay') + 's"></div></div>');
+
+        $('.input-group').append('<div class=' + inputword + '><div class="periodic-element" id="pe-'+index+'" style="left:' + view.get('left') + 'px;transition-delay:' + view.get('delay') + 's"></div></div>');
         var _thisEl = $('#'+'pe-'+index);
+        var thisEl = document.getElementById('pe-'+index); //start from here for jQ to js
 
         _thisEl.append('<div class="atomic-mass" title="atomic mass">' + dom[1].atomic_mass + '</div><div class="oxidation" title="oxidation states"></div><div class="symbol" title="periodic element">' + dom[1].symbol + '</div><div class="number" title="atomic number">' + dom[1].number + '</div><div class="shells" title="shells">2</div>');
         dom[1].shells.forEach(function(val) {
@@ -149,7 +151,9 @@ var view = {
         dom[1].oxidationStates.forEach(function(val) {
             $(genWord + ' ' + '.oxidation').append("<span>" + val + "</span>");
         });
-        details.append('<div><strong style="color:'+categoryColor+'">' +dom[1].name + ' - <span class="details-symbol">' + dom[1].symbol + '</span></strong><br>' + dom[1].summary + '<br>' + dom[1].source + '</div>');
+        $('.details').append('<div><strong style="color:'+categoryColor+'">' +dom[1].name + ' - <span class="details-symbol">' + dom[1].symbol + '</span></strong><br>' + dom[1].summary + '<br>' + dom[1].source + '</div>');
+
+        _thisEl.attr("data-before", dom[0]);
         _thisEl.attr("data-after", dom[2]);
         var spanEl = _thisEl.outerWidth();
         _thisEl.addClass('transit');
