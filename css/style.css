@@ -296,6 +296,14 @@ div[class*=input-word-] {
     }
 }
 
+#not-found {
+    display: none;
+    margin-top: 20px;
+    color: darkred;
+    font-size: 3em;
+    font-family: 'Cardenio Modern';
+}
+
 footer {
     position: absolute;
     font-family: 'Cardenio Modern';

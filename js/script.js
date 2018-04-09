@@ -85,14 +85,15 @@ function fireSubmit() {
 function processInput(input) {
     var splitInput = input.split(/\s+/);
     var periodicArr = ajaxCall();
+    var notFoundId = document.getElementById('not-found');
     btnState("disabled");
     for (var i = 0; i < splitInput.length; i++) {
         var retVal = regexMatch(periodicArr, splitInput[i]);
         if ((retVal === null || retVal === undefined)) {
-            view.displayMessage('No match found for this word: ' + splitInput[i]);
-            btnState("");
-            clearForm();
-            // return;
+            var createEl = document.createElement('span');
+            createEl.innerText = splitInput[i] + " ";
+            notFoundId.append(createEl);
+            notFoundId.style.display = "block";
         } else {
             var joinedArr = joinArray(splitInput[i], retVal);
             view.buildFullDom(joinedArr, i);
@@ -100,6 +101,7 @@ function processInput(input) {
     }
     $('.periodic-element').addClass('pseudo').css("transition-delay", view.get('delay') + "s");
     $('.details').css("transition-delay", view.get('delay') +1+ "s").fadeIn();
+    
     clearForm();
     return;
 }
@@ -135,7 +137,6 @@ var view = {
       return ss;
     },
     buildFullDom: function(dom, index) {
-      console.log("text",dom);
         var inputword = "input-word-" + index;
         var genWord = '.' + inputword;
         var categoryColor = view.setCateColor(dom[1].category);
