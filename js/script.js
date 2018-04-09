@@ -28,10 +28,6 @@ function ajaxCall() {
     return tempObj;
 }
 
-function btnState(state) {
-    $('#submitBtn').attr("disabled", state);
-}
-
 function regexMatch(periodicArr, str) {
     var oneLen = [];
     var twoLen = [];
@@ -86,7 +82,8 @@ function processInput(input) {
     var splitInput = input.split(/\s+/);
     var periodicArr = ajaxCall();
     var notFoundId = document.getElementById('not-found');
-    btnState("disabled");
+    document.getElementById('submit-btn').setAttribute('disabled','disabled');
+
     for (var i = 0; i < splitInput.length; i++) {
         var retVal = regexMatch(periodicArr, splitInput[i]);
         if ((retVal === null || retVal === undefined)) {
@@ -131,19 +128,26 @@ var view = {
         default: return 'whitesmoke';
       }
     },
-    createElement: function () {
-      var ss = document.createElement('div');
-      ss.innerText = "hello";
-      return ss;
+    createElement: function (tag, classN, id) {
+      var ce = document.createElement(tag);
+      ce.className += classN;
+      if (id) ce.setAttribute('id',id);
+      return ce;
     },
     buildFullDom: function(dom, index) {
         var inputword = "input-word-" + index;
         var genWord = '.' + inputword;
         var categoryColor = view.setCateColor(dom[1].category);
+        var inputGroup = document.getElementById('input-group');
 
-        $('.input-group').append('<div class=' + inputword + '><div class="periodic-element" id="pe-'+index+'" style="left:' + view.get('left') + 'px;transition-delay:' + view.get('delay') + 's"></div></div>');
-        var _thisEl = $('#'+'pe-'+index);
-        var thisEl = document.getElementById('pe-'+index); //start from here for jQ to js
+        var ciw = view.createElement('div', inputword);
+        var cpe = view.createElement('div','periodic-element', 'pe-'+index);
+        Object.assign(cpe.style, {left: view.get('left') + 'px', transitionDelay: view.get('delay') + 's' });
+        ciw.append(cpe); //appendchild
+        inputGroup.append(ciw);
+
+        var _thisEl = $('#pe-'+index);
+        var thisEl = document.getElementById('pe-'+index);
 
         _thisEl.append('<div class="atomic-mass" title="atomic mass">' + dom[1].atomic_mass + '</div><div class="oxidation" title="oxidation states"></div><div class="symbol" title="periodic element">' + dom[1].symbol + '</div><div class="number" title="atomic number">' + dom[1].number + '</div><div class="shells" title="shells">2</div>');
         dom[1].shells.forEach(function(val) {
@@ -154,17 +158,20 @@ var view = {
         });
         $('.details').append('<div><strong style="color:'+categoryColor+'">' +dom[1].name + ' - <span class="details-symbol">' + dom[1].symbol + '</span></strong><br>' + dom[1].summary + '<br>' + dom[1].source + '</div>');
 
-        _thisEl.attr("data-before", dom[0]);
-        _thisEl.attr("data-after", dom[2]);
+        thisEl.setAttribute("data-before", dom[0]);
+        thisEl.setAttribute("data-after", dom[2]);
         var spanEl = _thisEl.outerWidth();
         _thisEl.addClass('transit');
 
         var smokeElement = 'smoke'+index;
 
         $(".cook-element").append('<div id="smoke'+index+'" title="category: '+ dom[1].category +'"></div>');
-        $("#"+smokeElement).addClass('animate').css("animation-delay", view.get('delay') + "s");
 
         var smokeJs = document.getElementById(smokeElement);
+
+        smokeJs.className += ' animate';
+        smokeJs.style.animationDelay = view.get('delay') + "s";
+
         smokeJs.addEventListener("webkitAnimationEnd", deleteSmoke, false);
         smokeJs.addEventListener("animationend", deleteSmoke, false);
         smokeJs.addEventListener("oanimationend", deleteSmoke, false);
