@@ -128,11 +128,16 @@ var view = {
         default: return 'whitesmoke';
       }
     },
-    createElement: function (tag, classN, id) {
-      var ce = document.createElement(tag);
-      ce.className += classN;
-      if (id) ce.setAttribute('id',id);
-      return ce;
+    createElement: function(tag, classN, attr, text) {
+        var ce = document.createElement(tag);
+        ce.className += classN;
+
+        if (attr !== undefined) {
+            attr.type === 'id' ? ce.setAttribute('id', attr.value) : ce.setAttribute('title', attr.value);
+        }
+
+        if (text) ce.innerText = text;
+        return ce;
     },
     buildFullDom: function(dom, index) {
         var inputword = "input-word-" + index;
@@ -141,7 +146,7 @@ var view = {
         var inputGroup = document.getElementById('input-group');
 
         var ciw = view.createElement('div', inputword);
-        var cpe = view.createElement('div','periodic-element', 'pe-'+index);
+        var cpe = view.createElement('div','periodic-element', {type: 'id', value: 'pe-'+index});
         Object.assign(cpe.style, {left: view.get('left') + 'px', transitionDelay: view.get('delay') + 's' });
         ciw.append(cpe); //appendchild
         inputGroup.append(ciw);
@@ -149,23 +154,52 @@ var view = {
         var _thisEl = $('#pe-'+index);
         var thisEl = document.getElementById('pe-'+index);
 
-        _thisEl.append('<div class="atomic-mass" title="atomic mass">' + dom[1].atomic_mass + '</div><div class="oxidation" title="oxidation states"></div><div class="symbol" title="periodic element">' + dom[1].symbol + '</div><div class="number" title="atomic number">' + dom[1].number + '</div><div class="shells" title="shells">2</div>');
+        thisEl.innerHTML = '<div class="atomic-mass" title="atomic mass">' + dom[1].atomic_mass + '</div><div class="oxidation" title="oxidation states"></div><div class="symbol" title="periodic element">' + dom[1].symbol + '</div><div class="number" title="atomic number">' + dom[1].number + '</div><div class="shells" title="shells">2</div>';
+
+// var atm = view.createElement('div', 'atomic-mass', {type: 'title', value: 'atomic mass'}, dom[1].atomic_mass);
+
+// thisEl.append(atm);
+
+// var oxd = view.createElement('div', 'oxidation', {type: 'title', value: 'oxidation states'});
+
+// thisEl.append(oxd);
+
+// var sym = view.createElement('div', 'symbol', {type: 'title', value: 'periodic element'}, dom[1].symbol);
+
+// thisEl.append(sym);
+
+// var num = view.createElement('div', 'number', {type: 'title', value: 'atomic number'}, dom[1].number);
+
+// thisEl.append(num);
+
+// var she = view.createElement('div', 'shells', {type: 'title', value: 'shells'}, 2);
+
+// thisEl.append(she);
+
         dom[1].shells.forEach(function(val) {
-            $(genWord + ' ' + '.shells').append("<span>" + '-' + val + "</span>");
+          var createShell = view.createElement('span', '', undefined, '-'+val);
+            thisEl.lastElementChild.append(createShell);
         });
+
         dom[1].oxidationStates.forEach(function(val) {
-            $(genWord + ' ' + '.oxidation').append("<span>" + val + "</span>");
+          var createOxd = view.createElement('span', '', undefined, val);
+            thisEl.firstElementChild.nextElementSibling.append(createOxd);
         });
-        $('.details').append('<div><strong style="color:'+categoryColor+'">' +dom[1].name + ' - <span class="details-symbol">' + dom[1].symbol + '</span></strong><br>' + dom[1].summary + '<br>' + dom[1].source + '</div>');
+        
+        var _details = document.getElementById('details');
+        _details.innerHTML += '<div><strong style="color:'+categoryColor+'">' +dom[1].name + ' - <span class="details-symbol">' + dom[1].symbol + '</span></strong><br>' + dom[1].summary + '<br>' + dom[1].source+'</div>';
 
         thisEl.setAttribute("data-before", dom[0]);
         thisEl.setAttribute("data-after", dom[2]);
-        var spanEl = _thisEl.outerWidth();
+        var spanEl = thisEl.offsetWidth;
         _thisEl.addClass('transit');
 
         var smokeElement = 'smoke'+index;
+        var cookEl = document.getElementsByClassName('cook-element')[0];
 
-        $(".cook-element").append('<div id="smoke'+index+'" title="category: '+ dom[1].category +'"></div>');
+        var createSmokeEl = view.createElement('div', '', {type:'id', value: smokeElement});
+        createSmokeEl.setAttribute('title', 'category: '+dom[1].category);
+        cookEl.append(createSmokeEl);
 
         var smokeJs = document.getElementById(smokeElement);
 
@@ -180,7 +214,9 @@ var view = {
           window[smokeElement].destroy();
         }
 
-        var el = _thisEl.outerWidth();
+        var el = thisEl.offsetWidth;
+        console.log("el",el);
+        console.log("elel",_thisEl.outerWidth());
         view.set('left', el);
         view.set('delay', 2.5);
 
