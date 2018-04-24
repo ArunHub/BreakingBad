@@ -112,10 +112,7 @@ function processInput(input) {
       el.style.transitionDelay = view.get('delay') + "s";
     });
 
-    // $('.periodic-element').addClass('pseudo').css("transition-delay", view.get('delay') + "s");
-
     var details = document.getElementById('details');
-    // $('.details').css("transition-delay", view.get('delay') +1+ "s").fadeIn();
     Object.assign(details.style, {opacity: 1, transitionDelay: view.get('delay') + 1 + "s" });
 
     clearForm();
@@ -171,30 +168,9 @@ var view = {
         ciw.append(cpe); //appendchild
         inputGroup.append(ciw);
 
-        // var _thisEl = $('#pe-'+index);
         var thisEl = document.getElementById(peIndex);
 
         thisEl.innerHTML = '<div class="atomic-mass" title="atomic mass">' + dom[1].atomic_mass + '</div><div class="oxidation" title="oxidation states"></div><div class="symbol" title="periodic element">' + dom[1].symbol + '</div><div class="number" title="atomic number">' + dom[1].number + '</div><div class="shells" title="shells">2</div>';
-
-// var atm = view.createElement('div', 'atomic-mass', {type: 'title', value: 'atomic mass'}, dom[1].atomic_mass);
-
-// thisEl.append(atm);
-
-// var oxd = view.createElement('div', 'oxidation', {type: 'title', value: 'oxidation states'});
-
-// thisEl.append(oxd);
-
-// var sym = view.createElement('div', 'symbol', {type: 'title', value: 'periodic element'}, dom[1].symbol);
-
-// thisEl.append(sym);
-
-// var num = view.createElement('div', 'number', {type: 'title', value: 'atomic number'}, dom[1].number);
-
-// thisEl.append(num);
-
-// var she = view.createElement('div', 'shells', {type: 'title', value: 'shells'}, 2);
-
-// thisEl.append(she);
 
         dom[1].shells.forEach(function(val) {
           var createShell = view.createElement('span', '', undefined, '-'+val);
@@ -212,7 +188,7 @@ var view = {
         thisEl.setAttribute("data-before", dom[0]);
         thisEl.setAttribute("data-after", dom[2]);
         var spanEl = thisEl.offsetWidth;
-        // _thisEl.addClass('transit');
+
         addClass(peIndex, 'transit');
 
         var smokeElement = 'smoke'+index;
@@ -245,11 +221,7 @@ var view = {
 
     },
     displayMessage: function(str) {
-        // var message = $('.message');
         var message = document.getElementById('message');
-        // message.text(str).fadeOut(4000, function() {
-        //     message.show().text("");
-        // });
         document.getElementById('submit-btn').setAttribute('disabled','disabled');
         message.innerText = str;
         fade(message);
