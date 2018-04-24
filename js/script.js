@@ -51,6 +51,16 @@ function joinArray(str, retVal) {
     return retArr;
 }
 
+function addClass(id, cl) {
+    var element, name, arr;
+    element = document.getElementById(id);
+    name = cl;
+    arr = element.className.split(" ");
+    if (arr.indexOf(name) == -1) {
+        element.className += " " + name;
+    }
+}
+
 function replaceSymbol(input, string) {
     var regex = new RegExp(input, 'i');
     return string.replace(regex, '').split('');
@@ -144,15 +154,16 @@ var view = {
         var genWord = '.' + inputword;
         var categoryColor = view.setCateColor(dom[1].category);
         var inputGroup = document.getElementById('input-group');
+        var peIndex = 'pe-'+index;
 
         var ciw = view.createElement('div', inputword);
-        var cpe = view.createElement('div','periodic-element', {type: 'id', value: 'pe-'+index});
+        var cpe = view.createElement('div','periodic-element', {type: 'id', value: peIndex});
         Object.assign(cpe.style, {left: view.get('left') + 'px', transitionDelay: view.get('delay') + 's' });
         ciw.append(cpe); //appendchild
         inputGroup.append(ciw);
 
         var _thisEl = $('#pe-'+index);
-        var thisEl = document.getElementById('pe-'+index);
+        var thisEl = document.getElementById(peIndex);
 
         thisEl.innerHTML = '<div class="atomic-mass" title="atomic mass">' + dom[1].atomic_mass + '</div><div class="oxidation" title="oxidation states"></div><div class="symbol" title="periodic element">' + dom[1].symbol + '</div><div class="number" title="atomic number">' + dom[1].number + '</div><div class="shells" title="shells">2</div>';
 
@@ -192,7 +203,8 @@ var view = {
         thisEl.setAttribute("data-before", dom[0]);
         thisEl.setAttribute("data-after", dom[2]);
         var spanEl = thisEl.offsetWidth;
-        _thisEl.addClass('transit');
+        // _thisEl.addClass('transit');
+        addClass(peIndex, 'transit');
 
         var smokeElement = 'smoke'+index;
         var cookEl = document.getElementsByClassName('cook-element')[0];
@@ -226,6 +238,7 @@ var view = {
     },
     displayMessage: function(str) {
         var message = $('.message');
+        // var message = document.getElementById('message');
         message.text(str).fadeOut(4000, function() {
             message.show().text("");
         });
