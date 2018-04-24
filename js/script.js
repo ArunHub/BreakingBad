@@ -106,9 +106,18 @@ function processInput(input) {
             view.buildFullDom(joinedArr, i);
         }
     }
-    $('.periodic-element').addClass('pseudo').css("transition-delay", view.get('delay') + "s");
-    $('.details').css("transition-delay", view.get('delay') +1+ "s").fadeIn();
-    
+
+    [].forEach.call(document.querySelectorAll('.periodic-element'), function(el) {
+      el.classList.add('pseudo'); // or add a class
+      el.style.transitionDelay = view.get('delay') + "s";
+    });
+
+    // $('.periodic-element').addClass('pseudo').css("transition-delay", view.get('delay') + "s");
+
+    var details = document.getElementById('details');
+    // $('.details').css("transition-delay", view.get('delay') +1+ "s").fadeIn();
+    Object.assign(details.style, {opacity: 1, transitionDelay: view.get('delay') + 1 + "s" });
+
     clearForm();
     return;
 }
@@ -162,7 +171,7 @@ var view = {
         ciw.append(cpe); //appendchild
         inputGroup.append(ciw);
 
-        var _thisEl = $('#pe-'+index);
+        // var _thisEl = $('#pe-'+index);
         var thisEl = document.getElementById(peIndex);
 
         thisEl.innerHTML = '<div class="atomic-mass" title="atomic mass">' + dom[1].atomic_mass + '</div><div class="oxidation" title="oxidation states"></div><div class="symbol" title="periodic element">' + dom[1].symbol + '</div><div class="number" title="atomic number">' + dom[1].number + '</div><div class="shells" title="shells">2</div>';
@@ -227,8 +236,7 @@ var view = {
         }
 
         var el = thisEl.offsetWidth;
-        console.log("el",el);
-        console.log("elel",_thisEl.outerWidth());
+
         view.set('left', el);
         view.set('delay', 2.5);
 
@@ -237,10 +245,31 @@ var view = {
 
     },
     displayMessage: function(str) {
-        var message = $('.message');
-        // var message = document.getElementById('message');
-        message.text(str).fadeOut(4000, function() {
-            message.show().text("");
-        });
+        // var message = $('.message');
+        var message = document.getElementById('message');
+        // message.text(str).fadeOut(4000, function() {
+        //     message.show().text("");
+        // });
+        document.getElementById('submit-btn').setAttribute('disabled','disabled');
+        message.innerText = str;
+        fade(message);
     }
 };
+
+
+function fade(element) {
+    var op = 1;  // initial opacity
+    var timer = setInterval(function () {
+        if (op <= 0.1){
+            console.log(op,"op")
+            clearInterval(timer);
+            op = 0;
+            element.style.opacity = op;
+            // element.style.display = 'none';
+            document.getElementById('submit-btn').removeAttribute('disabled');
+        }
+        element.style.opacity = op;
+        element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+        op -= op * 0.1;
+    }, 300);
+}
