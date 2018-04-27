@@ -320,3 +320,19 @@ footer {
 footer span a {
     color: grey;
 }
+
+@media(max-width: 1366px) {
+    h1 {
+        font-size: 48px;
+    }
+
+    .truck {
+        top: 150px;
+        width: 275px;
+    }
+
+    .details {
+        width: 360px;
+        font-size: 1.4em;
+    }
+}

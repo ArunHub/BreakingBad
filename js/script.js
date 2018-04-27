@@ -156,6 +156,7 @@ var view = {
         return ce;
     },
     buildFullDom: function(dom, index) {
+        console.log(dom)
         var inputword = "input-word-" + index;
         var genWord = '.' + inputword;
         var categoryColor = view.setCateColor(dom[1].category);
