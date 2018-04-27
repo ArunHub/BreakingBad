@@ -335,4 +335,8 @@ footer span a {
         width: 360px;
         font-size: 1.4em;
     }
+
+    .cook-element {
+        left: 4px;
+    }
 }
