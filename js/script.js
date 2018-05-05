@@ -106,9 +106,15 @@ function processInput(input) {
             view.buildFullDom(joinedArr, i);
         }
     }
-    $('.periodic-element').addClass('pseudo').css("transition-delay", view.get('delay') + "s");
-    $('.details').css("transition-delay", view.get('delay') +1+ "s").fadeIn();
-    
+
+    [].forEach.call(document.querySelectorAll('.periodic-element'), function(el) {
+      el.classList.add('pseudo'); // or add a class
+      el.style.transitionDelay = view.get('delay') + "s";
+    });
+
+    var details = document.getElementById('details');
+    Object.assign(details.style, {opacity: 1, transitionDelay: view.get('delay') + 1 + "s" });
+
     clearForm();
     return;
 }
@@ -150,6 +156,7 @@ var view = {
         return ce;
     },
     buildFullDom: function(dom, index) {
+        console.log(dom)
         var inputword = "input-word-" + index;
         var genWord = '.' + inputword;
         var categoryColor = view.setCateColor(dom[1].category);
@@ -162,30 +169,9 @@ var view = {
         ciw.append(cpe); //appendchild
         inputGroup.append(ciw);
 
-        var _thisEl = $('#pe-'+index);
         var thisEl = document.getElementById(peIndex);
 
         thisEl.innerHTML = '<div class="atomic-mass" title="atomic mass">' + dom[1].atomic_mass + '</div><div class="oxidation" title="oxidation states"></div><div class="symbol" title="periodic element">' + dom[1].symbol + '</div><div class="number" title="atomic number">' + dom[1].number + '</div><div class="shells" title="shells">2</div>';
-
-// var atm = view.createElement('div', 'atomic-mass', {type: 'title', value: 'atomic mass'}, dom[1].atomic_mass);
-
-// thisEl.append(atm);
-
-// var oxd = view.createElement('div', 'oxidation', {type: 'title', value: 'oxidation states'});
-
-// thisEl.append(oxd);
-
-// var sym = view.createElement('div', 'symbol', {type: 'title', value: 'periodic element'}, dom[1].symbol);
-
-// thisEl.append(sym);
-
-// var num = view.createElement('div', 'number', {type: 'title', value: 'atomic number'}, dom[1].number);
-
-// thisEl.append(num);
-
-// var she = view.createElement('div', 'shells', {type: 'title', value: 'shells'}, 2);
-
-// thisEl.append(she);
 
         dom[1].shells.forEach(function(val) {
           var createShell = view.createElement('span', '', undefined, '-'+val);
@@ -203,7 +189,7 @@ var view = {
         thisEl.setAttribute("data-before", dom[0]);
         thisEl.setAttribute("data-after", dom[2]);
         var spanEl = thisEl.offsetWidth;
-        // _thisEl.addClass('transit');
+
         addClass(peIndex, 'transit');
 
         var smokeElement = 'smoke'+index;
@@ -227,8 +213,7 @@ var view = {
         }
 
         var el = thisEl.offsetWidth;
-        console.log("el",el);
-        console.log("elel",_thisEl.outerWidth());
+
         view.set('left', el);
         view.set('delay', 2.5);
 
@@ -237,11 +222,10 @@ var view = {
 
     },
     displayMessage: function(str) {
-        var message = $('.message');
-        // var message = document.getElementById('message');
-        message.text(str).fadeOut(4000, function() {
-            message.show().text("");
-        });
+        var message = document.getElementById('message');
+        document.getElementById('submit-btn').setAttribute('disabled','disabled');
+        message.innerText = str;
+        fade(message);
     }
 };
 
@@ -254,3 +238,20 @@ var oReq = new XMLHttpRequest();
 oReq.addEventListener("load", reqListener);
 oReq.open("GET", "http://localhost:5000/periodic-elements/");
 oReq.send();
+
+function fade(element) {
+    var op = 1;  // initial opacity
+    var timer = setInterval(function () {
+        if (op <= 0.1){
+            console.log(op,"op")
+            clearInterval(timer);
+            op = 0;
+            element.style.opacity = op;
+            // element.style.display = 'none';
+            document.getElementById('submit-btn').removeAttribute('disabled');
+        }
+        element.style.opacity = op;
+        element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+        op -= op * 0.1;
+    }, 300);
+}
