@@ -61,6 +61,10 @@
 html {
     height: 100%;
     --50per: 50%;
+    --2px: 0.125rem;
+    --3px: 0.1875rem;
+    --5px: 0.3125rem;
+    --10px: 0.625rem;
 }
 
 body {
@@ -79,34 +83,38 @@ body {
     position: relative;
 }
 
+.small-note {
+    display: none;
+}
+
 .one-who-knocks {
-    margin-top: 15px;
+    margin-top: 0.9375rem;
     max-width: 150px;
 }
 
 h1 {
-    font-size: 60px;
-    margin: 25px 0 5px;
+    font-size: 3.75rem;
+    margin: 1.5625rem 0 var(--5px);
 }
 
 form {
-    margin-bottom: 30px;
+    margin-bottom: 1.875rem;
 }
 
 input[type='text'] {
     width: 300px;
-    border: 3px solid white;
+    border: var(--3px) solid white;
     color: white;
     background: black;
-    padding: 10px 5px;
-    font-size: 1em;
+    padding: var(--10px) var(--5px);
+    font-size: 1rem;
 }
 
 input[type='submit'],
 input[type='reset']{
-    border: 3px solid black;
-    padding: 10px;
-    font-size: 0.9em;
+    border: var(--3px) solid black;
+    padding: var(--10px);
+    font-size: 0.9rem;
     cursor: pointer;
     font-weight: bold;
 }
@@ -133,7 +141,7 @@ div[class*=input-word-] {
     width: 200px;
     height: 200px;
     font-size: 3rem;
-    border: 2px solid white;
+    border: var(--2px) solid white;
     background: linear-gradient(to bottom right, #4ea76d 20%, #1f4c21 75%);
     transition-duration: 2s;
     transition-property: all;
@@ -220,31 +228,31 @@ div[class*=input-word-] {
     position: absolute;
     right: 0px;
     top: 0px;
-    width: 400px;
+    width: 25vw;
     color: white;
-    font-size: 1.6em;
-    padding: 5px;
+    font-size: 1.6rem;
+    padding: var(--5px);
     opacity: 0;
     transition: all 0.5s ease-in;
     background-color: #417d41;
     background-image: url("data:image/svg+xml,%3Csvg width='42' height='44' viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Page-1' fill='none' fill-rule='evenodd'%3E%3Cg id='brick-wall' fill='%23244824' fill-opacity='0.3'%3E%3Cpath d='M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     background-position-x: -2px;
-    box-shadow: inset 5px 5px #33683354;
+    box-shadow: inset var(--5px) var(--5px) #33683354;
 }
 
 .details-symbol {
     display: inline-block;
-    padding: 2px;
-    border: 2px solid;
+    padding: var(--2px);
+    border: var(--2px) solid;
     background: #367946;
-    margin-left: 2px;
+    margin-left: var(--2px);
 }
 
 .truck {
     position: absolute;
     left: 50px;
     top: 50px;
-    width: 350px;
+    max-width: 350px;
 }
 
 .truck img{
@@ -298,9 +306,9 @@ div[class*=input-word-] {
 
 #not-found {
     display: none;
-    margin-top: 20px;
+    margin-top: 1.25rem;
     color: darkred;
-    font-size: 3em;
+    font-size: 3rem;
     font-family: 'Cardenio Modern';
 }
 
@@ -308,10 +316,10 @@ footer {
     position: absolute;
     font-family: 'Cardenio Modern';
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1.2rem;
     color: whitesmoke;
-    padding: 2px;
-    border-top: 2px solid #175617;
+    padding: var(--2px);
+    border-top: var(--2px) solid #175617;
     text-align: center;
     bottom: 0;
     width: 100%;
@@ -322,8 +330,8 @@ footer span a {
 }
 
 @media(max-width: 1366px) {
-    h1 {
-        font-size: 48px;
+    html {
+        font-size: 14px;
     }
 
     .truck {
@@ -331,12 +339,58 @@ footer span a {
         width: 275px;
     }
 
-    .details {
-        width: 360px;
-        font-size: 1.4em;
+    .cook-element {
+        left: 4px;
+    }
+}
+
+@media(max-width: 1024px) {
+    html {
+        font-size: 11px;
+    }
+
+    .truck {
+        top: 100px;
+        width: 200px;
+    }
+
+    .one-who-knocks {
+        max-width: 100px;
+    }
+
+    .input-group {
+        width: 308px;
+    }
+
+    .periodic-element {
+        width: 150px;
+        height: 150px;
+    }
+
+    .periodic-element:before,
+    .periodic-element:after {
+        line-height: 154px;
     }
 
     .cook-element {
-        left: 4px;
+        top: -50px;
+        width: 100px;
+        height: 70px;
+        left: 10px;
+    }
+}
+
+@media(max-width: 768px) {
+    .breakingbad,
+    footer {
+        display: none;
+    }
+
+    .small-note {
+        display: block;
+        width: 90%;
+        margin: 10% auto;
+        text-align: center;
+        font-size: 2rem;
     }
 }

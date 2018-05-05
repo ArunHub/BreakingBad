@@ -209,7 +209,7 @@ var view = {
         smokeJs.addEventListener("oanimationend", deleteSmoke, false);
 
         function deleteSmoke() {
-          window[smokeElement].destroy();
+          // window[smokeElement].destroy();
         }
 
         var el = thisEl.offsetWidth;
@@ -219,6 +219,7 @@ var view = {
 
         smokeEmitter(smokeElement);
         window[smokeElement].opts.color = categoryColor;
+        window[smokeElement].opts.particles = 20;
 
     },
     displayMessage: function(str) {
