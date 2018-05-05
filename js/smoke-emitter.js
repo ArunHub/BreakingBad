@@ -33,7 +33,6 @@ var Emitter = function(opts, parent) {
 }
 
 Emitter.prototype.destroy = function() {
-console.log("ele:",this.ele.parentNode);
     this.ele.parentNode.removeChild(this.ele);
 }
 

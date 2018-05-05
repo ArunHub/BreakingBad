@@ -119,6 +119,17 @@ function processInput(input) {
     return;
 }
 
+function createElem(tag, classN, attr, text) {
+    var ce = document.createElement(tag);
+    ce.className += classN;
+
+    if (attr !== undefined) {
+        attr.type === 'id' ? ce.setAttribute('id', attr.value) : ce.setAttribute('title', attr.value);
+    }
+
+    if (text) ce.innerText = text;
+    return ce;
+}
 
 var view = {
     left: 0,
@@ -144,27 +155,15 @@ var view = {
         default: return 'whitesmoke';
       }
     },
-    createElement: function(tag, classN, attr, text) {
-        var ce = document.createElement(tag);
-        ce.className += classN;
-
-        if (attr !== undefined) {
-            attr.type === 'id' ? ce.setAttribute('id', attr.value) : ce.setAttribute('title', attr.value);
-        }
-
-        if (text) ce.innerText = text;
-        return ce;
-    },
     buildFullDom: function(dom, index) {
-        console.log(dom)
         var inputword = "input-word-" + index;
         var genWord = '.' + inputword;
         var categoryColor = view.setCateColor(dom[1].category);
         var inputGroup = document.getElementById('input-group');
         var peIndex = 'pe-'+index;
 
-        var ciw = view.createElement('div', inputword);
-        var cpe = view.createElement('div','periodic-element', {type: 'id', value: peIndex});
+        var ciw = createElem('div', inputword);
+        var cpe = createElem('div','periodic-element', {type: 'id', value: peIndex});
         Object.assign(cpe.style, {left: view.get('left') + 'px', transitionDelay: view.get('delay') + 's' });
         ciw.append(cpe); //appendchild
         inputGroup.append(ciw);
@@ -174,12 +173,12 @@ var view = {
         thisEl.innerHTML = '<div class="atomic-mass" title="atomic mass">' + dom[1].atomic_mass + '</div><div class="oxidation" title="oxidation states"></div><div class="symbol" title="periodic element">' + dom[1].symbol + '</div><div class="number" title="atomic number">' + dom[1].number + '</div><div class="shells" title="shells">2</div>';
 
         dom[1].shells.forEach(function(val) {
-          var createShell = view.createElement('span', '', undefined, '-'+val);
+          var createShell = createElem('span', '', undefined, '-'+val);
             thisEl.lastElementChild.append(createShell);
         });
 
         dom[1].oxidationStates.forEach(function(val) {
-          var createOxd = view.createElement('span', '', undefined, val);
+          var createOxd = createElem('span', '', undefined, val);
             thisEl.firstElementChild.nextElementSibling.append(createOxd);
         });
         
@@ -188,14 +187,14 @@ var view = {
 
         thisEl.setAttribute("data-before", dom[0]);
         thisEl.setAttribute("data-after", dom[2]);
-        var spanEl = thisEl.offsetWidth;
+        var spanEl = thisEl.offsetWidth; //useless
 
         addClass(peIndex, 'transit');
 
         var smokeElement = 'smoke'+index;
         var cookEl = document.getElementsByClassName('cook-element')[0];
 
-        var createSmokeEl = view.createElement('div', '', {type:'id', value: smokeElement});
+        var createSmokeEl = createElem('div', '', {type:'id', value: smokeElement});
         createSmokeEl.setAttribute('title', 'category: '+dom[1].category);
         cookEl.append(createSmokeEl);
 
@@ -209,17 +208,16 @@ var view = {
         smokeJs.addEventListener("oanimationend", deleteSmoke, false);
 
         function deleteSmoke() {
-          // window[smokeElement].destroy();
+          window[smokeElement].destroy();
         }
 
-        var el = thisEl.offsetWidth;
+        var elWidth = thisEl.offsetWidth;
 
-        view.set('left', el);
+        view.set('left', elWidth);
         view.set('delay', 2.5);
 
         smokeEmitter(smokeElement);
         window[smokeElement].opts.color = categoryColor;
-        window[smokeElement].opts.particles = 20;
 
     },
     displayMessage: function(str) {

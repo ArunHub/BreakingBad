@@ -65,6 +65,7 @@ html {
     --3px: 0.1875rem;
     --5px: 0.3125rem;
     --10px: 0.625rem;
+    --200px: 200px;
 }
 
 body {
@@ -127,7 +128,7 @@ input[type='submit'][disabled]{
 .input-group {
     position: relative;
     margin: auto;
-    width: 408px;
+    width: calc(2 * var(--200px) + 8px);
     color: white;
 }
 
@@ -138,8 +139,8 @@ div[class*=input-word-] {
 .periodic-element {
     font-family: 'Arial';
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: var(--200px);
+    height: var(--200px);
     font-size: 3rem;
     border: var(--2px) solid white;
     background: linear-gradient(to bottom right, #4ea76d 20%, #1f4c21 75%);
@@ -157,7 +158,7 @@ div[class*=input-word-] {
     font-family: 'Bundy';
     position: absolute;
     font-size: 2.5em;
-    line-height: 204px;
+    line-height: calc(var(--200px) + 4px);
     left: 103%;
     transition: inherit;
     opacity: 0;
@@ -359,17 +360,17 @@ footer span a {
     }
 
     .input-group {
-        width: 308px;
+        width: calc(2 * var(--200px) + 8px - 100px);
     }
 
     .periodic-element {
-        width: 150px;
-        height: 150px;
+        width: calc(var(--200px) - 50px);
+        height: calc(var(--200px) - 50px);
     }
 
     .periodic-element:before,
     .periodic-element:after {
-        line-height: 154px;
+        line-height: calc(var(--200px) + 4px - 50px);
     }
 
     .cook-element {
