@@ -3,9 +3,10 @@ function clearForm() {
     form[0].reset();
 }
 
-function breakStr(string, count) {
-    return [...string.slice(count - 1)].map((_, i) => string.slice(i, i + count));
-}
+// function breakStr(string, count) {
+//     // return [...string.slice(count - 1)].map((_, i) => string.slice(i, i + count));
+//     return [Array.from(string).slice(count - 1)].map((_, i) => string.slice(i, i + count));
+// }
 
 function refreshPage() {
     window.location.reload();
@@ -165,6 +166,10 @@ var view = {
         var ciw = createElem('div', inputword);
         var cpe = createElem('div','periodic-element', {type: 'id', value: peIndex});
         Object.assign(cpe.style, {left: view.get('left') + 'px', transitionDelay: view.get('delay') + 's' });
+          // console.log("text",ciw);
+        // if (!ciw.append) {
+        //   ciw.parentNode.append(cpe);
+        // }
         ciw.append(cpe); //appendchild
         inputGroup.append(ciw);
 
