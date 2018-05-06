@@ -55,8 +55,12 @@
 
 
 * {
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
+
 
 html {
     height: 100%;
@@ -143,12 +147,23 @@ div[class*=input-word-] {
     height: var(--200px);
     font-size: 3rem;
     border: var(--2px) solid white;
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(20%, #4ea76d), color-stop(75%, #1f4c21));
+    background: -webkit-linear-gradient(top left, #4ea76d 20%, #1f4c21 75%);
+    background: -o-linear-gradient(top left, #4ea76d 20%, #1f4c21 75%);
     background: linear-gradient(to bottom right, #4ea76d 20%, #1f4c21 75%);
-    transition-duration: 2s;
+    -webkit-transition-duration: 2s;
+         -o-transition-duration: 2s;
+            transition-duration: 2s;
+    -webkit-transition-property: all;
+    -o-transition-property: all;
     transition-property: all;
-    transition-timing-function: ease-in;
-    transform: perspective(120px) scaleZ(.5) translate3d(-100px, 0, 100px);
-    transform-style: preserve-3d;
+    -webkit-transition-timing-function: ease-in;
+         -o-transition-timing-function: ease-in;
+            transition-timing-function: ease-in;
+    -webkit-transform: perspective(120px) scaleZ(.5) translate3d(-100px, 0, 100px);
+            transform: perspective(120px) scaleZ(.5) translate3d(-100px, 0, 100px);
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
     opacity: 0;
 }
 
@@ -160,6 +175,8 @@ div[class*=input-word-] {
     font-size: 2.5em;
     line-height: calc(var(--200px) + 4px);
     left: 103%;
+    -webkit-transition: inherit;
+    -o-transition: inherit;
     transition: inherit;
     opacity: 0;
 }
@@ -171,7 +188,8 @@ div[class*=input-word-] {
 
 .periodic-element.transit {
     opacity: 1;
-    transform: perspective(0) scaleZ(.5) translate3d(0, 0, 100px);
+    -webkit-transform: perspective(0) scaleZ(.5) translate3d(0, 0, 100px);
+            transform: perspective(0) scaleZ(.5) translate3d(0, 0, 100px);
 }
 
 .pseudo.periodic-element:before {
@@ -203,7 +221,9 @@ div[class*=input-word-] {
 .periodic-element .symbol {
     left: var(--50per);
     top: var(--50per);
-    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
     font-size: 2.5em;
     text-transform: capitalize;
 }
@@ -234,11 +254,14 @@ div[class*=input-word-] {
     font-size: 1.6rem;
     padding: var(--5px);
     opacity: 0;
+    -webkit-transition: all 0.5s ease-in;
+    -o-transition: all 0.5s ease-in;
     transition: all 0.5s ease-in;
     background-color: #417d41;
     background-image: url("data:image/svg+xml,%3Csvg width='42' height='44' viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Page-1' fill='none' fill-rule='evenodd'%3E%3Cg id='brick-wall' fill='%23244824' fill-opacity='0.3'%3E%3Cpath d='M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     background-position-x: -2px;
-    box-shadow: inset var(--5px) var(--5px) #33683354;
+    -webkit-box-shadow: inset var(--5px) var(--5px) #33683354;
+            box-shadow: inset var(--5px) var(--5px) #33683354;
 }
 
 .details-symbol {
@@ -276,18 +299,22 @@ div[class*=input-word-] {
     background: black;
     bottom: 0;
     right: 0;
-    animation-duration: 8s;
-    animation-fill-mode: forwards;
+    -webkit-animation-duration: 8s;
+            animation-duration: 8s;
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
     opacity: 0;
 }
 
 .cook-element > div.animate{
-    animation-name: cloud;
+    -webkit-animation-name: cloud;
+            animation-name: cloud;
 }
 
-@keyframes cloud {
+@-webkit-keyframes cloud {
     0% {
-        transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
         opacity: 0;
     }
 
@@ -301,7 +328,30 @@ div[class*=input-word-] {
 
     100% {
         opacity: 0;
-        transform: rotate(180deg) translate(90px, 70px);
+        -webkit-transform: rotate(180deg) translate(90px, 70px);
+                transform: rotate(180deg) translate(90px, 70px);
+    }
+}
+
+@keyframes cloud {
+    0% {
+        -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: rotate(180deg) translate(90px, 70px);
+                transform: rotate(180deg) translate(90px, 70px);
     }
 }
 
