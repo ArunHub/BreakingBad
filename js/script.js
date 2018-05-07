@@ -224,6 +224,11 @@ var view = {
         smokeEmitter(smokeElement);
         window[smokeElement].opts.color = categoryColor;
 
+        if (window.matchMedia("(max-width: 1000px)").matches) {
+          // window[smokeElement].opts.particles = 200;
+          window[smokeElement].opts.r = [3, 2];
+        }
+
     },
     displayMessage: function(str) {
         var message = document.getElementById('message');

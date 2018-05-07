@@ -142,8 +142,9 @@ Particle.prototype.draw = function(i, p) {
 }
 
 function smokeEmitter(attachTo) {
+
   window[attachTo] = new Emitter({
-    particles:70,      
+    particles:150,      
     attachTo: attachTo,
     color:'rgba(255,255,255,.5)',
     ang: [1.5,0.5],
