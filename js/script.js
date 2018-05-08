@@ -116,9 +116,6 @@ function processInput(input) {
     var details = document.getElementById('details');
     Object.assign(details.style, {opacity: 1, transitionDelay: view.get('delay') + 1 + "s" });
 
-    var footer = document.getElementsByTagName('footer');
-    footer[0].style.display = "block";
-
     clearForm();
     return;
 }

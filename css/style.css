@@ -87,6 +87,7 @@ body {
     text-align: center;
     position: relative;
     margin-bottom: 2rem;
+    min-height: 90vh;
 }
 
 .small-note {
@@ -361,7 +362,6 @@ div[class*=input-word-] {
 }
 
 footer {
-    display: none;
     position: relative;
     font-family: 'Cardenio Modern';
     font-weight: bold;
