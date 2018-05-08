@@ -116,6 +116,9 @@ function processInput(input) {
     var details = document.getElementById('details');
     Object.assign(details.style, {opacity: 1, transitionDelay: view.get('delay') + 1 + "s" });
 
+    var footer = document.getElementsByTagName('footer');
+    footer[0].style.display = "block";
+
     clearForm();
     return;
 }
@@ -234,7 +237,7 @@ var view = {
         var message = document.getElementById('message');
         document.getElementById('submit-btn').setAttribute('disabled','disabled');
         message.innerText = str;
-        fade(message);
+        fadeOut(message);
     }
 };
 
@@ -248,7 +251,7 @@ oReq.addEventListener("load", reqListener);
 oReq.open("GET", "http://localhost:5000/periodic-elements/");
 oReq.send();
 
-function fade(element) {
+function fadeOut(element) {
     var op = 1;  // initial opacity
     var timer = setInterval(function () {
         if (op <= 0.1){
