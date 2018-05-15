@@ -29,19 +29,48 @@ function ajaxCall() {
     return tempObj;
 }
 
+var selected = [];
+function setSelectedVal(val) {
+    selected.push(val)
+}
+
+function getSelectedVal() {
+    return selected;
+}
+
+    var sameEl = [];
 function regexMatch(periodicArr, str) {
     var oneLen = [];
     var twoLen = [];
+    var temp;
+
+    function strMatch(regex) {
+        
+        temp = str.match(regex);
+        if(temp !== null) {
+            // console.log('temp',periodicArr[i])
+            periodicArr[i]['pos'] = temp.index;
+            var temObj = Object.assign({}, periodicArr[i])
+            if ((selected.indexOf(temp[0])>-1)) sameEl.push(temObj);
+            console.log('sameEl', sameEl)
+            return temp;
+        }
+        return ;
+    }
+
     for (var i = 0; i < periodicArr.length; i++) {
         var regex = new RegExp(periodicArr[i].symbol, 'i');
-        var temp;
-        if (periodicArr[i].symbol && (temp = str.match(regex)) !== null) {
+        // var temp;
+        if (periodicArr[i].symbol && strMatch(regex) && (selected.indexOf(temp[0])<0) ) {
+            // console.log("sameEl",sameEl)
             periodicArr[i]['pos'] = temp.index;
             (temp[0].length === 2) ? twoLen.push(periodicArr[i]): oneLen.push(periodicArr[i]);
 
         }
     }
-    return twoLen[0] ? twoLen[0] : oneLen[0] ? oneLen[0] : null;
+    console.log('twolen', twoLen);
+    console.log('oneLen', oneLen);
+    return twoLen[0] ? twoLen[0] : oneLen[0] ? oneLen[0] : sameEl[0] ? sameEl[0] : null;
 }
 
 function joinArray(str, retVal) {
@@ -85,7 +114,7 @@ function fireSubmit() {
         return;
     } else {
         processInput(input.toLowerCase());
-        // play();
+        play();
     }
 }
 
@@ -103,7 +132,11 @@ function processInput(input) {
             notFoundId.append(createEl);
             notFoundId.style.display = "block";
         } else {
+            console.log('retVal',retVal)
+            // retVal = sameEl.length? sameEl[0] : retVal; suppose if br ba there br is in selected so br duplicates again
+            setSelectedVal(retVal.symbol);
             var joinedArr = joinArray(splitInput[i], retVal);
+            // console.log('joinedArr',joinedArr)
             view.buildFullDom(joinedArr, i);
         }
     }
