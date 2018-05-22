@@ -284,11 +284,14 @@ div[class*=input-word-] {
 .truck img{
     max-width: 100%;
     height: auto;
+    position: relative;
+    z-index: 10;
 }
 
 .cook-element {
+    display: block;
     position: absolute;
-    left: 40px;
+    left: 35px;
     top: -50px;
     width: 140px;
     height: 80px;
@@ -296,6 +299,7 @@ div[class*=input-word-] {
 
 .cook-element > div{
     position: absolute;
+    display: block;
     width: 0px;
     height: 0px;
     background: black;
@@ -317,14 +321,9 @@ div[class*=input-word-] {
     0% {
         -webkit-transform: rotate(0deg);
                 transform: rotate(0deg);
-        opacity: 0;
     }
 
-    20% {
-        opacity: 0;
-    }
-
-    50% {
+    60% {
         opacity: 0.6;
     }
 
@@ -339,10 +338,9 @@ div[class*=input-word-] {
     0% {
         -webkit-transform: rotate(0deg);
                 transform: rotate(0deg);
-        opacity: 0;
     }
 
-    50% {
+    60% {
         opacity: 0.6;
     }
 
@@ -428,7 +426,7 @@ footer span a {
     }
 }
 
-@media(max-width: 768px) {
+@media(max-width: 992px) {
     .breakingbad,
     footer {
         display: none;
