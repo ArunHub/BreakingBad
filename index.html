@@ -4,14 +4,14 @@
 
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-38792506-3"></script>
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-38792506-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
   gtag('config', 'UA-38792506-3');
-</script>
+</script> -->
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -34,12 +34,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </head>
 
 <body>
-    <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K3K8F54"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 
-    <svg style="display: none;" xml:space="preserve" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px">
+    <svg class="svg" xml:space="preserve" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px">
         <defs>
             <symbol id="icon-fb" fill="#3b5998" viewBox="0 0 16 16" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414">
                 <path d="M15.117 0H.883C.395 0 0 .395 0 .883v14.234c0 .488.395.883.883.883h7.663V9.804H6.46V7.39h2.086V5.607c0-2.066 1.262-3.19 3.106-3.19.883 0 1.642.064 1.863.094v2.16h-1.28c-1 0-1.195.48-1.195 1.18v1.54h2.39l-.31 2.42h-2.08V16h4.077c.488 0 .883-.395.883-.883V.883C16 .395 15.605 0 15.117 0" fill-rule="nonzero" />
@@ -58,7 +54,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h1 itemprop="name">Say Your Name</h1>
         <form name="periodicForm" action="javascript:void(0);">
             <input type="text" id="say-ur-name" />
-            <input type="submit" onclick="fireSubmit()" value="Submit" id="submit-btn" />
+            <input type="submit" onclick="fireSubmit();dataLayer.push({'submit': 'match-element'});" value="Submit" id="submit-btn" />
             <input type="reset" onclick="refreshPage()" value="Refresh" id="refresh" />
         </form>
         <div class="input-group" id="input-group"></div>

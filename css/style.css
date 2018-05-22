@@ -73,13 +73,17 @@ html {
 }
 
 body {
-    font-family: 'Bimasakti';
+    font-family: 'Bimasakti', 'Helvetica', 'Arial', sans-serif;
     margin: 0;
     padding: 0;
     background: -webkit-linear-gradient(to top right, #060606 0%, #50a750 100%);
     background: -o-linear-gradient(to top right, #060606 0%, #50a750 100%);
     background: linear-gradient(to top right, #060606 0%, #50a750 100%);
     background-attachment: fixed; 
+}
+
+body .svg {
+    display: none;
 }
 
 .breakingbad {
