@@ -30,47 +30,38 @@ function ajaxCall() {
 }
 
 var selected = [];
-function setSelectedVal(val) {
-    selected.push(val)
-}
 
-function getSelectedVal() {
-    return selected;
-}
-
-    var sameEl = [];
 function regexMatch(periodicArr, str) {
     var oneLen = [];
     var twoLen = [];
     var temp;
+    var sameEl = [];
 
     function strMatch(regex) {
-        
         temp = str.match(regex);
-        if(temp !== null) {
-            // console.log('temp',periodicArr[i])
+
+        if (temp !== null) { // checks if temp has element matched instead of null
             periodicArr[i]['pos'] = temp.index;
             var temObj = Object.assign({}, periodicArr[i])
-            if ((selected.indexOf(temp[0])>-1)) sameEl.push(temObj);
-            console.log('sameEl', sameEl)
+            if ((selected.indexOf(temp[0]) > -1)) sameEl.push(temObj); // checks if matched element already exists in selected array
             return temp;
         }
-        return ;
+        return;
     }
 
     for (var i = 0; i < periodicArr.length; i++) {
         var regex = new RegExp(periodicArr[i].symbol, 'i');
-        // var temp;
-        if (periodicArr[i].symbol && strMatch(regex) && (selected.indexOf(temp[0])<0) ) {
-            // console.log("sameEl",sameEl)
+        if (periodicArr[i].symbol && strMatch(regex) && (selected.indexOf(temp[0]) < 0)) {
             periodicArr[i]['pos'] = temp.index;
             (temp[0].length === 2) ? twoLen.push(periodicArr[i]): oneLen.push(periodicArr[i]);
 
         }
     }
-    console.log('twolen', twoLen);
-    console.log('oneLen', oneLen);
-    return twoLen[0] ? twoLen[0] : oneLen[0] ? oneLen[0] : sameEl[0] ? sameEl[0] : null;
+
+    return twoLen[0] ?
+           twoLen[0] : oneLen[0] ?
+           oneLen[0] : sameEl[0] ?
+           sameEl[0] : null;
 }
 
 function joinArray(str, retVal) {
@@ -124,6 +115,10 @@ function processInput(input) {
     var notFoundId = document.getElementById('not-found');
     document.getElementById('submit-btn').setAttribute('disabled','disabled');
 
+    function setSelectedVal(val) {
+        selected.push(val)
+    }
+
     for (var i = 0; i < splitInput.length; i++) {
         var retVal = regexMatch(periodicArr, splitInput[i]);
         if ((retVal === null || retVal === undefined)) {
@@ -132,11 +127,8 @@ function processInput(input) {
             notFoundId.append(createEl);
             notFoundId.style.display = "block";
         } else {
-            console.log('retVal',retVal)
-            // retVal = sameEl.length? sameEl[0] : retVal; suppose if br ba there br is in selected so br duplicates again
             setSelectedVal(retVal.symbol);
             var joinedArr = joinArray(splitInput[i], retVal);
-            // console.log('joinedArr',joinedArr)
             view.buildFullDom(joinedArr, i);
         }
     }
