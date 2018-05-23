@@ -73,13 +73,17 @@ html {
 }
 
 body {
-    font-family: 'Bimasakti';
+    font-family: 'Bimasakti', 'Helvetica', 'Arial', sans-serif;
     margin: 0;
     padding: 0;
     background: -webkit-linear-gradient(to top right, #060606 0%, #50a750 100%);
     background: -o-linear-gradient(to top right, #060606 0%, #50a750 100%);
     background: linear-gradient(to top right, #060606 0%, #50a750 100%);
     background-attachment: fixed; 
+}
+
+body .svg {
+    display: none;
 }
 
 .breakingbad {
@@ -375,6 +379,49 @@ footer span a {
     color: grey;
 }
 
+.social-icons {
+    margin-top: 1rem;
+}
+
+.social-icons ul {
+  margin: 0;
+  list-style: none;
+  padding: 0;
+}
+
+.social-icons li {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+}
+
+.social-icons li a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.social-icons li a svg {
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.social-icons li a:hover svg {
+    -webkit-transform: translateY(-5px);
+    -ms-transform: translateY(-5px);
+    transform: translateY(-5px);
+}
+
+.social-icons li:not(:last-child) {
+    margin-right: 10px;
+}
+
 @media(max-width: 1366px) {
     html {
         font-size: 14px;
@@ -387,56 +434,5 @@ footer span a {
 
     .cook-element {
         left: 4px;
-    }
-}
-
-@media(max-width: 1024px) {
-    html {
-        font-size: 11px;
-    }
-
-    .truck {
-        top: 100px;
-        width: 200px;
-    }
-
-    .one-who-knocks {
-        max-width: 100px;
-    }
-
-    .input-group {
-        width: calc(2 * var(--200px) + 8px - 100px);
-    }
-
-    .periodic-element {
-        width: calc(var(--200px) - 50px);
-        height: calc(var(--200px) - 50px);
-    }
-
-    .periodic-element:before,
-    .periodic-element:after {
-        line-height: calc(var(--200px) + 4px - 50px);
-    }
-
-    .cook-element {
-        top: -50px;
-        width: 100px;
-        height: 70px;
-        left: 10px;
-    }
-}
-
-@media(max-width: 992px) {
-    .breakingbad,
-    footer {
-        display: none;
-    }
-
-    .small-note {
-        display: block;
-        width: 90%;
-        margin: 10% auto;
-        text-align: center;
-        font-size: 2rem;
     }
 }
