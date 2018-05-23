@@ -1,0 +1,50 @@
+@media(max-width: 1024px) {
+    html {
+        font-size: 11px;
+    }
+
+    .truck {
+        top: 100px;
+        width: 200px;
+    }
+
+    .one-who-knocks {
+        max-width: 100px;
+    }
+
+    .input-group {
+        width: calc(2 * var(--200px) + 8px - 100px);
+    }
+
+    .periodic-element {
+        width: calc(var(--200px) - 50px);
+        height: calc(var(--200px) - 50px);
+    }
+
+    .periodic-element:before,
+    .periodic-element:after {
+        line-height: calc(var(--200px) + 4px - 50px);
+    }
+
+    .cook-element {
+        top: -50px;
+        width: 100px;
+        height: 70px;
+        left: 10px;
+    }
+}
+
+@media(max-width: 768px) {
+    .breakingbad,
+    footer {
+        display: none;
+    }
+
+    .small-note {
+        display: block;
+        width: 90%;
+        margin: 10% auto;
+        text-align: center;
+        font-size: 2rem;
+    }
+}
