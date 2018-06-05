@@ -105,7 +105,7 @@ function fireSubmit() {
         return;
     } else {
         processInput(input.toLowerCase());
-        play();
+        // play();
     }
 }
 
@@ -124,7 +124,7 @@ function processInput(input) {
         if ((retVal === null || retVal === undefined)) {
             var createEl = document.createElement('span');
             createEl.innerText = splitInput[i] + " ";
-            notFoundId.append(createEl);
+            notFoundId.appendChild(createEl);
             notFoundId.style.display = "block";
         } else {
             setSelectedVal(retVal.symbol);
@@ -195,8 +195,8 @@ var view = {
         // if (!ciw.append) {
         //   ciw.parentNode.append(cpe);
         // }
-        ciw.append(cpe); //appendchild
-        inputGroup.append(ciw);
+        ciw.appendChild(cpe); 
+        inputGroup.appendChild(ciw);
 
         var thisEl = document.getElementById(peIndex);
 
@@ -204,12 +204,12 @@ var view = {
 
         dom[1].shells.forEach(function(val) {
           var createShell = createElem('span', '', undefined, '-'+val);
-            thisEl.lastElementChild.append(createShell);
+            thisEl.lastElementChild.appendChild(createShell);
         });
 
         dom[1].oxidationStates.forEach(function(val) {
           var createOxd = createElem('span', '', undefined, val);
-            thisEl.firstElementChild.nextElementSibling.append(createOxd);
+            thisEl.firstElementChild.nextElementSibling.appendChild(createOxd);
         });
         
         var _details = document.getElementById('details');
@@ -226,7 +226,7 @@ var view = {
 
         var createSmokeEl = createElem('div', '', {type:'id', value: smokeElement});
         createSmokeEl.setAttribute('title', 'category: '+dom[1].category);
-        cookEl.append(createSmokeEl);
+        cookEl.appendChild(createSmokeEl);
 
         var smokeJs = document.getElementById(smokeElement);
 
