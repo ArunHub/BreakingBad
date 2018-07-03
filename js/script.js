@@ -1,3 +1,7 @@
+function PeriodicService() {
+    
+}
+
 function clearForm() {
     var form = document.getElementsByName('periodicForm');
     form[0].reset();
@@ -195,6 +199,8 @@ var view = {
         // if (!ciw.append) {
         //   ciw.parentNode.append(cpe);
         // }
+
+        // document.fragement
         ciw.appendChild(cpe); 
         inputGroup.appendChild(ciw);
 

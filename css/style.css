@@ -1,54 +1,54 @@
 @font-face {
     font-family: 'Bimasakti';
-    src: url('Bimasakti_1.eot');
-    src: local('Bimasakti'), url('Bimasakti_1.eot?#iefix') format('embedded-opentype'), url('Bimasakti_1.woff2') format('woff2'), url('Bimasakti_1.woff') format('woff'), url('Bimasakti_1.ttf') format('truetype'), url('Bimasakti_1.svg#Bimasakti') format('svg');
+    src: url('fonts/Bimasakti_1.eot');
+    src: local('fonts/Bimasakti'), url('fonts/Bimasakti_1.eot?#iefix') format('embedded-opentype'), url('fonts/Bimasakti_1.woff2') format('woff2'), url('fonts/Bimasakti_1.woff') format('woff'), url('fonts/Bimasakti_1.ttf') format('truetype'), url('fonts/Bimasakti_1.svg#Bimasakti') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Bundy';
-    src: url('Bundy-Regular.eot');
-    src: local('Bundy-Regular'),
-    url('Bundy-Regular.eot?#iefix') format('embedded-opentype'),
-    url('Bundy-Regular.woff2') format('woff2'),
-    url('Bundy-Regular.woff') format('woff'),
-    url('Bundy-Regular.ttf') format('truetype'),
-    url('Bundy-Regular.svg#Bundy-Regular') format('svg');
+    src: url('fonts/Bundy-Regular.eot');
+    src: local('fonts/Bundy-Regular'),
+    url('fonts/Bundy-Regular.eot?#iefix') format('embedded-opentype'),
+    url('fonts/Bundy-Regular.woff2') format('woff2'),
+    url('fonts/Bundy-Regular.woff') format('woff'),
+    url('fonts/Bundy-Regular.ttf') format('truetype'),
+    url('fonts/Bundy-Regular.svg#Bundy-Regular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Autodestruct BB';
-    src: url('AutodestructBB.eot');
-    src: local('Autodestruct BB'), local('AutodestructBB'), url('AutodestructBB.eot?#iefix') format('embedded-opentype'), url('AutodestructBB.woff2') format('woff2'), url('AutodestructBB.woff') format('woff'), url('AutodestructBB.ttf') format('truetype'), url('AutodestructBB.svg#AutodestructBB') format('svg');
+    src: url('fonts/AutodestructBB.eot');
+    src: local('fonts/Autodestruct BB'), local('fonts/AutodestructBB'), url('fonts/AutodestructBB.eot?#iefix') format('embedded-opentype'), url('fonts/AutodestructBB.woff2') format('woff2'), url('fonts/AutodestructBB.woff') format('woff'), url('fonts/AutodestructBB.ttf') format('truetype'), url('fonts/AutodestructBB.svg#AutodestructBB') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
-@font-face {
+@font-face {    
     font-family: 'Cardenio Modern';
-    src: url('hinted-CardenioModern-Bold.eot');
-    src: local('Cardenio Modern Bold'), local('CardenioModern-Bold'),
-        url('hinted-CardenioModern-Bold.eot?#iefix') format('embedded-opentype'),
-        url('hinted-CardenioModern-Bold.woff2') format('woff2'),
-        url('hinted-CardenioModern-Bold.woff') format('woff'),
-        url('hinted-CardenioModern-Bold.ttf') format('truetype'),
-        url('hinted-CardenioModern-Bold.svg#CardenioModern-Bold') format('svg');
+    src: url('fonts/hinted-CardenioModern-Bold.eot');
+    src: local('fonts/Cardenio Modern Bold'), local('fonts/CardenioModern-Bold'),
+        url('fonts/hinted-CardenioModern-Bold.eot?#iefix') format('embedded-opentype'),
+        url('fonts/hinted-CardenioModern-Bold.woff2') format('woff2'),
+        url('fonts/hinted-CardenioModern-Bold.woff') format('woff'),
+        url('fonts/hinted-CardenioModern-Bold.ttf') format('truetype'),
+        url('fonts/hinted-CardenioModern-Bold.svg#CardenioModern-Bold') format('svg');
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Cardenio Modern';
-    src: url('hinted-CardenioModern-Reg.eot');
-    src: local('Cardenio Modern'), local('CardenioModern-Reg'),
-        url('hinted-CardenioModern-Reg.eot?#iefix') format('embedded-opentype'),
-        url('hinted-CardenioModern-Reg.woff2') format('woff2'),
-        url('hinted-CardenioModern-Reg.woff') format('woff'),
-        url('hinted-CardenioModern-Reg.ttf') format('truetype'),
-        url('hinted-CardenioModern-Reg.svg#CardenioModern-Reg') format('svg');
+    src: url('fonts/hinted-CardenioModern-Reg.eot');
+    src: local('fonts/Cardenio Modern'), local('fonts/CardenioModern-Reg'),
+        url('fonts/hinted-CardenioModern-Reg.eot?#iefix') format('embedded-opentype'),
+        url('fonts/hinted-CardenioModern-Reg.woff2') format('woff2'),
+        url('fonts/hinted-CardenioModern-Reg.woff') format('woff'),
+        url('fonts/hinted-CardenioModern-Reg.ttf') format('truetype'),
+        url('fonts/hinted-CardenioModern-Reg.svg#CardenioModern-Reg') format('svg');
     font-weight: normal;
     font-style: normal;
 }
