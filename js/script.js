@@ -1,7 +1,3 @@
-function PeriodicService() {
-    
-}
-
 function clearForm() {
     var form = document.getElementsByName('periodicForm');
     form[0].reset();
@@ -13,11 +9,11 @@ function clearForm() {
 // }
 
 function refreshPage() {
-    window.location.reload();
+   window.location.reload();
 }
 
 function ajaxCall() {
-    var tempObj = jsonData.elements.map(function(obj) {
+    var tempObj = window.jsonData.elements.map(function(obj) {
         return {
             name: obj.name,
             source: obj.source,
@@ -33,7 +29,7 @@ function ajaxCall() {
     return tempObj;
 }
 
-var selected = [];
+var selected = [], elemNotFound = false;
 
 function regexMatch(periodicArr, str) {
     var oneLen = [];
@@ -46,7 +42,7 @@ function regexMatch(periodicArr, str) {
 
         if (temp !== null) { // checks if temp has element matched instead of null
             periodicArr[i]['pos'] = temp.index;
-            var temObj = Object.assign({}, periodicArr[i])
+            var temObj = Object.assign({}, periodicArr[i]);
             if ((selected.indexOf(temp[0]) > -1)) sameEl.push(temObj); // checks if matched element already exists in selected array
             return temp;
         }
@@ -109,7 +105,9 @@ function fireSubmit() {
         return;
     } else {
         processInput(input.toLowerCase());
-        // play();
+        if ( (selected.length>0 || !elemNotFound)) {
+            play();
+        }
     }
 }
 
@@ -120,12 +118,13 @@ function processInput(input) {
     document.getElementById('submit-btn').setAttribute('disabled','disabled');
 
     function setSelectedVal(val) {
-        selected.push(val)
+        selected.push(val);
     }
 
     for (var i = 0; i < splitInput.length; i++) {
         var retVal = regexMatch(periodicArr, splitInput[i]);
         if ((retVal === null || retVal === undefined)) {
+            elemNotFound = true;
             var createEl = document.createElement('span');
             createEl.innerText = splitInput[i] + " ";
             notFoundId.appendChild(createEl);
@@ -187,26 +186,29 @@ var view = {
     },
     buildFullDom: function(dom, index) {
         var inputword = "input-word-" + index;
-        var genWord = '.' + inputword;
+        //var genWord = '.' + inputword;
         var categoryColor = view.setCateColor(dom[1].category);
         var inputGroup = document.getElementById('input-group');
         var peIndex = 'pe-'+index;
 
         var ciw = createElem('div', inputword);
-        var cpe = createElem('div','periodic-element', {type: 'id', value: peIndex});
-        Object.assign(cpe.style, {left: view.get('left') + 'px', transitionDelay: view.get('delay') + 's' });
+        // var cpe = createElem('div','periodic-element', {type: 'id', value: peIndex});
+        var cpe = '<div class="periodic-element" id="'+ peIndex +'" style="left: '+view.get('left')+'px; transition-delay: '+view.get('delay')+'s"><div class="atomic-mass" title="atomic mass">' + dom[1].atomic_mass + '</div><div class="oxidation" title="oxidation states"></div><div class="symbol" title="periodic element">' + dom[1].symbol + '</div><div class="number" title="atomic number">' + dom[1].number + '</div><div class="shells" title="shells">2</div></div>';
+        // Object.assign(cpe.style, {left: view.get('left') + 'px', transitionDelay: view.get('delay') + 's' });
           // console.log("text",ciw);
         // if (!ciw.append) {
         //   ciw.parentNode.append(cpe);
         // }
 
         // document.fragement
-        ciw.appendChild(cpe); 
+        // var ciw = '<div class="'+inputword+'">';
+        // ciw.appendChild(cpe); 
+        ciw.innerHTML = cpe;
         inputGroup.appendChild(ciw);
 
         var thisEl = document.getElementById(peIndex);
 
-        thisEl.innerHTML = '<div class="atomic-mass" title="atomic mass">' + dom[1].atomic_mass + '</div><div class="oxidation" title="oxidation states"></div><div class="symbol" title="periodic element">' + dom[1].symbol + '</div><div class="number" title="atomic number">' + dom[1].number + '</div><div class="shells" title="shells">2</div>';
+        // thisEl.innerHTML = '<div class="atomic-mass" title="atomic mass">' + dom[1].atomic_mass + '</div><div class="oxidation" title="oxidation states"></div><div class="symbol" title="periodic element">' + dom[1].symbol + '</div><div class="number" title="atomic number">' + dom[1].number + '</div><div class="shells" title="shells">2</div>';
 
         dom[1].shells.forEach(function(val) {
           var createShell = createElem('span', '', undefined, '-'+val);
@@ -252,7 +254,7 @@ var view = {
         view.set('left', elWidth);
         view.set('delay', 2.5);
 
-        smokeEmitter(smokeElement);
+        window.smokeEmitter(smokeElement);
         window[smokeElement].opts.color = categoryColor;
 
         if (window.matchMedia("(max-width: 1000px)").matches) {
@@ -283,7 +285,6 @@ function fadeOut(element) {
     var op = 1;  // initial opacity
     var timer = setInterval(function () {
         if (op <= 0.1){
-            console.log(op,"op")
             clearInterval(timer);
             op = 0;
             element.style.opacity = op;
