@@ -54,8 +54,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <h1 itemprop="name">Say Your Name</h1>
         <form name="periodicForm" action="javascript:void(0);">
             <input type="text" id="say-ur-name" />
-            <input type="submit" onclick="fireSubmit();dataLayer.push({'submit': 'match-element'});" value="Submit" id="submit-btn" />
-            <input type="reset" onclick="refreshPage()" value="Refresh" id="refresh" />
+            <input type="submit" onclick="dataLayer.push({'submit': 'match-element'});" value="Submit" id="submit-btn" />
+            <input type="reset" value="Refresh" id="refresh" />
         </form>
         <div class="input-group" id="input-group"></div>
         <div class="details" id="details"></div>
