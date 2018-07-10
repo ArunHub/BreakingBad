@@ -41,6 +41,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </style>
 </head>
 <body>
+<!--  <?php
+// header("HTTP/1.0 404 Not Found");
+
+// print('The file that you requested: ' . $_GET['path'] . ' was not found\n');
+
+// or include a special 404 page
+
+// include ('/path/to/' . $_GET['path']);
+?>
+-->
 	<img src="images/404-broken-link-page.png">
 </body>
 </html>

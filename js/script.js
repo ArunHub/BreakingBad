@@ -6,10 +6,17 @@
         inputGroup.addEventListener('mouseleave', leaveInpGroup, false);
 
         this.selectedInput = null;
-        return "dsfds";
     };
 
+
+
+    // var oReq = new XMLHttpRequest();
+    // oReq.addEventListener("load", reqListener);
+    // oReq.open("GET", "http://localhost:3000/js/server-response.js");
+    // oReq.send();
+
     //private variables
+    var jsondata;
     var submitBtn = document.getElementById('submit-btn');
     var details = document.getElementById('details');
 
@@ -43,9 +50,7 @@
             displayMessage('Enter atleast two letters');
             clearForm();
             return;
-        } else {
-            console.log("elsepart");
-        }
+        } else {}
         this.selectedInput = input.toLowerCase();
         processInput.call(this);
         if ((selected.length > 0 || !elemNotFound)) {
@@ -167,10 +172,14 @@
             }
         }
 
-        return twoLen[0] ?
-            twoLen[0] : oneLen[0] ?
-            oneLen[0] : sameEl[0] ?
-            sameEl[0] : null;
+        function getRandom(max) {
+            return Math.floor(Math.random() * Math.floor(max));
+        }
+
+        return twoLen[getRandom(twoLen.length)] ?
+            twoLen[getRandom(twoLen.length)] : oneLen[getRandom(oneLen.length)] ?
+            oneLen[getRandom(oneLen.length)] : sameEl[getRandom(sameEl.length)] ?
+            sameEl[getRandom(sameEl.length)] : null;
     }
 
 
@@ -244,6 +253,7 @@
 
         thisEl.setAttribute("data-before", dom[0]);
         thisEl.setAttribute("data-after", dom[2]);
+
         var spanEl = thisEl.offsetWidth; //useless
 
         addClass(peIndex, 'transit');
@@ -320,47 +330,12 @@
         fadeOut(message);
     }
 
+    function reqListener() {
+
+        jsondata = this.responseText;
+    }
+
 
 })();
 
 var breaking = new BreakingBad();
-console.log("text", breaking);
-
-
-
-
-
-
-
-// function fireSubmit() {
-//     var sayUrName = document.getElementById('say-ur-name');
-//     var input = sayUrName.value.trim();
-//     if (input === null || input.length === 0 || input.match(/[^a-zA-Z\s+]/gi)) {
-//         view.displayMessage('Oops, Special characters, numbers are not allowed. Enter only Letters!');
-//         clearForm();
-//         return;
-//     } else if (input.length === 1) {
-//         view.displayMessage('Enter atleast two letters');
-//         clearForm();
-//         return;
-//     } else {
-//         processInput(input.toLowerCase());
-//         if ((selected.length > 0 || !elemNotFound)) {
-//             play();
-//         }
-//     }
-// }
-
-
-
-
-
-
-function reqListener() {
-    console.log(this.responseText);
-}
-
-var oReq = new XMLHttpRequest();
-oReq.addEventListener("load", reqListener);
-oReq.open("GET", "http://localhost:5000/periodic-elements/");
-oReq.send();
