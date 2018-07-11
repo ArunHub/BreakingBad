@@ -2,10 +2,20 @@
 
     //constructor
     this.BreakingBad = function() {
+
+        var defaults = {
+            isRandom: false
+        }
+        this.randomElem = false;
+        this.selectedInput = null;
+
+        if (arguments[0] && typeof arguments[0] === "object") {
+            this.options = extendDefaults(defaults, arguments[0]);
+        }
+
         inputGroup.addEventListener('mouseover', overInpGroup, false);
         inputGroup.addEventListener('mouseleave', leaveInpGroup, false);
 
-        this.selectedInput = null;
     };
 
 
@@ -41,6 +51,8 @@
     BreakingBad.prototype.fireSubmit = function(e) {
         e.stopPropagation();
         var sayUrName = document.getElementById('say-ur-name');
+        var randomElem = document.getElementById('randomInp').checked;
+        this.randomElem = randomElem;
         var input = sayUrName.value.trim();
         if (input === null || input.length === 0 || input.match(/[^a-zA-Z\s+]/gi)) {
             displayMessage('Oops, Special characters, numbers are not allowed. Enter only Letters!');
@@ -173,7 +185,7 @@
         }
 
         function getRandom(max) {
-            return Math.floor(Math.random() * Math.floor(max));
+            return breaking.randomElem ? Math.floor(Math.random() * Math.floor(max)) : 0;
         }
 
         return twoLen[getRandom(twoLen.length)] ?
@@ -330,11 +342,20 @@
         fadeOut(message);
     }
 
-    function reqListener() {
-
-        jsondata = this.responseText;
+    // Utility method to extend defaults with user options
+    function extendDefaults(source, properties) {
+        var property;
+        for (property in properties) {
+            if (properties.hasOwnProperty(property)) {
+                source[property] = properties[property];
+            }
+        }
+        return source;
     }
 
+    function reqListener() {
+        jsondata = this.responseText;
+    }
 
 })();
 

@@ -56,6 +56,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <input type="text" id="say-ur-name" />
             <input type="submit" onclick="breaking.fireSubmit(event); dataLayer.push({'submit': 'match-element'});" value="Submit" id="submit-btn" />
             <input type="reset" value="Refresh" onclick="breaking.refreshPage(event);" id="refresh" />
+            <div class="random-element">
+                <input type="checkbox" name="randomInp" id="randomInp" value="may contain other elements" />
+                <label for="randomInp">may contain other elements</label>                
+            </div>
         </form>
         <div class="input-group" id="input-group"></div>
         <div class="details" id="details"></div>

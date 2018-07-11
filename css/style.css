@@ -322,6 +322,22 @@ div[class*=input-word-] {
             animation-name: cloud;
 }
 
+.random-element {
+    font-family: 'Cardenio Modern';
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.random-element label {
+    vertical-align: middle;
+}
+
+.random-element input {
+    width: 16px;
+    height: 16px;
+    vertical-align: bottom;
+}
+
 @-webkit-keyframes cloud {
     0% {
         -webkit-transform: rotate(0deg);
