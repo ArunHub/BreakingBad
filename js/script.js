@@ -6,7 +6,6 @@
         var defaults = {
             isRandom: false
         }
-        this.randomElem = false;
         this.selectedInput = null;
 
         if (arguments[0] && typeof arguments[0] === "object") {
@@ -31,7 +30,8 @@
     var details = document.getElementById('details');
 
     var selected = [],
-        elemNotFound = false;
+        elemNotFound = false,
+        randomElem = false;
 
     var inputGroup = document.getElementById('input-group');
     var refresh = document.getElementById('refresh');
@@ -51,8 +51,8 @@
     BreakingBad.prototype.fireSubmit = function(e) {
         e.stopPropagation();
         var sayUrName = document.getElementById('say-ur-name');
-        var randomElem = document.getElementById('randomInp').checked;
-        this.randomElem = randomElem;
+        var randomCheck = document.getElementById('randomInp').checked;
+        randomElem = randomCheck;
         var input = sayUrName.value.trim();
         if (input === null || input.length === 0 || input.match(/[^a-zA-Z\s+]/gi)) {
             displayMessage('Oops, Special characters, numbers are not allowed. Enter only Letters!');
@@ -185,7 +185,7 @@
         }
 
         function getRandom(max) {
-            return breaking.randomElem ? Math.floor(Math.random() * Math.floor(max)) : 0;
+            return randomElem ? Math.floor(Math.random() * Math.floor(max)) : 0;
         }
 
         return twoLen[getRandom(twoLen.length)] ?
