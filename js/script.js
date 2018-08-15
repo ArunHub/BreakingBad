@@ -357,6 +357,17 @@
         jsondata = this.responseText;
     }
 
+    var show = function() {
+        console.log("Orientation type is " + screen.orientation.type);
+        console.log("Orientation angle is " + screen.orientation.angle);
+        if (screen.orientation.type === 'portrait-primary') {
+            alert('Please rotate your screen orientation to landscape and get better view.')
+        }
+    }
+
+    screen.orientation.addEventListener("change", show);
+    window.onload = show;
+
 })();
 
 var breaking = new BreakingBad();

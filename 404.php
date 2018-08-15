@@ -24,6 +24,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta name="keywords" content="breaking bad, chemistry, periodic elements, generator, TV series"/>
     <meta name=viewport content="width=device-width, initial-scale=1">
     <title>Breaking Bad Generator - 404 page</title>
+    <link rel="alternate" hreflang="en" href="http://breakingbad.imarun.com/">
     <link rel="icon" type="image/png" href="images/favicon.png">
     <style type="text/css">
     	body{
