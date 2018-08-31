@@ -14,7 +14,6 @@
 
         inputGroup.addEventListener('mouseover', overInpGroup, false);
         inputGroup.addEventListener('mouseleave', leaveInpGroup, false);
-
     };
 
 
@@ -328,10 +327,12 @@
     }
 
     function overInpGroup() {
+        console.log("touchstart");
         this.style.zIndex = 1;
     }
 
     function leaveInpGroup() {
+        console.log("touchsend");
         this.style.zIndex = 0;
     }
 
@@ -357,15 +358,17 @@
         jsondata = this.responseText;
     }
 
-    var show = function() {
-        console.log("Orientation type is " + screen.orientation.type);
-        console.log("Orientation angle is " + screen.orientation.angle);
-        if (screen.orientation.type === 'portrait-primary') {
+    function show() {
+        console.log("screen.orientation",screen.msOrientation);
+        if ((screen.msOrientation || screen.orientation.type) === 'portrait-primary') {
             alert('Please rotate your screen orientation to landscape and get better view.')
         }
     }
 
-    screen.orientation.addEventListener("change", show);
+    if (screen.orientation) {
+        screen.orientation.addEventListener("change", show);        
+    }
+
     window.onload = show;
 
 })();
