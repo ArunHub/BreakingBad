@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites disabled="0" errors="0" failures="8" tests="4" time="0.011">
+ <testsuite name="jasmine-node" timestamp="2018-09-26T13:07:03" hostname="localhost" time="0.01" errors="0" tests="4" skipped="0" disabled="0" failures="8">
+  <testcase classname="jasmine-node" name="should call the processInput function" time="0.002">
+   <failure type="exception" message="ReferenceError: ajaxCall is not defined"><![CDATA[at <Jasmine>
+    at UserContext.<anonymous> (D:\current working\gulp projects\chemistry\test\test.js:4:9)
+    at <Jasmine>
+    at runCallback (timers.js:794:20)
+    at tryOnImmediate (timers.js:752:5)
+    at processImmediate [as _immediateCallback] (timers.js:729:5)]]>
+   </failure>
+   <failure type="exception" message="ReferenceError: window is not defined"><![CDATA[at <Jasmine>
+    at UserContext.<anonymous> (D:\current working\gulp projects\chemistry\test\test.js:21:7)
+    at <Jasmine>
+    at runCallback (timers.js:794:20)
+    at tryOnImmediate (timers.js:752:5)
+    at processImmediate [as _immediateCallback] (timers.js:729:5)]]>
+   </failure>
+  </testcase>
+  <testcase classname="jasmine-node" name="should replace symbol with empty" time="0.001">
+   <failure type="exception" message="ReferenceError: ajaxCall is not defined"><![CDATA[at <Jasmine>
+    at UserContext.<anonymous> (D:\current working\gulp projects\chemistry\test\test.js:4:9)
+    at <Jasmine>
+    at runCallback (timers.js:794:20)
+    at tryOnImmediate (timers.js:752:5)
+    at processImmediate [as _immediateCallback] (timers.js:729:5)]]>
+   </failure>
+   <failure type="exception" message="ReferenceError: replaceSymbol is not defined"><![CDATA[at <Jasmine>
+    at UserContext.<anonymous> (D:\current working\gulp projects\chemistry\test\test.js:36:23)
+    at <Jasmine>
+    at runCallback (timers.js:794:20)
+    at tryOnImmediate (timers.js:752:5)
+    at processImmediate [as _immediateCallback] (timers.js:729:5)]]>
+   </failure>
+  </testcase>
+  <testcase classname="jasmine-node" name="should find regex match of element" time="0.001">
+   <failure type="exception" message="ReferenceError: ajaxCall is not defined"><![CDATA[at <Jasmine>
+    at UserContext.<anonymous> (D:\current working\gulp projects\chemistry\test\test.js:4:9)
+    at <Jasmine>
+    at runCallback (timers.js:794:20)
+    at tryOnImmediate (timers.js:752:5)
+    at processImmediate [as _immediateCallback] (timers.js:729:5)]]>
+   </failure>
+   <failure type="exception" message="ReferenceError: regexMatch is not defined"><![CDATA[at <Jasmine>
+    at UserContext.<anonymous> (D:\current working\gulp projects\chemistry\test\test.js:49:28)
+    at <Jasmine>
+    at runCallback (timers.js:794:20)
+    at tryOnImmediate (timers.js:752:5)
+    at processImmediate [as _immediateCallback] (timers.js:729:5)]]>
+   </failure>
+  </testcase>
+  <testcase classname="jasmine-node" name="should join array of three" time="0">
+   <failure type="exception" message="ReferenceError: ajaxCall is not defined"><![CDATA[at <Jasmine>
+    at UserContext.<anonymous> (D:\current working\gulp projects\chemistry\test\test.js:4:9)
+    at <Jasmine>
+    at runCallback (timers.js:794:20)
+    at tryOnImmediate (timers.js:752:5)
+    at processImmediate [as _immediateCallback] (timers.js:729:5)]]>
+   </failure>
+   <failure type="exception" message="ReferenceError: joinArray is not defined"><![CDATA[at <Jasmine>
+    at UserContext.<anonymous> (D:\current working\gulp projects\chemistry\test\test.js:60:26)
+    at <Jasmine>
+    at runCallback (timers.js:794:20)
+    at tryOnImmediate (timers.js:752:5)
+    at processImmediate [as _immediateCallback] (timers.js:729:5)]]>
+   </failure>
+  </testcase>
+ </testsuite>
+ <testsuite name="jasmine-node.break string" timestamp="2018-09-26T13:07:03" hostname="localhost" time="0.001" errors="0" tests="0" skipped="0" disabled="0" failures="0">
+ </testsuite>
+</testsuites>
