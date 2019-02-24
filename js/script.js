@@ -359,7 +359,6 @@
     }
 
     function show() {
-        console.log("screen.orientation",screen.msOrientation);
         if ((screen.msOrientation || screen.orientation.type) === 'portrait-primary') {
             alert('Please rotate your screen orientation to landscape and get better view.')
         }

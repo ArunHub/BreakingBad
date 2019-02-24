@@ -1,10 +1,15 @@
+describe('sample test', function () {
+    it('should call the processInput function', function () {
+        expect(true).toBe(true);
+    })
+})
 describe('jasmine-node', function() {
     var periodicArr;
     beforeEach(function() {
         periodicArr = ajaxCall();
     })
 
-    var str = "breaking";
+    var str = "breaking"; 
     var symbol = "br";
     describe('break string', function() {
         var breakSt = breakStr(str, 3);
