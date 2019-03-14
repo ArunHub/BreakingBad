@@ -105,7 +105,7 @@ gulp.task('minify', function () {
 });
 
 function minifyHtml() {
-    gulp.src('./index.html')
+    return gulp.src('./index.html')
         .pipe(htmlmin({ collapseWhitespace: true }))
         .pipe(gulp.dest('./dist'))
 }
@@ -117,7 +117,7 @@ gulp.task('fonts', function () {
 });
 
 function copyFonts() {
-    gulp.src('./css/fonts/*')
+   return gulp.src('./css/fonts/*')
     .pipe(gulp.dest('./dist/css/fonts'))
 }
 
@@ -129,7 +129,7 @@ gulp.task('imagemin', () =>
 );
 
 function minifyImages() {
-    gulp.src('./images/*')
+    return gulp.src('./images/*')
     .pipe(imagemin({ progressive: true }))
     .pipe(gulp.dest('dist/images'))
 }
@@ -142,7 +142,7 @@ function minifyImages() {
 //     )
 // })
 
-gulp.task('build', gulp.series([minifyHtml, minifyImages, styles, copyFonts, scripts]))
+gulp.task('build', gulp.series([clean, minifyHtml, minifyImages, styles, copyFonts, scripts]))
 
 
 function reload(done) {
