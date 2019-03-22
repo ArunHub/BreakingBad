@@ -19,13 +19,13 @@
     font-style: normal;
 }
 
-@font-face {
+/* @font-face {
     font-family: 'Autodestruct BB';
     src: url('fonts/AutodestructBB.eot');
     src: local('fonts/Autodestruct BB'), local('fonts/AutodestructBB'), url('fonts/AutodestructBB.eot?#iefix') format('embedded-opentype'), url('fonts/AutodestructBB.woff2') format('woff2'), url('fonts/AutodestructBB.woff') format('woff'), url('fonts/AutodestructBB.ttf') format('truetype'), url('fonts/AutodestructBB.svg#AutodestructBB') format('svg');
     font-weight: normal;
     font-style: normal;
-}
+} */
 
 @font-face {    
     font-family: 'Cardenio Modern';
@@ -64,12 +64,12 @@
 
 html {
     height: 100%;
-    --50per: 50%;
+    /* --50per: 50%;
     --2px: 0.125rem;
     --3px: 0.1875rem;
     --5px: 0.3125rem;
     --10px: 0.625rem;
-    --200px: 200px;
+    --200px: 200px; */
 }
 
 body {
@@ -458,4 +458,46 @@ footer span a {
     }
 }
 
+@media (max-width: 1024px) {
+    html {
+        font-size: 11px;
+    }
+    .truck {
+        top: 100px;
+        width: 200px;
+    }
+    .one-who-knocks {
+        max-width: 100px;
+    }
+    .input-group {
+        width: calc(2 * 200px + 8px - 100px);
+    }
+    .periodic-element {
+        width: calc(200px - 50px);
+        height: calc(200px - 50px);
+    }
+    .periodic-element:before,
+    .periodic-element:after {
+        line-height: calc(200px + 4px - 50px);
+    }
+    .cook-element {
+        top: -50px;
+        width: 100px;
+        height: 70px;
+        left: 10px;
+    }
+}
 
+@media (max-width: 767px) and (max-height: 767px) {
+    .breakingbad,
+    footer {
+        display: none;
+    }
+    .small-note {
+        display: block;
+        width: 90%;
+        margin: 10% auto;
+        text-align: center;
+        font-size: 2rem;
+    }
+}
