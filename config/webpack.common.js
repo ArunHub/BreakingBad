@@ -48,18 +48,22 @@ let config = {
             {
                 from: './images/*.png',
                 to: './images',
-                flatten: true            
+                flatten: true
+            }, {
+                from: './images/*.mp3',
+                to: './images',
+                flatten: true
             }
         ], {})
     ],
     optimization: {
-        namedModules: true, // NamedModulesPlugin()
+        namedModules: false, // NamedModulesPlugin()
         splitChunks: { // CommonsChunkPlugin()
             name: 'vendor',
             minChunks: 2
         },
         noEmitOnErrors: true, // NoEmitOnErrorsPlugin
-        concatenateModules: true //ModuleConcatenationPlugin,
+        concatenateModules: false //ModuleConcatenationPlugin,
     }
 }
 

@@ -1,4 +1,4 @@
-(function() {
+(function() {    
 
     //constructor
     this.BreakingBad = function() {
@@ -16,15 +16,16 @@
         inputGroup.addEventListener('mouseleave', leaveInpGroup, false);
     };
 
+    var jsondata;
 
-
-    // var oReq = new XMLHttpRequest();
-    // oReq.addEventListener("load", reqListener);
-    // oReq.open("GET", "http://localhost:3000/js/server-response.js");
-    // oReq.send();
+    var oReq = new XMLHttpRequest();
+    oReq.addEventListener("load", function () {
+        jsondata = oReq.responseText
+    });
+    oReq.open("GET", "js/data/content.json");
+    oReq.send();
 
     //private variables
-    var jsondata;
     var submitBtn = document.getElementById('submit-btn');
     var details = document.getElementById('details');
 
@@ -108,9 +109,9 @@
         return;
     }
 
-
     function ajaxCall() {
-        var tempObj = this.jsonData.elements.map(function(obj) {
+        console.log(jsonData,'this')
+        var tempObj = jsonData.elements.map(function(obj) {
             return {
                 name: obj.name,
                 source: obj.source,
@@ -372,4 +373,5 @@
 
 })();
 
-var breaking = new BreakingBad();
+window.breaking = new BreakingBad();
+console.log('rrrr')

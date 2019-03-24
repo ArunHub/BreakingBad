@@ -19,14 +19,6 @@
     font-style: normal;
 }
 
-/* @font-face {
-    font-family: 'Autodestruct BB';
-    src: url('fonts/AutodestructBB.eot');
-    src: local('fonts/Autodestruct BB'), local('fonts/AutodestructBB'), url('fonts/AutodestructBB.eot?#iefix') format('embedded-opentype'), url('fonts/AutodestructBB.woff2') format('woff2'), url('fonts/AutodestructBB.woff') format('woff'), url('fonts/AutodestructBB.ttf') format('truetype'), url('fonts/AutodestructBB.svg#AutodestructBB') format('svg');
-    font-weight: normal;
-    font-style: normal;
-} */
-
 @font-face {    
     font-family: 'Cardenio Modern';
     src: url('fonts/hinted-CardenioModern-Bold.eot');
