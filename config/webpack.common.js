@@ -53,8 +53,15 @@ let config = {
                 from: './images/*.mp3',
                 to: './images',
                 flatten: true
+            }, {
+                from: './js/*.json',
+                to: './',
+                flatten: true
             }
-        ], {})
+        ], {}),
+        new webpack.ProvidePlugin({
+            modernizr: 'modernizr'
+        })
     ],
     optimization: {
         namedModules: false, // NamedModulesPlugin()
