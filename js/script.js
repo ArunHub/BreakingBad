@@ -16,14 +16,16 @@
         inputGroup.addEventListener('mouseleave', leaveInpGroup, false);
     };
 
-    var jsondata;
+    var jsonData = null;
 
     var oReq = new XMLHttpRequest();
-    oReq.addEventListener("load", function () {
-        jsondata = oReq.responseText
-    });
+    oReq.addEventListener("load", reqListener);
     oReq.open("GET", "js/data/content.json");
     oReq.send();
+
+    function reqListener() {
+        jsonData = JSON.parse(oReq.responseText);
+    }
 
     //private variables
     var submitBtn = document.getElementById('submit-btn');
@@ -110,8 +112,7 @@
     }
 
     function ajaxCall() {
-        console.log(jsonData,'this')
-        var tempObj = jsonData.elements.map(function(obj) {
+        var tempObj = this.jsonData.elements.map(function(obj) {
             return {
                 name: obj.name,
                 source: obj.source,
@@ -355,10 +356,6 @@
         return source;
     }
 
-    function reqListener() {
-        jsondata = this.responseText;
-    }
-
     function show() {
         if ((screen.msOrientation || screen.orientation.type) === 'portrait-primary') {
             alert('Please rotate your screen orientation to landscape and get better view.')
@@ -374,4 +371,3 @@
 })();
 
 window.breaking = new BreakingBad();
-console.log('rrrr')
