@@ -3,7 +3,9 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const importsLoader = require('imports-loader');
+const exportsLoader = require('exports-loader');
 
 let config = {
     entry: {
@@ -33,6 +35,14 @@ let config = {
                         }
                     },
                 ]
+            },
+            // {
+            //     test: /[\\\/]bower_components[\\\/]modernizr[\\\/]modernizr\.js$/,
+            //     loader: 'imports-loader?this=>window!exports-loader?window.Modernizr' 
+            // }
+            {
+                test: require.resolve("modernizr"),
+                use: "imports-loader?this=>window!exports-loader?window.Modernizr"
             }
         ]
     },
@@ -59,9 +69,9 @@ let config = {
                 flatten: true
             }
         ], {}),
-        new webpack.ProvidePlugin({
-            modernizr: 'modernizr'
-        })
+        // new webpack.ProvidePlugin({
+        //     modernizr: 'modernizr'
+        // })
     ],
     optimization: {
         namedModules: false, // NamedModulesPlugin()

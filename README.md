@@ -25,4 +25,4 @@
         > $ webpack-dev-server --inline
     > 3. reloads just the module(HMR), or the entire page if HMR fails
         > $ webpack-dev-server  --inline --hot
-- https://medium.com/@rajaraodv/webpack-the-confusing-parts-58712f8fcad9
+        
