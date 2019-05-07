@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/ArunHub/BreakingBad#readme",
   "devDependencies": {
-    "browser-sync": "^2.24.7",
+    "browser-sync": "^2.26.4",
     "copy-webpack-plugin": "^4.6.0",
     "css-loader": "1.0.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
@@ -49,6 +49,7 @@
     "html-webpack-plugin": "3.2.0",
     "jasmine-core": "^3.3.0",
     "jasmine-reporters": "^2.3.2",
+    "jquery": "^3.4.0",
     "karma": "^3.1.4",
     "karma-chrome-launcher": "^2.2.0",
     "karma-firefox-launcher": "^1.1.0",
@@ -63,7 +64,8 @@
     "webpack": "4.16.5",
     "webpack-cli": "3.1.0",
     "webpack-dev-server": "^3.2.1",
-    "webpack-merge": "4.1.4"
+    "webpack-merge": "4.1.4",
+    "webpack-merge-and-include-globally": "^2.1.16"
   },
   "dependencies": {
     "modernizr": "^3.7.1"

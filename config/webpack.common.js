@@ -3,7 +3,8 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MergeIntoSingleFilePlugin = require('webpack-merge-and-include-globally');
 
 let config = {
     entry: {
@@ -38,6 +39,10 @@ let config = {
     },
     context: path.resolve(__dirname, '../'), // setting base path for webpack 
     plugins: [
+        // new webpack.ProvidePlugin({
+        //     jq: "jquery",
+        //     jsonss: path.resolve('js/json.js'),
+        // }),
         new HtmlWebpackPlugin({ //finds index.html as root and bundles n inject above js bundles into script
             template: "./index.html",   // Input FileName
             filename: "./index.html"    // Output FileName
@@ -54,7 +59,8 @@ let config = {
                 to: './images',
                 flatten: true
             }
-        ], {})
+        ], {}),
+
     ],
     optimization: {
         namedModules: false, // NamedModulesPlugin()

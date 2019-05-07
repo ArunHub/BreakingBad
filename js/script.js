@@ -1,7 +1,5 @@
-(function() {    
-
-    //constructor
-    this.BreakingBad = function() {
+(function () {
+    this.BreakingBad = function () {
 
         var defaults = {
             isRandom: false
@@ -16,14 +14,14 @@
         inputGroup.addEventListener('mouseleave', leaveInpGroup, false);
     };
 
-    var jsondata;
+    // var jsondat;
 
-    var oReq = new XMLHttpRequest();
-    oReq.addEventListener("load", function () {
-        jsondata = oReq.responseText
-    });
-    oReq.open("GET", "js/data/content.json");
-    oReq.send();
+    // var oReq = new XMLHttpRequest();
+    // oReq.addEventListener("load", function () {
+    //     jsondat = oReq.responseText
+    // });
+    // oReq.open("GET", "js/data/content.json");
+    // oReq.send();
 
     //private variables
     var submitBtn = document.getElementById('submit-btn');
@@ -38,17 +36,17 @@
     var view = {
         left: 0,
         delay: 1,
-        get: function(prop) {
+        get: function (prop) {
             return prop === 'left' ? this.left : this.delay;
         },
-        set: function(prop, value) {
+        set: function (prop, value) {
             return prop === 'left' ? this.left += value : this.delay += value;
         }
     };
 
     // public methods
 
-    BreakingBad.prototype.fireSubmit = function(e) {
+    BreakingBad.prototype.fireSubmit = function (e) {
         e.stopPropagation();
         var sayUrName = document.getElementById('say-ur-name');
         var randomCheck = document.getElementById('randomInp').checked;
@@ -62,7 +60,7 @@
             displayMessage('Enter atleast two letters');
             clearForm();
             return;
-        } else {}
+        } else { }
         this.selectedInput = input.toLowerCase();
         processInput.call(this);
         if ((selected.length > 0 || !elemNotFound)) {
@@ -70,7 +68,7 @@
         }
     };
 
-    BreakingBad.prototype.refreshPage = function() {
+    BreakingBad.prototype.refreshPage = function () {
         window.location.reload();
     };
 
@@ -97,7 +95,7 @@
             }
         }
 
-        [].forEach.call(document.querySelectorAll('.periodic-element'), function(el) {
+        [].forEach.call(document.querySelectorAll('.periodic-element'), function (el) {
             el.classList.add('pseudo'); // or add a class
             el.style.transitionDelay = view.get('delay') + "s";
         });
@@ -110,8 +108,7 @@
     }
 
     function ajaxCall() {
-        console.log(jsonData,'this')
-        var tempObj = jsonData.elements.map(function(obj) {
+        var tempObj = jsonData.elements.map(function (obj) {
             return {
                 name: obj.name,
                 source: obj.source,
@@ -180,7 +177,7 @@
             var regex = new RegExp(periodicArr[i].symbol, 'i');
             if (periodicArr[i].symbol && strMatch(regex) && (selected.indexOf(temp[0]) < 0)) {
                 periodicArr[i]['pos'] = temp.index;
-                (temp[0].length === 2) ? twoLen.push(periodicArr[i]): oneLen.push(periodicArr[i]);
+                (temp[0].length === 2) ? twoLen.push(periodicArr[i]) : oneLen.push(periodicArr[i]);
             }
         }
 
@@ -190,8 +187,8 @@
 
         return twoLen[getRandom(twoLen.length)] ?
             twoLen[getRandom(twoLen.length)] : oneLen[getRandom(oneLen.length)] ?
-            oneLen[getRandom(oneLen.length)] : sameEl[getRandom(sameEl.length)] ?
-            sameEl[getRandom(sameEl.length)] : null;
+                oneLen[getRandom(oneLen.length)] : sameEl[getRandom(sameEl.length)] ?
+                    sameEl[getRandom(sameEl.length)] : null;
     }
 
 
@@ -251,12 +248,12 @@
 
         var thisEl = document.getElementById(peIndex);
 
-        dom[1].shells.forEach(function(val) {
+        dom[1].shells.forEach(function (val) {
             var createShell = createElem('span', '', undefined, '-' + val);
             thisEl.lastElementChild.appendChild(createShell);
         });
 
-        dom[1].oxidationStates.forEach(function(val) {
+        dom[1].oxidationStates.forEach(function (val) {
             var createOxd = createElem('span', '', undefined, val);
             thisEl.firstElementChild.nextElementSibling.appendChild(createOxd);
         });
@@ -313,7 +310,7 @@
 
     function fadeOut(element) {
         var op = 1; // initial opacity
-        var timer = setInterval(function() {
+        var timer = setInterval(function () {
             if (op <= 0.1) {
                 clearInterval(timer);
                 op = 0;
@@ -366,12 +363,11 @@
     }
 
     if (screen.orientation) {
-        screen.orientation.addEventListener("change", show);        
+        screen.orientation.addEventListener("change", show);
     }
 
     window.onload = show;
 
 })();
 
-window.breaking = new BreakingBad();
-console.log('rrrr')
+var breaking = new BreakingBad();
