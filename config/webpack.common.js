@@ -5,6 +5,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MergeIntoSingleFilePlugin = require('webpack-merge-and-include-globally');
+const importsLoader = require('imports-loader');
+const exportsLoader = require('exports-loader');
 
 let config = {
     entry: {
@@ -34,6 +36,14 @@ let config = {
                         }
                     },
                 ]
+            },
+            // {
+            //     test: /[\\\/]bower_components[\\\/]modernizr[\\\/]modernizr\.js$/,
+            //     loader: 'imports-loader?this=>window!exports-loader?window.Modernizr' 
+            // }
+            {
+                test: require.resolve("modernizr"),
+                use: "imports-loader?this=>window!exports-loader?window.Modernizr"
             }
         ]
     },
@@ -58,9 +68,12 @@ let config = {
                 from: './images/*.mp3',
                 to: './images',
                 flatten: true
+            }, {
+                from: './js/*.json',
+                to: './',
+                flatten: true
             }
         ], {}),
-
     ],
     optimization: {
         namedModules: false, // NamedModulesPlugin()

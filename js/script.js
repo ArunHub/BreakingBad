@@ -3,7 +3,7 @@
 
         var defaults = {
             isRandom: false
-        }
+        };
         this.selectedInput = null;
 
         if (arguments[0] && typeof arguments[0] === "object") {
@@ -14,6 +14,7 @@
         inputGroup.addEventListener('mouseleave', leaveInpGroup, false);
     };
 
+
     // var jsondat;
 
     // var oReq = new XMLHttpRequest();
@@ -22,6 +23,7 @@
     // });
     // oReq.open("GET", "js/data/content.json");
     // oReq.send();
+
 
     //private variables
     var submitBtn = document.getElementById('submit-btn');
@@ -89,7 +91,7 @@
                 notFoundId.appendChild(createEl);
                 notFoundId.style.display = "block";
             } else {
-                selected.push(retVal.symbol)
+                selected.push(retVal.symbol);
                 var joinedArr = joinArray(splitInput[i], retVal);
                 buildFullDom(joinedArr, i);
             }
@@ -352,13 +354,9 @@
         return source;
     }
 
-    function reqListener() {
-        jsondata = this.responseText;
-    }
-
     function show() {
         if ((screen.msOrientation || screen.orientation.type) === 'portrait-primary') {
-            alert('Please rotate your screen orientation to landscape and get better view.')
+            alert('Please rotate your screen orientation to landscape and get better view.');
         }
     }
 
