@@ -18,12 +18,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-K3K8F54');</script>
 <!-- End Google Tag Manager -->
+<meta property="og:title" content="Breaking Bad Element Generator" />
+    <meta property="og:type" content="TV Series" />
+    <meta property="og:url" content="http://breakingbad.imarun.com/" />
+    <meta property="og:image" content="http://breakingbad.imarun.com/images/im-the-one-who-knocks.png" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Breaking Bad Generator" />
+    <meta property="og:audio" content="http://breakingbad.imarun.com/images/breaking-bad-theme.mp3" />
+    <meta property="og:description"
+        content="This webpage is designed for Breaking Bad TV series lovers. Users can generate their names with periodic elements in Breaking bad credit style" />
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="404 page - Broken link of Breaking bad generator site. Walter White is very sad."/>
-    <meta name="keywords" content="breaking bad, chemistry, periodic elements, generator, TV series"/>
-    <meta name=viewport content="width=device-width, initial-scale=1">
-    <title>Breaking Bad Generator - 404 page</title>
+	<meta name="keywords" content="breaking bad, chemistry, periodic elements, generator, TV series" />
+    <meta name=viewport content="width=device-width, initial-scale=1.0">
+    <meta name="yandex-verification" content="ba1e94835b124584" />
+    <meta name="msvalidate.01" content="669E7B8BF4A4EEBB7E16259B78C4EA25" />
+    <title>Breaking Bad Element Generator - 404 page</title>
     <link rel="alternate" hreflang="en" href="http://breakingbad.imarun.com/">
     <link rel="icon" type="image/png" href="images/favicon.png">
     <style type="text/css">
