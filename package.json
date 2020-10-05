@@ -1,6 +1,6 @@
 {
-  "name": "chemistry",
-  "version": "1.0.1",
+  "name": "BreakingBad",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "directories": {
@@ -23,7 +23,7 @@
     "type": "git",
     "url": "git+https://github.com/ArunHub/BreakingBad.git"
   },
-  "author": "arun",
+  "author": "Arun Kumar M",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ArunHub/BreakingBad/issues"
