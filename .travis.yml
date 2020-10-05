@@ -3,3 +3,10 @@ node_js:
   - "node"
 script: echo "Running tests against $(node -v) ..."
 script: npm run gulp-build
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: 43b2471b18ed179e46168beab82774c2b31165eb  # Set in the settings page of your repository, as a secure variable
+  keep_history: true
+  on:
+    branch: master
