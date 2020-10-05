@@ -6,14 +6,15 @@ cache:
   - node_modules
 script: echo "Running tests against $(node -v) ..."
 script: npm run gulp-build
+script: gem install travis
+
+script: travis encrypt secure="heyther" --add
 jobs:
   include:
     - script: echo "Running unit tests (1)"
     - script: echo "Running unit tests (2)"
     - stage: GitHub Release
-      script: echo "Deploying to GitHub releases ..."
-      script: gem install travis
-      script: travis encrypt secure="heyther" --add      
+      script: echo "Deploying to GitHub releases ..."      
       deploy:
         provider: releases
         skip_cleanup: true
