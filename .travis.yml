@@ -12,7 +12,7 @@ jobs:
       deploy:
         provider: pages
         skip_cleanup: true
-        github_token: "43b2471b18ed179e46168beab82774c2b31165eb"
+        github_token: "f2f5c575b4928831424d71b86cb0aae2dbaaf566"
         keep_history: true
         on:
           branch: master
