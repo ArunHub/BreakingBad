@@ -10,9 +10,9 @@ jobs:
     - stage: GitHub Release
       script: echo "Deploying to GitHub releases ..."
       deploy:
-        provider: pages
+        provider: releases
         skip_cleanup: true
-        github_token: ddaa94d13d6f43ea3b060570922b26c0a2dc028b
+        api_key: 5dd7daa809cab3f1ec015073e26eb4daac8786b5
         keep_history: true
         on:
           branch: master
