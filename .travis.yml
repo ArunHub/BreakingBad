@@ -1,7 +1,5 @@
 language: node_js
 node_js:
   - "node"
-install:
-  - npm install
 script: echo "Running tests against $(node -v) ..."
 script: npm test
