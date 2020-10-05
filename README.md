@@ -1,5 +1,14 @@
 # Breaking Bad Generator
 
+### For development:
+> npm run dev 
+
+#### for build
+> npm run gulp-build
+
+- Even this build scripts has some 404 error issue and have to manually change the url for some time till its fixed.
+    > Other npm scripts like npm run, npm wp-start and npm run wp-build has some issues.
+
 * The journey
     - Used Jquery before in the application but
         > Solved using plain JS code since it is a small application
@@ -10,7 +19,8 @@
         > Then changed to use Karma for running Jasmine unit test cases
     - Used Gulp to watch all file changes and build
     - While building i need to inject JS and CSS files directly into html instead of manual configuration
-        > So Webpack came to rescue.  
+        > So Webpack came to rescue.  Many webpack configurations did for this project. Gulp , different compatible versions, protractor, karma, testing with jasmine . automating with gulp , webpack and so on .. see package json scripts and dev dependencies
+         > git commits also tells lot of experimented stories
 
 * Some Lessons
 
