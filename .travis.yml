@@ -6,9 +6,6 @@ cache:
   - node_modules
 script: echo "Running tests against $(node -v) ..."
 script: npm run gulp-build
-script: gem install travis
-
-script: travis encrypt secure="heyther" --add
 jobs:
   include:
     - script: echo "Running unit tests (1)"
@@ -16,9 +13,9 @@ jobs:
     - stage: GitHub Release
       script: echo "Deploying to GitHub releases ..."      
       deploy:
-        provider: releases
+        provider: pages
         skip_cleanup: true
-        api_key: f66878606087a4111195b364845a2ae7ec3bbe38
+        github_token: $github_token
         keep_history: true
         on:
           branch: master
