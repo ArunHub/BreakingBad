@@ -15,7 +15,9 @@ jobs:
       deploy:
         provider: pages
         skip_cleanup: true
+        local_dir: dist
         github_token: $github_token
+        target_branch: gh-pages
         keep_history: true
         on:
           branch: master
